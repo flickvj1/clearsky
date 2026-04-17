@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donate — ClearSky Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  .donate-layout {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 40px;
+    padding: 40px 0 80px;
+    align-items: start;
+  }
+  @media (max-width: 900px) { .donate-layout { grid-template-columns: 1fr; gap: 24px; } }
+
+  .camp-strip {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    box-shadow: var(--s-sm);
+    margin-bottom: 20px;
+  }
+  .camp-strip-img {
+    height: 180px;
+    background: var(--surface-2) center / cover no-repeat;
+  }
+  .camp-strip-body { padding: 20px 24px; }
+  .camp-strip-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .camp-strip-progress {
+    background: var(--surface-2);
+    height: 6px;
+    border-radius: var(--r-pill);
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .camp-strip-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue) 0%, var(--blue-mid) 100%);
+    transition: width 1s;
+  }
+  .camp-strip-stats {
+    display: flex;
+    gap: 20px;
+    font-size: .86rem;
+    color: var(--muted);
+  }
+  .camp-strip-stats strong { color: var(--ink); font-weight: 700; }
+
+  .guarantee {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: 18px 20px;
+  }
+  .guarantee-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--r);
+    background: var(--blue-light);
+    color: var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .guarantee h4 {
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .guarantee p {
+    font-size: .82rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* Donate Card */
+  .donate-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    box-shadow: var(--s-md);
+    position: sticky;
+    top: calc(var(--header-h) + 20px);
+  }
+  .donate-head {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+    color: var(--white);
+    padding: 24px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .donate-head::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 90% 20%, rgba(255,255,255,.15) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .donate-head h2 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+    position: relative;
+  }
+  .donate-head p {
+    font-size: .86rem;
+    opacity: .88;
+    position: relative;
+  }
+  .donate-body { padding: 26px 28px; }
+
+  .freq-switch {
+    display: flex;
+    background: var(--surface);
+    border-radius: var(--r-pill);
+    padding: 4px;
+    margin-bottom: 22px;
+    gap: 4px;
+  }
+  .freq-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    border-radius: var(--r-pill);
+    font-weight: 700;
+    font-size: .88rem;
+    color: var(--muted);
+    cursor: pointer;
+    transition: background .15s, color .15s;
+  }
+  .freq-btn.active {
+    background: var(--white);
+    color: var(--blue);
+    box-shadow: var(--s-sm);
+  }
+
+  .amt-label {
+    font-size: .74rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .amt-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .amt-btn {
+    padding: 14px 8px;
+    border: 1.5px solid var(--line);
+    border-radius: var(--r);
+    background: var(--white);
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--slate);
+    cursor: pointer;
+    transition: all .15s;
+    position: relative;
+  }
+  .amt-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+  .amt-btn.selected {
+    border-color: var(--blue);
+    background: var(--blue);
+    color: var(--white);
+    box-shadow: var(--s-blue);
+  }
+  .amt-btn.selected::after {
+    content: '✓';
+    position: absolute;
+    top: 3px;
+    right: 6px;
+    font-size: .7rem;
+    opacity: .8;
+  }
+  .amt-popular {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--blue);
+    color: var(--white);
+    font-size: .58rem;
+    font-weight: 800;
+    letter-spacing: .7px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: var(--r-pill);
+    pointer-events: none;
+  }
+
+  .custom-wrap {
+    position: relative;
+    margin-bottom: 22px;
+  }
+  .custom-prefix {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 800;
+    color: var(--muted);
+    pointer-events: none;
+    font-size: 1rem;
+  }
+  .custom-input {
+    width: 100%;
+    padding: 13px 14px 13px 28px;
+    border: 1.5px solid var(--line);
+    border-radius: var(--r);
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--ink);
+    outline: none;
+    background: var(--white);
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .custom-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(26,86,219,.12); }
+  .custom-input::placeholder { color: var(--subtle); font-weight: 400; }
+
+  .donate-cta {
+    width: 100%;
+    padding: 16px;
+    font-size: 1rem;
+    font-weight: 800;
+    border-radius: var(--r);
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--s-blue);
+    transition: transform .1s, box-shadow .15s;
+  }
+  .donate-cta:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(26,86,219,.32);
+  }
+  .donate-cta:disabled { opacity: .55; cursor: not-allowed; }
+
+  .donate-cta-amt {
+    display: inline-block;
+    background: rgba(255,255,255,.2);
+    padding: 1px 10px;
+    border-radius: var(--r-pill);
+    margin-left: 6px;
+  }
+
+  .secure-note {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: center;
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: .78rem;
+  }
+
+  .banner-err {
+    display: none;
+    background: var(--danger-bg);
+    border: 1.5px solid #FECACA;
+    color: #991B1B;
+    border-radius: var(--r);
+    padding: 14px 16px;
+    margin-bottom: 18px;
+    font-size: .86rem;
+    gap: 10px;
+  }
+  .banner-err.show { display: flex; align-items: flex-start; }
+  .banner-err strong { display: block; margin-bottom: 2px; }
+
+  .config-warn {
+    display: none;
+    background: var(--warning-bg);
+    border: 1.5px solid #FED7AA;
+    color: #9A3412;
+    border-radius: var(--r);
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    font-size: .82rem;
+    line-height: 1.55;
+  }
+  .config-warn.show { display: block; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><span class="brand-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></span>ClearSky</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="campaigns.html">Campaigns</a></li>
+      <li><a href="start-campaign.html">Start a Campaign</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="btn btn-secondary btn-sm btn-signin" href="campaigns.html">Explore</a>
+      <a class="btn btn-primary btn-sm" href="start-campaign.html">Start a Campaign</a>
+      <button class="nav-burger" aria-label="Menu"><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="nav-mobile">
+  <a href="index.html">Home</a><a href="campaigns.html">Campaigns</a>
+  <a href="start-campaign.html">Start a Campaign</a><a href="about.html">About</a>
+</div>
+
+<div class="container">
+  <div class="donate-layout">
+    <!-- LEFT — Campaign context -->
+    <div>
+      <div class="camp-strip" id="campStrip" style="display:none;">
+        <div class="camp-strip-img" id="campImg"></div>
+        <div class="camp-strip-body">
+          <div class="camp-strip-title" id="campTitle">—</div>
+          <div class="camp-strip-progress"><div class="camp-strip-bar" id="campBar" style="width:0%"></div></div>
+          <div class="camp-strip-stats">
+            <span><strong id="campRaised">$0</strong> raised</span>
+            <span>of <strong id="campGoal">$0</strong></span>
+            <span><strong id="campPct">0%</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="guarantee">
+        <div class="guarantee-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <h4>ClearSky Donor Guarantee</h4>
+          <p>Your donation goes directly to this campaign. If the organizer can't deliver on their stated plan, we'll work with you on a refund.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT — Donate card -->
+    <aside class="donate-card">
+      <div class="donate-head">
+        <h2>Make a donation</h2>
+        <p>Every dollar goes directly to the cause.</p>
+      </div>
+      <div class="donate-body">
+
+        <div class="config-warn" id="configWarn">
+          <strong>Demo mode.</strong> Stripe Payment Links are not configured yet — edit <code>js/config.js</code> to enable real checkout.
+        </div>
+        <div class="banner-err" id="errBanner">
+          <div style="font-size:1.1rem;">⚠</div>
+          <div><strong>Payment not completed</strong>Your last payment didn't go through. Try a different amount or card.</div>
+        </div>
+
+        <div class="freq-switch" id="freqSwitch">
+          <button class="freq-btn active" data-freq="once">One-time</button>
+          <button class="freq-btn" data-freq="monthly">Monthly</button>
+        </div>
+
+        <div class="amt-label">Select amount</div>
+        <div class="amt-grid" id="amtGrid" style="padding-top:14px;"></div>
+
+        <label class="amt-label" for="customAmt">Or enter a custom amount</label>
+        <div class="custom-wrap">
+          <span class="custom-prefix">$</span>
+          <input id="customAmt" class="custom-input" type="number" min="1" step="1" placeholder="Other amount">
+        </div>
+
+        <button class="donate-cta" id="submitBtn" disabled>Select an amount</button>
+        <div class="secure-note">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Secure checkout via Stripe · SSL encrypted
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a class="brand" href="index.html"><span class="brand-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></span>ClearSky</a><p>Transparent giving for real people, real causes.</p></div>
+      <div class="footer-col"><h4>Platform</h4><ul><li><a href="campaigns.html">Explore campaigns</a></li><li><a href="start-campaign.html">Start a campaign</a></li><li><a href="donate.html">Donate</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="about.html#contact">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul><li><a href="about.html#privacy">Privacy</a></li><li><a href="about.html#terms">Terms</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 ClearSky Foundation</span><div class="footer-bottom-links"><a href="about.html#privacy">Privacy</a><a href="about.html#terms">Terms</a><a href="about.html#contact">Contact</a></div></div>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/ui-components.js"></script>
+<script src="js/tracker.js"></script>
+<script>
+(function () {
+  const params = new URLSearchParams(location.search);
+  const campaignId = params.get('id') || '';
+
+  // Show error banner if returning from a Stripe cancel redirect
+  if (params.get('payment') === 'cancelled' || params.get('payment') === 'failed') {
+    document.getElementById('errBanner').classList.add('show');
+    // Clean URL (keep campaign id if present)
+    const clean = location.pathname + (campaignId ? '?id=' + encodeURIComponent(campaignId) : '');
+    history.replaceState(null, '', clean);
+  }
+
+  // Configuration warning if Stripe links are empty
+  const hasAnyStripe = Object.values(window.CLEARSKY_STRIPE_ONETIME || {}).some(Boolean);
+  if (!hasAnyStripe) document.getElementById('configWarn').classList.add('show');
+
+  // Amount presets
+  const PRESETS = [25, 50, 100, 250, 500, 1000];
+  const POPULAR = 100;
+  const grid = document.getElementById('amtGrid');
+  grid.innerHTML = PRESETS.map(v => {
+    const pop = v === POPULAR ? '<span class="amt-popular">Popular</span>' : '';
+    return `<button type="button" class="amt-btn" data-amt="${v}">${pop}$${v.toLocaleString('en-US')}</button>`;
+  }).join('');
+
+  const state = { amount: null, freq: 'once' };
+  const submitBtn = document.getElementById('submitBtn');
+  const customInput = document.getElementById('customAmt');
+
+  function syncBtn() {
+    if (!state.amount || state.amount < 1) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Select an amount';
+      return;
+    }
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = 'Donate <span class="donate-cta-amt">$' + Number(state.amount).toLocaleString('en-US') + '</span>';
+  }
+
+  grid.addEventListener('click', e => {
+    const btn = e.target.closest('.amt-btn');
+    if (!btn) return;
+    state.amount = Number(btn.dataset.amt);
+    customInput.value = '';
+    grid.querySelectorAll('.amt-btn').forEach(b => b.classList.toggle('selected', b === btn));
+    syncBtn();
+  });
+  customInput.addEventListener('input', () => {
+    const v = Number(customInput.value);
+    state.amount = v > 0 ? v : null;
+    grid.querySelectorAll('.amt-btn').forEach(b => b.classList.remove('selected'));
+    syncBtn();
+  });
+
+  // Frequency
+  document.getElementById('freqSwitch').addEventListener('click', e => {
+    const btn = e.target.closest('.freq-btn');
+    if (!btn) return;
+    state.freq = btn.dataset.freq;
+    document.querySelectorAll('.freq-btn').forEach(b => b.classList.toggle('active', b === btn));
+  });
+
+  // Load campaign summary
+  (async function () {
+    if (!campaignId) return;
+    const c = await ClearSky.ui.fetchCampaignById(campaignId);
+    if (!c) return;
+    document.getElementById('campStrip').style.display = 'block';
+    document.getElementById('campTitle').textContent = c.title;
+    document.getElementById('campRaised').textContent = ClearSky.ui.fmtMoney(c.raised);
+    document.getElementById('campGoal').textContent = ClearSky.ui.fmtMoney(c.goal);
+    const pct = ClearSky.ui.percent(c.raised, c.goal);
+    document.getElementById('campPct').textContent = pct + '% funded';
+    if (c.image_url) {
+      document.getElementById('campImg').style.backgroundImage = `url('${c.image_url}')`;
+    } else {
+      document.getElementById('campImg').style.background = 'linear-gradient(135deg, var(--blue), var(--blue-dark))';
+    }
+    setTimeout(() => { document.getElementById('campBar').style.width = pct + '%'; }, 200);
+  })();
+
+  // Submit
+  submitBtn.addEventListener('click', () => {
+    const amt = state.amount;
+    if (!amt || amt < 1) return;
+
+    const links = state.freq === 'monthly'
+      ? (window.CLEARSKY_STRIPE_MONTHLY || {})
+      : (window.CLEARSKY_STRIPE_ONETIME || {});
+    const link = links[amt];
+
+    // Save donation context so payment-success can resolve it after Stripe redirect
+    ClearSky.track.donationStart({
+      amount: amt,
+      campaignId: campaignId || null,
+      freq: state.freq,
+      currency: 'USD'
+    });
+
+    if (link) {
+      const url = ClearSky.track.buildStripeUrl(link, { campaignId, amount: amt });
+      window.location.href = url;
+    } else {
+      // Demo mode — jump straight to success page with query params
+      const qs = new URLSearchParams({ amount: String(amt), demo: '1' });
+      if (campaignId) qs.set('campaign', campaignId);
+      window.location.href = 'payment-success.html?' + qs.toString();
+    }
+  });
+})();
+</script>
+</body>
+</html>

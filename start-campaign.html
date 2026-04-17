@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start a Campaign — ClearSky Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+  .wizard-wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  .stepper {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 32px;
+  }
+  .step {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--muted);
+    font-weight: 600;
+    font-size: .88rem;
+  }
+  .step .num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: .85rem;
+    flex-shrink: 0;
+    transition: background .15s, color .15s;
+  }
+  .step.active .num { background: var(--blue); color: var(--white); }
+  .step.done .num { background: var(--success); color: var(--white); }
+  .step.active { color: var(--ink); }
+  .step-line {
+    flex: 0 0 28px;
+    height: 2px;
+    background: var(--line);
+    border-radius: 2px;
+  }
+  .step.done + .step-line { background: var(--success); }
+  @media (max-width: 600px) {
+    .step .lbl { display: none; }
+    .step-line { flex: 0 0 12px; }
+  }
+
+  .wizard-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 36px;
+    box-shadow: var(--s-sm);
+  }
+  @media (max-width: 600px) { .wizard-card { padding: 24px; } }
+  .wizard-card h2 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -.015em;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .wizard-card .lead {
+    color: var(--muted);
+    font-size: .95rem;
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .cat-opt {
+    padding: 14px 12px;
+    border-radius: var(--r);
+    border: 1.5px solid var(--line);
+    background: var(--white);
+    font-weight: 600;
+    font-size: .88rem;
+    color: var(--slate);
+    cursor: pointer;
+    transition: all .15s;
+    text-align: center;
+  }
+  .cat-opt:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+  .cat-opt.active { border-color: var(--blue); background: var(--blue); color: var(--white); }
+
+  .upload {
+    border: 2px dashed var(--line-strong);
+    border-radius: var(--r);
+    padding: 36px 20px;
+    text-align: center;
+    background: var(--surface);
+    color: var(--muted);
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+  }
+  .upload:hover { border-color: var(--blue); background: var(--blue-light); }
+  .upload.has-file { border-color: var(--blue); color: var(--blue); }
+  .upload strong { color: var(--ink); display: block; margin-bottom: 4px; }
+
+  .preview-wrap {
+    margin-top: 14px;
+    display: none;
+  }
+  .preview-wrap.show { display: block; }
+  .preview-img {
+    width: 100%;
+    max-height: 240px;
+    object-fit: cover;
+    border-radius: var(--r);
+    border: 1px solid var(--line);
+  }
+  .preview-meta { font-size: .8rem; color: var(--muted); margin-top: 6px; }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .actions .btn:only-child { margin-left: auto; }
+
+  /* Review */
+  .review-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 600px) { .review-grid { grid-template-columns: 1fr; } }
+  .review-item {
+    padding: 14px 16px;
+    background: var(--surface);
+    border-radius: var(--r-sm);
+  }
+  .review-item .lbl {
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--muted);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .review-item .val {
+    font-size: .95rem;
+    color: var(--ink);
+    font-weight: 600;
+    word-break: break-word;
+  }
+  .review-full { grid-column: 1 / -1; }
+
+  /* Final state */
+  .final {
+    text-align: center;
+    padding: 20px 0;
+  }
+  .final-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--success-bg);
+    color: var(--success);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .final h2 { font-size: 1.5rem; margin-bottom: 10px; }
+  .final p { color: var(--muted); line-height: 1.7; margin-bottom: 24px; max-width: 440px; margin-left: auto; margin-right: auto; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><span class="brand-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></span>ClearSky</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="campaigns.html">Campaigns</a></li>
+      <li><a href="start-campaign.html" class="active">Start a Campaign</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="btn btn-secondary btn-sm btn-signin" href="campaigns.html">Explore</a>
+      <a class="btn btn-primary btn-sm" href="donate.html">Donate</a>
+      <button class="nav-burger" aria-label="Menu"><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="nav-mobile">
+  <a href="index.html">Home</a><a href="campaigns.html">Campaigns</a>
+  <a href="start-campaign.html">Start a Campaign</a><a href="about.html">About</a>
+</div>
+
+<section class="page-hero" style="padding: 50px 0 40px;">
+  <div class="container">
+    <span class="eyebrow">New campaign</span>
+    <h1>Tell your story, set a goal, launch in minutes</h1>
+    <p>Every campaign is reviewed before it goes live. Most are approved within 24 hours.</p>
+  </div>
+</section>
+
+<div class="wizard-wrap">
+  <div class="stepper" id="stepper">
+    <div class="step active" data-step="1"><span class="num">1</span><span class="lbl">Basics</span></div>
+    <div class="step-line"></div>
+    <div class="step" data-step="2"><span class="num">2</span><span class="lbl">Story</span></div>
+    <div class="step-line"></div>
+    <div class="step" data-step="3"><span class="num">3</span><span class="lbl">Media</span></div>
+    <div class="step-line"></div>
+    <div class="step" data-step="4"><span class="num">4</span><span class="lbl">Review</span></div>
+  </div>
+
+  <div class="wizard-card">
+    <!-- STEP 1 — BASICS -->
+    <section class="pane" data-pane="1">
+      <h2>The essentials</h2>
+      <p class="lead">Start with a clear title, a category, and who's running this campaign.</p>
+
+      <div class="field">
+        <label class="field-label" for="f-title">Campaign title</label>
+        <input id="f-title" class="field-input" maxlength="90" placeholder="e.g., Help rebuild Maplewood Library" />
+        <div class="field-hint">Keep it concrete and specific — aim for 40–80 characters.</div>
+        <div class="field-error">Please add a title between 5 and 90 characters.</div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Category</label>
+        <div id="cats" class="cat-grid"></div>
+        <div class="field-error">Please choose a category.</div>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="f-organizer">Organizer name</label>
+        <input id="f-organizer" class="field-input" maxlength="80" placeholder="Person or organization running this campaign" />
+        <div class="field-error">Please tell us who's running this campaign.</div>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="f-location">Location</label>
+        <input id="f-location" class="field-input" maxlength="80" placeholder="City, State" />
+      </div>
+
+      <div class="actions">
+        <span></span>
+        <button class="btn btn-primary" id="btn-next-1">Continue →</button>
+      </div>
+    </section>
+
+    <!-- STEP 2 — STORY -->
+    <section class="pane" data-pane="2" style="display:none;">
+      <h2>Tell the story</h2>
+      <p class="lead">Describe the situation, the people involved, and exactly how donations will be used.</p>
+
+      <div class="field">
+        <label class="field-label" for="f-goal">Fundraising goal (USD)</label>
+        <input id="f-goal" class="field-input" type="number" min="100" step="50" placeholder="e.g., 5000" />
+        <div class="field-hint">Minimum $100. You'll still receive any amount raised.</div>
+        <div class="field-error">Please enter a goal of at least $100.</div>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="f-description">Your story</label>
+        <textarea id="f-description" class="field-textarea" maxlength="3000" placeholder="Who needs help, why, and what the funds will cover. Be specific — donors want to see exactly where their money goes."></textarea>
+        <div class="field-hint"><span id="descCount">0</span> / 3000 characters · aim for at least 200</div>
+        <div class="field-error">Your story should be at least 120 characters.</div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-secondary" data-back="1">← Back</button>
+        <button class="btn btn-primary" id="btn-next-2">Continue →</button>
+      </div>
+    </section>
+
+    <!-- STEP 3 — MEDIA -->
+    <section class="pane" data-pane="3" style="display:none;">
+      <h2>Add a cover image</h2>
+      <p class="lead">A clear, honest photo gets 3× more donations than a stock image.</p>
+
+      <div class="field">
+        <label class="upload" for="f-cover" id="uploadBox">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 10px;display:block;color:var(--blue);"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <strong id="uploadTitle">Click to upload cover image</strong>
+          <span id="uploadHint">PNG or JPG, up to 5MB</span>
+          <input id="f-cover" type="file" accept="image/*" style="display:none">
+        </label>
+        <div class="preview-wrap" id="previewWrap">
+          <img class="preview-img" id="previewImg" alt="Cover preview">
+          <div class="preview-meta" id="previewMeta"></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="f-image-url">…or paste an image URL</label>
+        <input id="f-image-url" class="field-input" type="url" placeholder="https://..." />
+        <div class="field-hint">Use this if you'd rather host the image elsewhere. Optional if you uploaded a file above.</div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-secondary" data-back="2">← Back</button>
+        <button class="btn btn-primary" id="btn-next-3">Continue →</button>
+      </div>
+    </section>
+
+    <!-- STEP 4 — REVIEW -->
+    <section class="pane" data-pane="4" style="display:none;">
+      <h2>Review &amp; submit</h2>
+      <p class="lead">Double-check everything. Once submitted, your campaign enters review.</p>
+
+      <div class="review-grid" id="reviewGrid"></div>
+
+      <div class="field mt" style="margin-top: 24px;">
+        <label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer;">
+          <input type="checkbox" id="f-agree" style="margin-top:4px;">
+          <span style="font-size:.88rem;color:var(--slate);line-height:1.6;">
+            I confirm the information above is accurate and that I'm authorized to raise funds for this cause. I understand ClearSky may contact me to verify details before publishing.
+          </span>
+        </label>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-secondary" data-back="3">← Back</button>
+        <button class="btn btn-primary" id="btn-submit">Submit for review</button>
+      </div>
+    </section>
+
+    <!-- DONE -->
+    <section class="pane" data-pane="done" style="display:none;">
+      <div class="final">
+        <div class="final-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Thanks — we're on it</h2>
+        <p>Your campaign has been submitted for review. We'll email you within 24 hours with approval status and your live campaign link.</p>
+        <a class="btn btn-primary" href="campaigns.html">Browse other campaigns</a>
+      </div>
+    </section>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a class="brand" href="index.html"><span class="brand-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></span>ClearSky</a><p>Transparent giving for real people, real causes.</p></div>
+      <div class="footer-col"><h4>Platform</h4><ul><li><a href="campaigns.html">Explore campaigns</a></li><li><a href="start-campaign.html">Start a campaign</a></li><li><a href="donate.html">Donate</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="about.html#contact">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul><li><a href="about.html#privacy">Privacy</a></li><li><a href="about.html#terms">Terms</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 ClearSky Foundation</span><div class="footer-bottom-links"><a href="about.html#privacy">Privacy</a><a href="about.html#terms">Terms</a><a href="about.html#contact">Contact</a></div></div>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/ui-components.js"></script>
+<script>
+(function () {
+  const form = {
+    title: '',
+    category: '',
+    organizer: '',
+    location: '',
+    goal: 0,
+    description: '',
+    image_url: '',
+    file: null
+  };
+
+  // Build category grid
+  const cats = document.getElementById('cats');
+  cats.innerHTML = ClearSky.ui.CATEGORY_LIST.map(k =>
+    `<button type="button" class="cat-opt" data-cat="${k}">${ClearSky.ui.CATEGORY_LABELS[k]}</button>`
+  ).join('');
+  cats.addEventListener('click', e => {
+    const btn = e.target.closest('.cat-opt');
+    if (!btn) return;
+    form.category = btn.dataset.cat;
+    cats.querySelectorAll('.cat-opt').forEach(b => b.classList.toggle('active', b.dataset.cat === form.category));
+    btn.closest('.field').classList.remove('has-error');
+  });
+
+  // Char count
+  const desc = document.getElementById('f-description');
+  const descCount = document.getElementById('descCount');
+  desc.addEventListener('input', () => { descCount.textContent = desc.value.length; });
+
+  // Image upload preview
+  const fileInput = document.getElementById('f-cover');
+  const uploadBox = document.getElementById('uploadBox');
+  const prevWrap  = document.getElementById('previewWrap');
+  const prevImg   = document.getElementById('previewImg');
+  const prevMeta  = document.getElementById('previewMeta');
+  fileInput.addEventListener('change', () => {
+    const f = fileInput.files && fileInput.files[0];
+    if (!f) return;
+    if (f.size > 5 * 1024 * 1024) {
+      ClearSky.ui.toast('File is too large — max 5MB', 'error');
+      fileInput.value = '';
+      return;
+    }
+    form.file = f;
+    uploadBox.classList.add('has-file');
+    document.getElementById('uploadTitle').textContent = 'Change image';
+    document.getElementById('uploadHint').textContent = f.name;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      prevImg.src = ev.target.result;
+      prevMeta.textContent = f.name + ' · ' + (f.size / 1024 | 0) + ' KB';
+      prevWrap.classList.add('show');
+    };
+    reader.readAsDataURL(f);
+  });
+
+  // Step navigation
+  function showStep(n) {
+    document.querySelectorAll('.pane').forEach(p => {
+      p.style.display = p.dataset.pane === String(n) ? 'block' : 'none';
+    });
+    document.querySelectorAll('#stepper .step').forEach(s => {
+      const idx = Number(s.dataset.step);
+      s.classList.remove('active', 'done');
+      if (n === 'done') { s.classList.add('done'); return; }
+      if (idx === n) s.classList.add('active');
+      else if (idx < n) s.classList.add('done');
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Back buttons
+  document.querySelectorAll('[data-back]').forEach(btn => {
+    btn.addEventListener('click', () => showStep(Number(btn.dataset.back)));
+  });
+
+  function markError(field, msg) {
+    field.classList.add('has-error');
+    if (msg) field.querySelector('.field-error').textContent = msg;
+  }
+  function clearError(field) { field.classList.remove('has-error'); }
+
+  // Step 1 validation
+  document.getElementById('btn-next-1').addEventListener('click', () => {
+    form.title = document.getElementById('f-title').value.trim();
+    form.organizer = document.getElementById('f-organizer').value.trim();
+    form.location = document.getElementById('f-location').value.trim();
+    let ok = true;
+    const fTitle = document.getElementById('f-title').closest('.field');
+    if (form.title.length < 5 || form.title.length > 90) { markError(fTitle); ok = false; } else clearError(fTitle);
+    const fCat = cats.closest('.field');
+    if (!form.category) { markError(fCat); ok = false; } else clearError(fCat);
+    const fOrg = document.getElementById('f-organizer').closest('.field');
+    if (!form.organizer) { markError(fOrg); ok = false; } else clearError(fOrg);
+    if (ok) showStep(2);
+  });
+
+  // Step 2 validation
+  document.getElementById('btn-next-2').addEventListener('click', () => {
+    form.goal = Number(document.getElementById('f-goal').value) || 0;
+    form.description = desc.value.trim();
+    let ok = true;
+    const fGoal = document.getElementById('f-goal').closest('.field');
+    if (form.goal < 100) { markError(fGoal); ok = false; } else clearError(fGoal);
+    const fDesc = desc.closest('.field');
+    if (form.description.length < 120) { markError(fDesc); ok = false; } else clearError(fDesc);
+    if (ok) showStep(3);
+  });
+
+  // Step 3 — image is optional but recommended; just move forward
+  document.getElementById('btn-next-3').addEventListener('click', () => {
+    const urlInput = document.getElementById('f-image-url').value.trim();
+    if (urlInput) form.image_url = urlInput;
+    renderReview();
+    showStep(4);
+  });
+
+  function renderReview() {
+    const items = [
+      { label: 'Title',      value: form.title },
+      { label: 'Category',   value: ClearSky.ui.categoryLabel(form.category) },
+      { label: 'Organizer',  value: form.organizer },
+      { label: 'Location',   value: form.location || '—' },
+      { label: 'Goal',       value: '$' + form.goal.toLocaleString('en-US') },
+      { label: 'Image',      value: form.file ? form.file.name : (form.image_url || '— (none)') }
+    ];
+    let html = items.map(i =>
+      `<div class="review-item"><div class="lbl">${i.label}</div><div class="val">${ClearSky.ui.escapeHtml(i.value || '—')}</div></div>`
+    ).join('');
+    html += `<div class="review-item review-full"><div class="lbl">Story</div><div class="val" style="white-space:pre-wrap;font-weight:500;">${ClearSky.ui.escapeHtml(form.description)}</div></div>`;
+    document.getElementById('reviewGrid').innerHTML = html;
+  }
+
+  // Submit
+  document.getElementById('btn-submit').addEventListener('click', async () => {
+    const agree = document.getElementById('f-agree');
+    if (!agree.checked) {
+      ClearSky.ui.toast('Please confirm the statement above', 'error');
+      return;
+    }
+    const btn = document.getElementById('btn-submit');
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    try {
+      if (form.file && ClearSky.db.isConfigured) {
+        btn.textContent = 'Uploading image…';
+        form.image_url = await ClearSky.db.uploadCampaignImage(form.file, 'campaigns');
+      }
+      if (ClearSky.db.isConfigured) {
+        btn.textContent = 'Saving…';
+        await ClearSky.db.createCampaign({
+          title: form.title,
+          description: form.description,
+          category: form.category,
+          goal: form.goal,
+          organizer: form.organizer,
+          location: form.location,
+          image_url: form.image_url || null,
+          images: []
+        });
+      } else {
+        // Demo mode — simulate a short delay, then move to done.
+        await new Promise(r => setTimeout(r, 700));
+      }
+      showStep('done');
+    } catch (e) {
+      console.error(e);
+      ClearSky.ui.toast('Submission failed: ' + (e.message || 'unknown error'), 'error');
+      btn.disabled = false;
+      btn.textContent = 'Submit for review';
+    }
+  });
+})();
+</script>
+</body>
+</html>

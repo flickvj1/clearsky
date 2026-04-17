@@ -1,0 +1,728 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donate — Good Green Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue:#27AE60;--blue-dark:#1E8449;--blue-light:#EAFAF1;
+  --orange:#2ECC71;--orange-dark:#27AE60;--orange-light:#D5F5E3;
+  --green:#27AE60;--green-dark:#1E8449;--green-light:#EAFAF1;
+  --ink:#0D1117;--ink2:#1C2333;--ink3:#2D3748;--slate:#4A5568;
+  --muted:#718096;--subtle:#A0AEC0;--line:#E2E8F0;--surface:#F7F8FA;--white:#FFFFFF;
+  --font-head:'Plus Jakarta Sans',sans-serif;--font-body:'Plus Jakarta Sans',sans-serif;
+  --r-xs:6px;--r-sm:100px;--r:100px;--r-lg:100px;--r-xl:100px;
+  --s-sm:0 1px 3px rgba(0,0,0,.06),0 2px 8px rgba(0,0,0,.04);
+  --s-md:0 4px 12px rgba(0,0,0,.08),0 8px 28px rgba(0,0,0,.06);
+  --s-lg:0 8px 24px rgba(0,0,0,.10),0 20px 48px rgba(0,0,0,.08);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--surface);color:var(--ink);min-height:100vh;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+/* NAV */
+nav{background:var(--white);border-bottom:1px solid var(--line);height:80px;padding:0 4%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;position:sticky;top:0;z-index:999;box-shadow:0 1px 0 var(--line),0 2px 12px rgba(0,0,0,.04)}
+.logo{display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none}
+.logo-img{height:72px;width:auto;object-fit:contain;display:block}
+.logo-mobile{display:none}
+.logo-desktop{display:block}
+@media(max-width:900px){.logo-desktop{display:none}.logo-mobile{display:block;height:44px;width:auto}.logo{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important}}
+.nav-links{display:flex;align-items:center;gap:0;list-style:none}
+.nav-item{position:relative}
+.nav-trigger{display:flex;align-items:center;gap:6px;color:var(--slate);font-family:var(--font-body);font-weight:700;font-size:1rem;letter-spacing:.01em;padding:8px 12px;border-radius:0;cursor:pointer;background:none;border:none;height:80px;transition:color .15s;white-space:nowrap;border-bottom:2.5px solid transparent}
+.nav-trigger:hover{color:var(--ink);border-bottom-color:var(--line)}
+.nc{width:16px;height:16px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;font-size:.48rem;color:var(--muted)}
+.nav-actions{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.btn-signin{padding:9px 18px;border-radius:100px;font-weight:600;font-size:.92rem;cursor:pointer;border:1.5px solid var(--line);background:var(--white);color:var(--slate);font-family:var(--font-body);transition:all .15s;white-space:nowrap;height:42px}
+.btn-signin:hover{border-color:var(--ink3);color:var(--ink);background:var(--surface)}
+.btn-cta{padding:11px 26px;border-radius:100px;font-weight:700;font-size:.95rem;cursor:pointer;border:none;background:var(--orange);color:var(--white);font-family:var(--font-body);transition:background .15s,box-shadow .15s,transform .1s;white-space:nowrap;box-shadow:0 2px 8px rgba(232,114,10,.35)}
+.btn-cta:hover{background:var(--orange-dark);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px;border:none;background:none;position:absolute;right:4%}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink3);border-radius:2px}
+@media(max-width:900px){.nav-links{display:none}.hamburger{display:flex}nav{display:flex;justify-content:center;align-items:center}.nav-actions{display:none}}
+
+/* BREADCRUMB */
+.breadcrumb{padding:12px 5%;font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:6px;background:var(--white);border-bottom:1px solid var(--line)}
+.breadcrumb a{color:var(--blue)}.breadcrumb a:hover{text-decoration:underline}
+
+/* DONATE PAGE HERO STRIP */
+.donate-hero-strip{
+  background:linear-gradient(135deg,var(--blue-dark) 0%,#27AE60 60%,#52D68A 100%);
+  padding:36px 5% 32px;
+  text-align:center;
+}
+.donate-hero-strip h2{
+  font-family:var(--font-head);font-size:clamp(1.3rem,2.5vw,1.75rem);
+  font-weight:900;color:#fff;letter-spacing:-.025em;margin-bottom:6px;
+}
+.donate-hero-strip p{
+  font-size:.9rem;color:rgba(255,255,255,.8);line-height:1.6;
+}
+
+/* PAGE LAYOUT */
+.page-wrap{max-width:960px;margin:0 auto;padding:40px 5% 80px;display:grid;grid-template-columns:1fr 360px;grid-template-rows:auto auto;gap:24px 40px;align-items:start}
+.pw-left      { grid-column:1; grid-row:1; }
+.donate-card  { grid-column:2; grid-row:1 / 3; }
+.pw-guarantee { grid-column:1; grid-row:2; margin-top:0; }
+
+/* LEFT — Campaign summary */
+.camp-summary{background:var(--white);border-radius:16px;border:1px solid var(--line);box-shadow:var(--s-sm);overflow:hidden;}
+.camp-summary-img{width:100%;height:200px;object-fit:cover;background:linear-gradient(135deg,var(--blue-dark),var(--blue));display:flex;align-items:center;justify-content:center;font-size:3rem}
+.camp-summary-body{padding:20px 24px}
+.camp-summary-label{font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue-dark);background:var(--blue-light);padding:3px 10px;border-radius:16px;display:inline-block;margin-bottom:10px}
+.camp-summary-title{font-family:var(--font-head);font-size:1.05rem;font-weight:800;color:var(--ink);line-height:1.3;margin-bottom:14px}
+.camp-summary-progress{background:var(--line);border-radius: 16px;height:6px;margin-bottom:8px;overflow:hidden}
+.camp-summary-bar{height:100%;border-radius:16px;background:linear-gradient(90deg,var(--green-dark),var(--green));transition:width 1s}
+.camp-summary-stats{display:flex;gap:20px}
+.camp-stat{font-size:.8rem;color:var(--muted)}
+.camp-stat strong{color:var(--ink);font-family:var(--font-head);font-weight:700}
+
+/* Guarantee box */
+.guarantee-box{background:var(--white);border-radius:16px;border:1px solid var(--line);box-shadow:var(--s-sm);padding:20px 24px;display:flex;align-items:flex-start;gap:14px}
+.guarantee-icon{width:40px;height:40px;border-radius:var(--r-lg);background:var(--green-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.guarantee-text h4{font-family:var(--font-head);font-size:.88rem;font-weight:700;color:var(--ink);margin-bottom:4px}
+.guarantee-text p{font-size:.78rem;color:var(--muted);line-height:1.6}
+
+/* RIGHT — Donation card */
+.donate-card{background:var(--white);border-radius:16px;box-shadow:var(--s-md);border:1px solid var(--line);overflow:hidden;position:sticky;top:100px}
+.donate-card-header{background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue) 100%);padding:28px 28px 24px;position:relative;overflow:hidden}
+.donate-card-header::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.07)}
+.donate-card-header::after{content:'';position:absolute;bottom:-20px;left:-20px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.05)}
+.donate-card-header h2{font-family:var(--font-head);font-size:1.15rem;font-weight:800;color:var(--white);margin-bottom:4px;position:relative;z-index:1}
+.donate-card-header p{font-size:.82rem;color:rgba(255,255,255,.75);position:relative;z-index:1}
+
+.donate-card-body{padding:28px}
+
+/* Amount grid */
+.amount-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-bottom:12px}
+.amount-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px}
+.amt-btn{padding:14px 8px;border-radius:var(--r-lg);border:2px solid var(--line);background:var(--white);font-family:var(--font-head);font-size:1.05rem;font-weight:800;color:var(--slate);cursor:pointer;transition:all .15s;text-align:center;position:relative}
+.amt-btn:hover{border-color:var(--blue);color:var(--blue-dark);background:var(--blue-light)}
+.amt-btn.selected{border-color:var(--blue) !important;background:var(--blue) !important;color:#fff !important;box-shadow:0 4px 14px rgba(39,174,96,.35)}
+.amt-btn.selected::after{content:'✓';position:absolute;top:4px;right:6px;font-size:.6rem;font-weight:700;opacity:.8;color:#fff}
+.amt-popular{font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--orange);display:block;margin-top:2px}
+.amt-btn.selected .amt-popular{color:rgba(255,255,255,.8)}
+.amt-suggested{display:inline-flex;align-items:center;gap:3px;background:var(--blue);color:#fff;font-size:.52rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;padding:2px 7px;border-radius:100px;position:absolute;top:-11px;left:50%;transform:translateX(-50%);white-space:nowrap;pointer-events:none;transition:background .15s,color .15s}
+.amt-btn.selected .amt-suggested{background:#fff;color:var(--blue)}
+
+/* Custom amount */
+.custom-wrap{margin-bottom:24px}
+.custom-input-row{position:relative}
+.custom-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--muted);pointer-events:none}
+.custom-input{width:100%;padding:13px 14px 13px 28px;border:2px solid var(--line);border-radius:var(--r-lg);font-family:var(--font-head);font-size:1rem;font-weight:700;color:var(--ink);outline:none;transition:border-color .15s;background:var(--white)}
+.custom-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,109,181,.1)}
+.custom-input::placeholder{color:var(--subtle);font-weight:400}
+
+/* Divider */
+.or-divider{display:flex;align-items:center;gap:10px;margin-bottom:20px;font-size:.75rem;font-weight:600;color:var(--subtle)}
+.or-divider::before,.or-divider::after{content:'';flex:1;height:1px;background:var(--line)}
+
+/* Name field */
+.field-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-bottom:8px;display:block}
+.field-input{width:100%;padding:13px 14px;border:2px solid var(--line);border-radius:var(--r-lg);font-family:var(--font-body);font-size:.9rem;color:var(--ink);outline:none;transition:border-color .15s;margin-bottom:6px}
+.field-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,109,181,.1)}
+.field-input::placeholder{color:var(--subtle)}
+.field-hint{font-size:.72rem;color:var(--subtle);margin-bottom:22px}
+
+/* Anonymous toggle */
+.anon-row{display:flex;align-items:center;gap:10px;margin-bottom:24px;cursor:pointer;user-select:none}
+.anon-check{width:18px;height:18px;border-radius:100px;border:2px solid var(--line);background:var(--white);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;font-size:.65rem;color:var(--white)}
+.anon-check.checked{background:var(--blue);border-color:var(--blue)}
+.anon-label{font-size:.82rem;color:var(--slate)}
+
+/* Donate button */
+.btn-lift{width:100%;padding:17px;border-radius:var(--r-lg);font-weight:800;font-size:1rem;cursor:pointer;border:none;background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 100%);color:var(--white);font-family:var(--font-head);transition:all .2s;box-shadow:0 4px 16px rgba(46,139,58,.35);letter-spacing:.01em;position:relative;overflow:hidden}
+.btn-lift::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.12),transparent);pointer-events:none}
+.btn-lift:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(46,139,58,.45)}
+.btn-lift:active{transform:translateY(0)}
+.btn-lift:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.btn-lift-sub{font-size:.72rem;font-weight:500;opacity:.8;display:block;margin-top:3px}
+
+/* Amount display on button */
+.btn-amount{display:inline-block;background:rgba(255,255,255,.2);padding:1px 8px;border-radius:100px;font-size:.85rem;margin-left:4px}
+
+/* Frequency toggle */
+.freq-toggle{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:100px;padding:4px;margin-bottom:20px;gap:4px}
+.freq-btn{flex:1;padding:10px 8px;border-radius:100px;border:none;font-family:var(--font-head);font-weight:700;font-size:.85rem;cursor:pointer;transition:all .2s;background:transparent;color:var(--muted);text-align:center}
+.freq-btn.active{background:var(--white);color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.10)}
+.freq-monthly-badge{display:inline-block;background:var(--green-light);color:var(--green-dark);font-size:.6rem;font-weight:700;padding:2px 7px;border-radius:100px;margin-left:5px;vertical-align:middle;letter-spacing:.5px}
+
+/* Security row */
+.security-row{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:14px;font-size:.72rem;color:var(--muted)}
+
+/* PAYMENT ERROR BANNER */
+.payment-error-banner{display:none;align-items:flex-start;gap:14px;background:#FFF2F2;border:1.5px solid #FFBABA;border-radius:14px;padding:18px 20px;margin-bottom:24px;animation:slideDown .3s ease}
+.payment-error-banner.show{display:flex}
+.payment-error-icon{width:36px;height:36px;border-radius:50%;background:#FFE0E0;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem}
+.payment-error-body h4{font-family:var(--font-head);font-size:.9rem;font-weight:700;color:#C0392B;margin-bottom:3px}
+.payment-error-body p{font-size:.78rem;color:#8B2020;line-height:1.55}
+.payment-error-close{margin-left:auto;background:none;border:none;cursor:pointer;color:#C0392B;font-size:1.1rem;line-height:1;padding:0 4px;opacity:.7;flex-shrink:0}
+.payment-error-close:hover{opacity:1}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+/* SUCCESS STATE */
+.success-wrap{display:none;text-align:center;padding:40px 28px}
+.success-icon{width:72px;height:72px;border-radius:50%;background:var(--green-light);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:2rem}
+.success-wrap h2{font-family:var(--font-head);font-size:1.3rem;font-weight:800;color:var(--ink);margin-bottom:8px}
+.success-wrap p{font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:24px}
+.btn-back{padding:12px 28px;border-radius:100px;font-weight:700;font-size:.9rem;cursor:pointer;border:none;background:var(--blue);color:var(--white);font-family:var(--font-body);transition:background .15s}
+.btn-back:hover{background:var(--blue-dark)}
+
+/* FOOTER */
+footer{background:var(--ink);color:var(--subtle);padding:60px 5% 28px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;max-width:1200px;margin:0 auto 48px}
+.footer-brand p{font-size:.84rem;line-height:1.75;max-width:280px;margin-bottom:20px}
+.footer-social{display:flex;gap:8px;margin-top:18px}
+.soc-btn{width:64px;height:64px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;text-decoration:none;flex-shrink:0}
+.soc-btn img{width:32px;height:32px;object-fit:contain;filter:brightness(0) invert(1);display:block}
+.soc-btn:hover{background:#2ECC71;border-color:#2ECC71}
+.footer-col h4{font-family:var(--font-head);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--white);margin-bottom:16px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{font-size:.84rem;color:var(--subtle);transition:color .12s}
+.footer-col a:hover{color:var(--white)}
+.footer-bottom{max-width:1200px;margin:0 auto;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;font-size:.78rem;flex-wrap:wrap;gap:8px}
+
+@media(max-width:860px){
+  .page-wrap{grid-template-columns:1fr;grid-template-rows:none;gap:20px}
+  .pw-left      { grid-column:1; grid-row:auto; order:1; }
+  .donate-card  { grid-column:1; grid-row:auto; order:2; position:static; }
+  .pw-guarantee { grid-column:1; grid-row:auto; order:3; }
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:500px){
+  .amount-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr}
+}
+
+/* Card radius overrides - prevent pill on containers */
+.article-card, .ac-img, .cc, .cc-img, .value-card, .how-card,
+.start-card, .plan-card, .event-card, .cause-card, .help-card,
+.faq-item, .mission-visual, .sidebar-card, .donate-card,
+.camp-summary, .guarantee-box, .cover-wrap, .feat-wrap,
+.modal, .form-card, .info-card, .partner-card, .solution-card,
+.nonprofit-card, .contact-card, .most-loved-card, .trending-card,
+.blog-card, .story-card, .update-item, .donor-item,
+.nav-search-box, .heroCatBox, #heroCatBox { border-radius: 16px !important; }
+.ac-img, .cc-img { border-radius: 16px 16px 0 0 !important; }
+.ac-body, .cc-body { border-radius: 0 0 16px 16px !important; }
+</style>
+<style id="mobile-global">
+@media (max-width: 768px) {
+  nav { height: 64px; padding: 0 4%; }
+  .logo-img { height: 52px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-actions { gap: 6px; }
+  .btn-signin { display: none; }
+  .btn-cta { padding: 9px 16px; font-size: .82rem; }
+  .nav-search-btn { padding: 8px 12px; font-size: .82rem; }
+  .nav-search-box { width: calc(100vw - 32px); right: -60px; }
+  .breadcrumb { font-size: .72rem; padding: 10px 4%; flex-wrap: wrap; gap: 4px; }
+  .hero { min-height: auto; padding: 32px 16px; }
+  .hero-card { padding: 28px 20px 32px; margin: 0; border-radius: 16px; }
+  .hero-card h1 { font-size: 1.55rem; margin-bottom: 20px; }
+  .hero-tag { font-size: .62rem; padding: 5px 14px; }
+  .campaign-wrap { grid-template-columns: 1fr !important; gap: 20px; padding: 16px 4% 60px; }
+  .camp-sidebar { position: static !important; margin-top: 0; }
+  .sidebar-card { border-radius: 16px; padding: 20px; }
+  .raised-amount { font-size: 1.6rem; }
+  .stats-row { gap: 8px; }
+  .stat-box { padding: 10px 12px; border-radius: 12px; }
+  .stat-box-val { font-size: .9rem; }
+  .btn-donate { padding: 14px; font-size: .92rem; }
+  .camp-title { font-size: 1.2rem; }
+  .cover-wrap { border-radius: 12px; margin-bottom: 18px; }
+  .tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tab { padding: 10px 14px; font-size: .8rem; white-space: nowrap; }
+  .camp-meta { flex-wrap: wrap; gap: 6px; }
+  .urgent-banner { font-size: .7rem; padding: 8px 4%; }
+  .page-header { padding: 36px 4% 32px; }
+  .page-title { font-size: 1.5rem; }
+  .filter-bar { top: 64px; padding: 12px 4%; gap: 8px; flex-wrap: wrap; }
+  .filter-search { min-width: 100%; order: -1; }
+  .filter-chips { width: 100%; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+  .chip { white-space: nowrap; }
+  .filter-sort { margin-left: 0; width: 100%; }
+  .campaigns-layout { flex-direction: column; }
+  .sidebar { display: none; }
+  .campaigns-main { padding: 20px 4%; }
+  .cgrid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .section { padding: 48px 4%; }
+  .sec-title { font-size: 1.3rem; }
+  .values-grid { grid-template-columns: 1fr; gap: 14px; }
+  .how-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .how-connector { display: none; }
+  .mission-grid { grid-template-columns: 1fr; gap: 32px; }
+  .rel-grid { grid-template-columns: 1fr; }
+  .page-wrap { grid-template-columns: 1fr !important; gap: 20px; padding: 20px 4% 60px; }
+  .donate-card { position: static; }
+  .donate-card-header { padding: 22px 20px 18px; }
+  .donate-card-body { padding: 20px; }
+  .amount-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .amt-btn { padding: 12px 4px; font-size: .82rem; }
+  .btn-lift { padding: 15px; font-size: .9rem; }
+  .modal-overlay { padding: 0; align-items: flex-end; }
+  .modal { padding: 24px 20px; margin: 0; border-radius: 16px 16px 0 0; max-width: 100%; width: 100%; }
+  .modal-title { font-size: 1rem; }
+  .share-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .footer-grid { grid-template-columns: 1fr !important; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 8px; font-size: .72rem; }
+  footer { padding: 40px 4% 24px; }
+  .about-hero { padding: 48px 4% 44px; }
+  .about-hero h1 { font-size: 1.7rem; }
+  .cta-banner { padding: 40px 4%; }
+  .cta-banner h2 { font-size: 1.3rem; }
+  .blog-layout { flex-direction: column; }
+  .blog-sidebar { display: none; }
+  .start-options { grid-template-columns: 1fr; }
+  .start-card { padding: 24px 20px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .help-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 400px) {
+  .cgrid { grid-template-columns: 1fr; }
+  .amount-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .hero-card h1 { font-size: 1.35rem; }
+  .raised-amount { font-size: 1.4rem; }
+}
+@media (max-width: 768px) {
+  /* Footer Director/EIN row — stack vertically on mobile */
+  .footer-main > div[style*="justify-content:space-between"] { flex-direction: column !important; gap: 14px !important; align-items: flex-start !important; }
+  .footer-main > div[style*="justify-content:space-between"] > div { text-align: left !important; }
+}
+</style>
+<link rel="stylesheet" href="site.css?v=112">
+</head>
+<body>
+
+<style>
+nav .nav-links{order:1;display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0}.filter-bar{top:140px!important}
+nav .logo{order:2;justify-self:center;display:flex;align-items:center;}
+nav .logo-img{height:165px;width:auto;display:block;}
+nav .nav-actions{order:3;justify-self:end;display:flex;align-items:center;gap:12px;}
+nav .hamburger{order:4;}nav{background:transparent!important;box-shadow:none!important;border:none!important;position:relative!important;}
+@media(max-width:768px){nav{display:flex!important;justify-content:center!important;align-items:center!important;position:relative!important;}nav .nav-links{display:none!important}nav .hamburger{display:flex!important;position:absolute!important;right:16px!important;top:50%!important;transform:translateY(-50%)!important;}nav .nav-actions{display:none!important}nav .logo-img{height:155px!important}nav .logo{justify-content:center!important;}}
+</style><nav style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 5%;border-bottom:none;background:transparent;z-index:999;">
+  <ul class="nav-links">
+    <li class="nav-item">
+      <button class="nav-trigger">How to help <span class="nc">▾</span></button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-trigger">Discover <span class="nc">▾</span></button>
+    </li>
+  </ul>
+  <a class="logo" href="index.html">
+    <img class="logo-img" src="logo-ggf.png" alt="Good Green Foundation" style="height:165px;width:auto;" />
+  </a>
+  <div class="nav-actions">
+    
+    <button class="btn-cta" onclick="location.href='start-yourself.html'">Start a Campaign</button>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+
+<div class="page-wrap">
+
+  <!-- LEFT — Campaign summary -->
+  <div class="pw-left">
+    <div class="camp-summary">
+      <div class="camp-summary-img" id="campThumb"></div>
+      <div class="camp-summary-body">
+        <div class="camp-summary-label" id="campLabel">Health</div>
+        <div class="camp-summary-title" id="campTitle">Loading campaign...</div>
+        <div class="camp-summary-progress">
+          <div class="camp-summary-bar" id="campBar" style="width:0%"></div>
+        </div>
+        <div class="camp-summary-stats">
+          <div class="camp-stat"><strong id="campRaised">—</strong> raised</div>
+          <div class="camp-stat">of <strong id="campGoal">—</strong></div>
+          <div class="camp-stat"><strong id="campSup">—</strong> supporters</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT — Donate Card -->
+  <div class="donate-card">
+    <!-- Form state -->
+    <div id="formState">
+      <div class="donate-card-header">
+        <h2>Choose your donation</h2>
+        <p>Every dollar goes directly to this campaign.</p>
+      </div>
+      <div class="donate-card-body">
+
+        <!-- Payment error banner -->
+        <div class="payment-error-banner" id="paymentErrorBanner">
+          <div class="payment-error-icon">✕</div>
+          <div class="payment-error-body">
+            <h4>Payment not completed</h4>
+            <p>Your payment was not processed. Please try again or choose a different amount.</p>
+          </div>
+          <button class="payment-error-close" onclick="document.getElementById('paymentErrorBanner').classList.remove('show')" title="Dismiss">✕</button>
+        </div>
+
+        <!-- Frequency toggle -->
+        <div class="freq-toggle">
+          <button class="freq-btn active" id="btnOneTime" onclick="setFreq('once')">One-time</button>
+          <button class="freq-btn" id="btnMonthly" onclick="setFreq('monthly')">Monthly</button>
+        </div>
+
+        <div class="amount-label">Select an amount</div>
+        <div class="amount-grid" style="padding-top:14px">
+          <button class="amt-btn" onclick="selectAmt(this, 25)">$25</button>
+          <button class="amt-btn" onclick="selectAmt(this, 50)">$50</button>
+          <button class="amt-btn" onclick="selectAmt(this, 100)"><span class="amt-suggested">♥ Suggested</span>$100</button>
+          <button class="amt-btn" onclick="selectAmt(this, 300)">$300</button>
+          <button class="amt-btn" onclick="selectAmt(this, 500)">$500</button>
+          <button class="amt-btn" onclick="selectAmt(this, 1000)">$1,000</button>
+        </div>
+
+        <button class="btn-lift" id="liftBtn" onclick="submitDonation()">
+          Lift Someone Up
+          <span class="btn-lift-sub">Your generosity changes lives ✦</span>
+        </button>
+
+        <div class="security-row">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Secure payment · SSL encrypted
+        </div>
+      </div>
+    </div>
+
+    <!-- Success state -->
+    <div class="success-wrap" id="successState">
+      <div class="success-icon">🎉</div>
+      <h2 id="successTitle">Thank you, <span id="successName"></span>!</h2>
+      <p id="successMsg"></p>
+      <button class="btn-back" onclick="location.href='campaigns.html'">Explore more campaigns</button>
+    </div>
+  </div>
+
+  <!-- Guarantee — own grid item so it reorders independently on mobile -->
+  <div class="guarantee-box pw-guarantee">
+    <div class="guarantee-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div class="guarantee-text">
+      <h4>Protected by Good Green Foundation Guarantee</h4>
+      <p>Your donation is 100% secure. If the campaign does not reach its goal or is found to be fraudulent, you will receive a full refund.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<style id='footer-fix'>
+.footer-col a{color:rgba(255,255,255,.8)!important}
+.footer-col a::before{background:rgba(255,255,255,.3)!important}
+.footer-col a:hover{color:#fff!important}
+.footer-col h4{color:rgba(255,255,255,.45)!important}
+.footer-bottom{color:rgba(255,255,255,.45)!important;border-top:1px solid rgba(255,255,255,.1)!important}
+.footer-bottom-links a{color:rgba(255,255,255,.45)!important}
+.footer-bottom-links a:hover{color:#fff!important}
+.footer-brand p{color:rgba(255,255,255,.6)!important}
+.footer-social{display:flex!important;gap:10px!important;margin-top:14px!important}
+.soc-btn{display:none!important}
+</style><footer style="background:#0A2B18;color:rgba(255,255,255,0.75);">
+  <div class="footer-cta-strip">
+    <div>
+      <h3>Ready to make a difference?</h3>
+      <p>Launch your campaign in minutes — no fees, full transparency.</p>
+    </div>
+    <a href="start-yourself.html" class="footer-cta-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Start a Campaign
+    </a>
+  </div>
+  <div class="footer-main">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo-text-footer.png" alt="Good Green Foundation" style="width:200px;height:auto;display:block;margin-bottom:16px;">
+        <p class="footer-brand-desc">Connecting people and causes that transform communities across America. Transparent, secure, and making real impact since 2026.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/goodgreenfoundation/" class="soc-btn" title="Instagram">
+            <img src="social-instagram.png" alt="Instagram">
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="campaigns.html">Explore Campaigns</a></li>
+          <li><a href="index.html#start">Start a Campaign</a></li>
+          <li><a href="most-loved.html">Most Loved</a></li>
+          <li><a href="causes.html">All Causes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="help-center.html">Help Center</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-of-use.html">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 ALL GOOD GREEN TAG FOUNDATION</span>
+        <div class="footer-bottom-links">
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="terms-of-use.html">Terms</a>
+        <a href="contact.html">Contact</a>
+        </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Detect Stripe cancel/failure redirect ───────────
+(function(){
+  const p = new URLSearchParams(window.location.search);
+  if (p.get('payment') === 'cancelled' || p.get('payment') === 'failed') {
+    document.getElementById('paymentErrorBanner').classList.add('show');
+    // Clean URL without reloading
+    const clean = window.location.pathname + (p.get('id') ? '?id=' + p.get('id') : '');
+    history.replaceState(null, '', clean);
+  }
+})();
+
+// ── Load campaign data from Supabase ──────────────
+const SUPA_URL = 'https://zcrrknmpzfwazzhfxdyi.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjcnJrbm1wemZ3YXp6aGZ4ZHlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4MzkzNjEsImV4cCI6MjA5MTQxNTM2MX0.ahqK2wA418U9TcO4rqqkPb36_NPpBdhHXPrEswoR-zc';
+
+function fmtMoney(n) {
+  if (!n && n !== 0) return '$0';
+  if (n >= 1000000) return '$' + (n/1000000).toFixed(1).replace(/\.0$/,'') + 'M';
+  if (n >= 1000) return '$' + (n/1000).toFixed(1).replace(/\.0$/,'') + 'k';
+  return '$' + n.toLocaleString();
+}
+
+const params = new URLSearchParams(window.location.search);
+const campId = params.get('id');
+
+(async function loadCampaign() {
+  if (!campId) return;
+  try {
+    const res = await fetch(`${SUPA_URL}/rest/v1/campaigns?id=eq.${campId}&active=eq.true`, {
+      headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
+    });
+    const data = await res.json();
+    if (!data || !data.length) return;
+    const c = data[0];
+    const pct = c.goal > 0 ? Math.min(Math.round((c.raised / c.goal) * 100), 100) : 0;
+    const label = {children:'Children & Family',animals:'Animals & Pets',health:'Health',disaster:'Disaster Relief'}[c.category] || c.category;
+    const sup = c.raised > 0 ? Math.max(Math.floor(c.raised / 25), 1).toLocaleString() : '0';
+
+    document.getElementById('campLabel').textContent = label;
+    document.getElementById('campTitle').textContent = c.title;
+    document.getElementById('campRaised').textContent = fmtMoney(c.raised);
+    document.getElementById('campGoal').textContent = fmtMoney(c.goal);
+    document.getElementById('campSup').textContent = sup;
+    const thumb = document.getElementById('campThumb');
+    if (c.image_url) {
+      thumb.style.background = `url("${c.image_url}") center/cover no-repeat`;
+    } else {
+      thumb.style.background = 'linear-gradient(135deg,var(--blue-dark),var(--blue))';
+    }
+
+    setTimeout(() => {
+      document.getElementById('campBar').style.width = pct + '%';
+    }, 300);
+
+} catch(e) {
+    console.error('Failed to load campaign:', e);
+  }
+})();
+
+// ── Amount selection ────────────────────────────────
+let selectedAmt = null;
+function selectAmt(el, val) {
+  document.querySelectorAll('.amt-btn').forEach(b => {
+    b.classList.remove('selected');
+    b.style.removeProperty('background');
+    b.style.removeProperty('background-color');
+    b.style.removeProperty('color');
+    b.style.removeProperty('-webkit-text-fill-color');
+    b.style.removeProperty('border-color');
+    const badge = b.querySelector('.amt-suggested');
+    if (badge) {
+      badge.style.removeProperty('background');
+      badge.style.removeProperty('color');
+      badge.style.removeProperty('-webkit-text-fill-color');
+    }
+  });
+  el.classList.add('selected');
+  el.style.setProperty('background', '#27AE60', 'important');
+  el.style.setProperty('color', '#fff', 'important');
+  el.style.setProperty('-webkit-text-fill-color', '#fff', 'important');
+  el.style.setProperty('border-color', '#27AE60', 'important');
+  const badge = el.querySelector('.amt-suggested');
+  if (badge) {
+    badge.style.setProperty('background', '#fff', 'important');
+    badge.style.setProperty('color', '#27AE60', 'important');
+    badge.style.setProperty('-webkit-text-fill-color', '#27AE60', 'important');
+  }
+  selectedAmt = val;
+  updateBtn();
+}
+
+function clearAmtBtns() {
+  document.querySelectorAll('.amt-btn').forEach(b => {
+    b.classList.remove('selected');
+    b.style.removeProperty('background');
+    b.style.removeProperty('background-color');
+    b.style.removeProperty('color');
+    b.style.removeProperty('-webkit-text-fill-color');
+    b.style.removeProperty('border-color');
+    const badge = b.querySelector('.amt-suggested');
+    if (badge) {
+      badge.style.removeProperty('background');
+      badge.style.removeProperty('color');
+      badge.style.removeProperty('-webkit-text-fill-color');
+    }
+  });
+  selectedAmt = null;
+  updateBtn();
+}
+
+function updateBtn() {
+  const amt = selectedAmt;
+  const btn = document.getElementById('liftBtn');
+  if (amt) {
+    btn.innerHTML = `Lift Someone Up <span class="btn-amount">$${amt.toLocaleString()}</span><span class="btn-lift-sub">Your generosity changes lives ✦</span>`;
+  } else {
+    btn.innerHTML = `Lift Someone Up<span class="btn-lift-sub">Your generosity changes lives ✦</span>`;
+  }
+}
+
+
+// ── Frequency toggle ────────────────────────────────
+let donationFreq = 'once';
+function setFreq(freq) {
+  donationFreq = freq;
+  document.getElementById('btnOneTime').classList.toggle('active', freq === 'once');
+  document.getElementById('btnMonthly').classList.toggle('active', freq === 'monthly');
+}
+
+// ── Stripe Payment Links ─────────────────────────────
+const STRIPE_MONTHLY = {
+  10:   'https://buy.stripe.com/14A5kD34g739dfe7vs0sU09',
+  15:   'https://buy.stripe.com/dRm4gzawI3QX7UU0300sU0a',
+  25:   'https://buy.stripe.com/8x26oHbAMfzF5MM6ro0sU0b',
+  30:   'https://buy.stripe.com/8x2cN56gs9bh5MM5nk0sU0c',
+  50:   'https://buy.stripe.com/9B6aEXdIUfzFa325nk0sU0d',
+  100:  'https://buy.stripe.com/fZucN56gscntdfeg1Y0sU0e',
+  300:  'https://buy.stripe.com/3cI8wPcEQbjp0sscPM0sU0f',
+  500:  'https://buy.stripe.com/28E3cv20cdrx1ww0300sU0g',
+  1000: 'https://buy.stripe.com/dRmbJ148kfzF2AAeXU0sU0h'
+};
+
+const STRIPE_LINKS = {
+  10:   'https://buy.stripe.com/bJe4gz0W8afl2AAaHE0sU02',
+  15:   'https://buy.stripe.com/3cI28r48kdrx5MM8zw0sU01',
+  25:   'https://buy.stripe.com/test_eVqdR9eMYgDJ5MM7vs0sU00',
+  30:   'https://buy.stripe.com/4gM9ATgV64V15MMcPM0sU03',
+  50:   'https://buy.stripe.com/00w6oHeMY5Z55MMcPM0sU04',
+  100:  'https://buy.stripe.com/28E14n48k739b76aHE0sU05',
+  300:  'https://buy.stripe.com/5kQeVd5co0EL5MM6ro0sU06',
+  500:  'https://buy.stripe.com/3cIcN57kw1IP5MM8zw0sU07',
+  1000: 'https://buy.stripe.com/eVq8wPfR287d6QQaHE0sU08'
+};
+
+// ── Submit ──────────────────────────────────────────
+function submitDonation() {
+  const amt = selectedAmt;
+  if (!amt || amt < 1) {
+    highlight(document.querySelectorAll('.amt-btn')[0].parentElement);
+    alert('Please select a donation amount.');
+    return;
+  }
+
+
+  const links = donationFreq === 'monthly' ? STRIPE_MONTHLY : STRIPE_LINKS;
+  const link = links[amt];
+  if (link) {
+    // ── TikTok: InitiateCheckout ──────────────────────────────────────────
+    const campaignId = new URLSearchParams(window.location.search).get('id') || '';
+
+    // localStorage — persiste após redirect para domínio externo (Stripe) e volta
+    try {
+      localStorage.setItem('ggf_tt_donation', JSON.stringify({
+        amount: amt, currency: 'USD', campaignId: campaignId, freq: donationFreq,
+        ts: Date.now()
+      }));
+    } catch(e) {}
+
+    // TikTok pixel client-side
+    try {
+      if (window.ttq) {
+        window.ttq.track('InitiateCheckout', {
+          value: amt, currency: 'USD',
+          contents: [{ content_id: campaignId, content_category: 'donation', quantity: 1, price: amt }]
+        });
+      }
+    } catch(e) {}
+
+    // Facebook: InitiateCheckout (browser + CAPI server-side)
+    try {
+      if (window.GGF && window.GGF.fbSendEvent) {
+        window.GGF.fbSendEvent('InitiateCheckout', {
+          value:        amt,
+          currency:     'USD',
+          content_ids:  [campaignId || 'donation'],
+          content_type: 'product',
+          content_name: 'Donation — Good Green Foundation'
+        });
+      }
+    } catch(e) {}
+
+    // Injeta client_reference_id com dados de rastreamento FB para o webhook CAPI
+    const stripeUrl = (window.GGF && window.GGF.buildStripeUrl)
+      ? window.GGF.buildStripeUrl(link)
+      : link;
+    console.log('[Donate] URL gerada:', stripeUrl);
+    window.location.href = stripeUrl;
+  } else if (donationFreq === 'monthly') {
+    alert('Monthly subscription links coming soon.');
+  }
+}
+
+function highlight(el) {
+  el.style.outline = '2px solid var(--orange)';
+  setTimeout(() => el.style.outline = '', 1500);
+}
+
+// ── Nav hamburger ───────────────────────────────────
+const _hbg = document.getElementById('hamburger');
+if (_hbg) {
+  _hbg.addEventListener('click', () => {
+    const links = document.querySelector('.nav-links');
+    const open = links.style.display === 'flex';
+    links.style.cssText = open ? '' : 'display:flex;flex-direction:column;position:absolute;top:80px;left:0;width:100%;background:#fff;padding:12px 5%;gap:2px;box-shadow:0 8px 24px rgba(0,0,0,.08);z-index:998;border-top:1px solid #E2E8F0';
+  });
+}
+</script>
+
+<script src="sidebar.js"></script>
+<script src="ggf-tracker.js"></script>
+</body>
+</html>

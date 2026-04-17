@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donation Successful — Good Green Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=112">
+<style>
+:root{
+  --blue:#27AE60;--blue-dark:#1E8449;--blue-light:#EAFAF1;
+  --green:#27AE60;--green-dark:#1E8449;--green-light:#EAFAF1;
+  --ink:#0D1117;--slate:#4A5568;--muted:#718096;--line:#E2E8F0;--surface:#F7F8FA;--white:#FFFFFF;
+  --font:'Plus Jakarta Sans',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:var(--surface);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+
+/* ── Card section ── */
+.card-section{
+  background:linear-gradient(170deg,#dff4e8 0%,#eef8f2 40%,var(--white) 100%);
+  padding:36px 20px 52px;
+  display:flex;
+  justify-content:center;
+}
+.card{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:36px 40px;max-width:560px;width:100%;box-shadow:0 4px 28px rgba(39,174,96,.12)}
+.card-title{font-size:1.1rem;font-weight:800;color:var(--ink);margin-bottom:20px;text-align:center}
+.detail-box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:24px;text-align:left}
+.detail-row{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line);font-size:.88rem;gap:12px}
+.detail-row:last-child{border-bottom:none}
+.detail-label{color:var(--muted);font-weight:500;flex-shrink:0;padding-top:1px}
+.detail-value{font-weight:700;color:var(--ink);text-align:right;word-break:break-word}
+.btn-primary{display:block;width:100%;padding:14px;border-radius:100px;border:none;background:linear-gradient(135deg,var(--blue-dark),var(--blue));color:#fff;font-family:var(--font);font-size:.95rem;font-weight:700;cursor:pointer;margin-bottom:12px;text-align:center;transition:background .15s;box-shadow:0 3px 12px rgba(39,174,96,.3)}
+.btn-primary:hover{background:linear-gradient(135deg,#145A30,#1E8449)}
+.btn-secondary{display:block;width:100%;padding:14px;border-radius:100px;border:1.5px solid var(--line);background:var(--white);color:var(--slate);font-family:var(--font);font-size:.95rem;font-weight:600;text-align:center;transition:all .15s}
+.btn-secondary:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+.share-row{display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap}
+.share-btn{display:flex;align-items:center;gap:6px;padding:9px 18px;border-radius:100px;border:1.5px solid var(--line);background:var(--white);font-family:var(--font);font-size:.82rem;font-weight:600;color:var(--slate);cursor:pointer;transition:all .15s}
+.share-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+@media(max-width:600px){.card{padding:24px 20px}}
+
+/* ── Thank you banner ── */
+.ty-banner{background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue) 60%,#2ECC71 100%);padding:48px 5% 44px;text-align:center;position:relative;overflow:hidden}
+.ty-banner::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 80% 20%,rgba(255,255,255,.08) 0%,transparent 70%);pointer-events:none}
+.ty-icon{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.2);border:3px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;position:relative;z-index:1}
+.ty-icon svg{color:#fff}
+.ty-banner h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:#fff;letter-spacing:-.025em;margin-bottom:10px;position:relative;z-index:1}
+.ty-banner p{font-size:.95rem;color:rgba(255,255,255,.82);line-height:1.7;max-width:500px;margin:0 auto;position:relative;z-index:1}
+
+/* ── Upsell / campaigns section ── */
+.upsell{padding:56px 5% 64px;background:var(--surface)}
+.upsell-header{text-align:center;margin-bottom:36px}
+.upsell-header h3{font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:800;color:var(--ink);letter-spacing:-.02em;margin-bottom:8px}
+.upsell-header p{color:var(--muted);font-size:.93rem}
+.upsell-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto}
+@media(max-width:860px){.upsell-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.upsell-grid{grid-template-columns:1fr}}
+
+/* campaign card */
+.up-card{background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:transform .15s,box-shadow .15s;cursor:pointer}
+.up-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.1)}
+.up-card-img{width:100%;height:170px;object-fit:cover;display:block;background:#e2e8f0}
+.up-card-body{padding:16px}
+.up-card-cat{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--blue);margin-bottom:6px}
+.up-card-title{font-size:.93rem;font-weight:700;color:var(--ink);margin-bottom:10px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.up-card-prog{background:var(--line);border-radius:100px;height:5px;margin-bottom:8px;overflow:hidden}
+.up-card-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--blue-dark),var(--blue))}
+.up-card-meta{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);font-weight:600}
+.up-card-meta span b{color:var(--ink)}
+.up-card-btn{display:block;width:100%;padding:10px;border-radius:100px;border:none;background:linear-gradient(135deg,var(--blue-dark),var(--blue));color:#fff;font-family:var(--font);font-size:.82rem;font-weight:700;cursor:pointer;margin-top:12px;text-align:center}
+.upsell-see-all{text-align:center;margin-top:32px}
+.upsell-see-all a{display:inline-flex;align-items:center;gap:6px;padding:12px 28px;border-radius:100px;border:1.5px solid var(--blue);color:var(--blue);font-weight:700;font-size:.9rem;transition:all .15s}
+.upsell-see-all a:hover{background:var(--blue);color:#fff}
+
+</style>
+</head>
+<body>
+<style>
+nav .nav-links{order:1;display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0}
+nav .logo{order:2;justify-self:center;display:flex;align-items:center;}
+nav .logo-img{height:165px;width:auto;display:block;}
+nav .nav-actions{order:3;justify-self:end;display:flex;align-items:center;gap:12px;}
+nav .hamburger{order:4;}
+nav{background:transparent!important;box-shadow:none!important;border:none!important;position:relative!important;}
+@media(max-width:768px){nav{display:flex!important;justify-content:center!important;align-items:center!important;position:relative!important;}nav .nav-links{display:none!important}nav .hamburger{display:flex!important;position:absolute!important;right:16px!important;top:50%!important;transform:translateY(-50%)!important;}nav .nav-actions{display:none!important}nav .logo-img{height:155px!important}nav .logo{justify-content:center!important;}}
+</style>
+<nav style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 5%;border-bottom:none;background:transparent;z-index:999;">
+  <a class="logo" href="index.html"><img class="logo-img" src="logo-ggf.png" alt="Good Green Foundation" style="height:165px;width:auto;" /></a>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ── Confirmation card ── -->
+<div class="card-section">
+  <div class="card">
+    <p class="card-title">🎉 Your donation is confirmed!</p>
+    <div class="detail-box">
+      <div class="detail-row">
+        <span class="detail-label">Status</span>
+        <span class="detail-value" style="color:var(--green)">&#10003; Payment confirmed</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Amount</span>
+        <span class="detail-value" id="donationAmt">—</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Organization</span>
+        <span class="detail-value">Good Green Foundation</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Reference</span>
+        <span class="detail-value" id="refNumber">—</span>
+      </div>
+    </div>
+    <a href="campaigns.html" class="btn-primary">Explore More Campaigns →</a>
+    <a href="index.html" class="btn-secondary">Back to Home</a>
+    <div class="share-row">
+      <button class="share-btn" onclick="shareVia('whatsapp')">📱 WhatsApp</button>
+      <button class="share-btn" onclick="shareVia('facebook')">📘 Facebook</button>
+      <button class="share-btn" onclick="copyLink()">🔗 Copy Link</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Thank you banner ── -->
+<div class="ty-banner">
+  <div class="ty-icon">
+    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+  </div>
+  <h2>Thank you for your donation!</h2>
+  <p>Your generosity makes a real difference. The campaign organizer has been notified and your contribution will help change someone's life.</p>
+</div>
+
+<!-- ── Upsell: other campaigns ── -->
+<section class="upsell">
+  <div class="upsell-header">
+    <h3>Keep the momentum going</h3>
+    <p>Your donation inspires others. Here are more causes that need your support.</p>
+  </div>
+  <div class="upsell-grid" id="upsellGrid">
+    <!-- loaded via JS -->
+  </div>
+  <div class="upsell-see-all">
+    <a href="campaigns.html">See all campaigns →</a>
+  </div>
+</section>
+
+<style id="footer-fix">
+.footer-col a{color:rgba(255,255,255,.8)!important}
+.footer-col a::before{background:rgba(255,255,255,.3)!important}
+.footer-col a:hover{color:#fff!important}
+.footer-col h4{color:rgba(255,255,255,.45)!important}
+.footer-bottom{color:rgba(255,255,255,.45)!important;border-top:1px solid rgba(255,255,255,.1)!important}
+.footer-bottom-links a{color:rgba(255,255,255,.45)!important}
+.footer-bottom-links a:hover{color:#fff!important}
+.footer-brand p{color:rgba(255,255,255,.6)!important}
+.footer-social{display:flex!important;gap:10px!important;margin-top:14px!important}
+.soc-btn{display:none!important}
+</style><footer style="background:#0A2B18;color:rgba(255,255,255,0.75);">
+  <div class="footer-cta-strip" style="display:flex;">
+    <div>
+      <h3>Ready to make a difference?</h3>
+      <p>Launch your campaign in minutes — no fees, full transparency.</p>
+    </div>
+    <a href="start-yourself.html" class="footer-cta-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Start a Campaign
+    </a>
+  </div>
+  <div class="footer-main">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo-text-footer.png" alt="Good Green Foundation" style="width:200px;height:auto;display:block;margin-bottom:16px;">
+        <p class="footer-brand-desc">Connecting people and causes that transform communities across America. Transparent, secure, and making real impact since 2026.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/goodgreenfoundation/" class="soc-btn" title="Instagram">
+            <img src="social-instagram.png" alt="Instagram">
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="campaigns.html">Explore Campaigns</a></li>
+          <li><a href="index.html#start">Start a Campaign</a></li>
+          <li><a href="most-loved.html">Most Loved</a></li>
+          <li><a href="causes.html">All Causes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="help-center.html">Help Center</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-of-use.html">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 ALL GOOD GREEN TAG FOUNDATION</span>
+    <div class="footer-bottom-links">
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="terms-of-use.html">Terms</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Confirmation card data ────────────────────────────────────────────────
+(function() {
+  // Reference number: GGF- + last 8 digits of timestamp
+  var ref = 'GGF-' + String(Date.now()).slice(-8);
+  document.getElementById('refNumber').textContent = ref;
+
+  // Show donation amount from localStorage (persiste após redirect Stripe)
+  try {
+    var stored = localStorage.getItem('ggf_tt_donation');
+    if (stored) {
+      var d = JSON.parse(stored);
+      if (d.amount) {
+        document.getElementById('donationAmt').textContent =
+          '$' + Number(d.amount).toLocaleString('en-US') + ' USD';
+      }
+    }
+  } catch(e) {}
+})();
+
+function shareVia(p){
+  var url=encodeURIComponent('https://goodgreenfoundation.com/campaigns.html');
+  var txt=encodeURIComponent('I just donated on Good Green Foundation! Join me 💚');
+  var links={whatsapp:'https://wa.me/?text='+txt+'%20'+url,facebook:'https://www.facebook.com/sharer/sharer.php?u='+url};
+  window.open(links[p],'_blank');
+}
+function copyLink(){navigator.clipboard.writeText('https://goodgreenfoundation.com/campaigns.html');alert('Link copied!');}
+</script>
+
+<!-- ── Upsell campaigns ──────────────────────────────────────────────────── -->
+<script>
+(function() {
+  var SUPA_URL = 'https://zcrrknmpzfwazzhfxdyi.supabase.co';
+  var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjcnJrbm1wemZ3YXp6aGZ4ZHlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4MzkzNjEsImV4cCI6MjA5MTQxNTM2MX0.ahqK2wA418U9TcO4rqqkPb36_NPpBdhHXPrEswoR-zc';
+  var CAT_LABELS = {children:'Children & Family',animals:'Animals & Pets',health:'Health',disaster:'Disaster Relief',education:'Education',community:'Community'};
+
+  fetch(SUPA_URL + '/rest/v1/campaigns?active=eq.true&order=raised.desc&limit=3', {
+    headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY }
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(camps) {
+    var grid = document.getElementById('upsellGrid');
+    if (!camps || !camps.length) { grid.closest('.upsell').style.display='none'; return; }
+    grid.innerHTML = camps.map(function(c) {
+      var pct = c.goal > 0 ? Math.min(Math.round((c.raised / c.goal) * 100), 100) : 0;
+      var cat = CAT_LABELS[c.category] || c.category || '';
+      var raised = c.raised > 0 ? '$' + Number(c.raised).toLocaleString('en-US') : '$0';
+      var goal   = c.goal   > 0 ? '$' + Number(c.goal).toLocaleString('en-US')   : '';
+      return '<div class="up-card" onclick="location.href=\'campaign-detail.html?id='+c.id+'\'">'
+        + '<img class="up-card-img" src="'+(c.image_url||'')+(c.image_url?'':'')+'" onerror="this.style.background=\'#e2e8f0\';this.style.display=\'block\'" alt="">'
+        + '<div class="up-card-body">'
+        + (cat ? '<div class="up-card-cat">'+cat+'</div>' : '')
+        + '<div class="up-card-title">'+(c.title||'')+'</div>'
+        + '<div class="up-card-prog"><div class="up-card-fill" style="width:'+pct+'%"></div></div>'
+        + '<div class="up-card-meta"><span><b>'+raised+'</b> raised</span>'+(goal?'<span>Goal <b>'+goal+'</b></span>':'')+'</div>'
+        + '<button class="up-card-btn">Donate Now</button>'
+        + '</div></div>';
+    }).join('');
+  })
+  .catch(function(){ document.querySelector('.upsell').style.display='none'; });
+})();
+</script>
+
+<script src="sidebar.js"></script>
+<script src="ggf-tracker.js"></script>
+
+<!-- TikTok: CompletePayment — deve rodar APÓS ggf-tracker.js carregar -->
+<script>
+(function() {
+  try {
+    var stored = localStorage.getItem('ggf_tt_donation');
+    if (!stored) return;
+    var data = JSON.parse(stored);
+
+    // Segurança: ignora dados com mais de 2 horas (checkout abandonado)
+    if (!data.ts || (Date.now() - data.ts) > 7200000) {
+      localStorage.removeItem('ggf_tt_donation');
+      return;
+    }
+
+    localStorage.removeItem('ggf_tt_donation'); // dispara uma vez só
+
+    var props = {
+      value:        data.amount,
+      currency:     data.currency || 'USD',
+      content_id:   data.campaignId || '',
+      content_name: 'Donation — Good Green Foundation'
+    };
+
+    // TikTok: client-side pixel
+    if (window.ttq) {
+      window.ttq.track('CompletePayment', {
+        value: data.amount, currency: data.currency || 'USD',
+        contents: [{ content_id: data.campaignId || 'donation', content_category: 'donation', quantity: 1, price: data.amount }]
+      });
+    }
+
+    // TikTok: server-side CAPI
+    if (window.GGF && window.GGF.ttSendEvent) {
+      window.GGF.ttSendEvent('CompletePayment', props);
+    }
+
+    // Facebook: Purchase (browser fbq + CAPI server-side via fbSendEvent)
+    if (window.GGF && window.GGF.fbSendEvent) {
+      window.GGF.fbSendEvent('Purchase', {
+        value:        data.amount,
+        currency:     data.currency || 'USD',
+        content_ids:  [data.campaignId || 'donation'],
+        content_type: 'product',
+        content_name: 'Donation — Good Green Foundation'
+      });
+    }
+
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>

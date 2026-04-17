@@ -1,0 +1,2339 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campaign — Good Green Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#27AE60;--blue-dark:#1E8449;--blue-light:#EAFAF1;
+  --orange:#2ECC71;--orange-dark:#27AE60;
+  --ink:#0D1117;--ink3:#2D3748;--slate:#4A5568;
+  --muted:#718096;--subtle:#A0AEC0;--line:#E2E8F0;--surface:#F7F8FA;--white:#FFFFFF;
+  --font-head:'Plus Jakarta Sans',sans-serif;--font-body:'Plus Jakarta Sans',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--white);color:var(--ink);overflow-x:hidden;font-size:15.5px;line-height:1.68;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+/* SUMMARY SLIDE */
+.car-summary{display:none;position:absolute;inset:0;background:linear-gradient(145deg,var(--blue-dark),var(--blue));z-index:4;align-items:center;justify-content:center;padding:24px 20px}
+.car-summary.active{display:flex}
+.car-sum-card{background:#fff;border-radius:18px;padding:22px;width:100%;box-shadow:0 8px 32px rgba(0,0,0,.22)}
+.car-sum-text{font-size:.9rem;color:var(--ink3);line-height:1.65;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.car-sum-row{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.car-sum-avs{display:flex}
+.car-sum-av{width:32px;height:32px;border-radius:50%;border:2.5px solid #fff;margin-left:-10px;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:.62rem;font-weight:800;color:#fff;flex-shrink:0}
+.car-sum-av:first-child{margin-left:0}
+.car-sum-count{font-size:.85rem;color:var(--slate);font-weight:600}
+.car-sum-btn{width:100%;padding:14px;border-radius:100px;border:none;background:var(--orange);color:#fff;font-weight:700;font-size:.95rem;cursor:pointer;font-family:var(--font-body);transition:background .15s;box-shadow:0 2px 8px rgba(240,120,0,.3)}
+.car-sum-btn:hover{background:var(--orange-dark)}
+
+/* NAV */
+nav{background:var(--white);border-bottom:1px solid var(--line);height:86px;padding:0 4%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;position:sticky;top:0;z-index:999;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.logo{display:flex;align-items:center;justify-content:center;text-decoration:none}
+.logo-img{height:72px;width:auto;object-fit:contain}
+.logo-mobile{display:none}
+.logo-desktop{display:block}
+@media(max-width:900px){.logo-desktop{display:none}.logo-mobile{display:block;height:44px;width:auto}.logo{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important}}
+.nav-links{display:flex;align-items:center;list-style:none}
+.nav-item{position:relative}
+.nav-trigger{display:flex;align-items:center;gap:6px;color:var(--slate);font-family:var(--font-body);font-weight:700;font-size:.95rem;padding:8px 12px;cursor:pointer;background:none;border:none;height:86px;transition:color .15s;white-space:nowrap;border-bottom:2.5px solid transparent}
+.nav-trigger:hover{color:var(--ink);border-bottom-color:var(--line)}
+.nav-item.open .nav-trigger{color:var(--blue);border-bottom-color:var(--blue)}
+.nc{width:16px;height:16px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;font-size:.48rem;color:var(--muted);transition:transform .2s}
+.nav-item.open .nc{transform:rotate(180deg);background:var(--blue-light);border-color:var(--blue);color:var(--blue)}
+.dropdown{position:absolute;top:100%;left:0;background:var(--white);border-radius:0 0 12px 12px;box-shadow:0 8px 24px rgba(0,0,0,.10);border:1px solid var(--line);border-top:3px solid var(--blue);min-width:210px;padding:8px;opacity:0;visibility:hidden;transform:translateY(-2px);transition:opacity .15s,transform .15s,visibility .15s;z-index:1000}
+.nav-item.open .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.dropdown a{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:8px;color:var(--slate);font-weight:500;font-size:.9rem;transition:background .12s,color .12s}
+.dropdown a:before{content:'';width:5px;height:5px;border-radius:50%;background:var(--line);flex-shrink:0}
+.dropdown a:hover{background:var(--surface);color:var(--ink)}
+.dropdown a:hover:before{background:var(--blue)}
+.nav-actions{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.btn-nav{padding:8px 16px;border-radius:100px;font-weight:600;font-size:.88rem;cursor:pointer;border:1.5px solid var(--line);background:var(--white);color:var(--slate);font-family:var(--font-body);transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:5px}
+.btn-nav:hover{border-color:var(--ink3);color:var(--ink)}
+.btn-cta{padding:10px 22px;border-radius:100px;font-weight:700;font-size:.9rem;cursor:pointer;border:none;background:var(--orange);color:#fff;font-family:var(--font-body);transition:all .15s;box-shadow:0 2px 8px rgba(232,114,10,.3)}
+.btn-cta:hover{background:var(--orange-dark)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px;border:none;background:none;position:absolute;right:4%}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink3);border-radius:2px;transition:transform .22s,opacity .22s}
+.hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(max-width:900px){.nav-links{display:none}.hamburger{display:flex}.btn-nav.hide-mobile{display:none}nav{display:flex;justify-content:center;align-items:center}.nav-actions{display:none}}
+
+/* BREADCRUMB */
+.breadcrumb{padding:11px 5%;font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:6px;background:var(--white);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.breadcrumb a{color:var(--blue)}.breadcrumb a:hover{text-decoration:underline}
+.urgent-banner{background:#DC2626;color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.01em;padding:6px 5%;text-align:center;display:none}
+
+/* MAIN LAYOUT */
+.page{max-width:1040px;margin:0 auto;padding:36px 4% 0;display:grid;grid-template-columns:1fr 340px;gap:44px;align-items:start}
+
+/* ── LEFT COLUMN ── */
+.camp-title{font-family:var(--font-head);font-size:clamp(1.3rem,2.4vw,1.8rem);font-weight:800;color:var(--ink);line-height:1.22;letter-spacing:-.025em;margin-bottom:20px}
+
+/* Carousel */
+.car-wrap{position:relative;border-radius:12px;overflow:hidden;margin-bottom:18px;aspect-ratio:16/9;background:#111;touch-action:pan-y}
+.car-img{position:absolute;inset:0;background-size:cover;background-position:center}
+.car-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.9);border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;z-index:5;display:none;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,.15);color:var(--ink);transition:background .15s}
+.car-btn:hover{background:#fff}
+.car-btn.prev{left:12px}
+.car-btn.next{right:12px}
+.car-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:5}
+.cdot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.5);border:none;cursor:pointer;transition:all .2s}
+.cdot.on{background:#fff;transform:scale(1.3)}
+
+/* Organizer row */
+.org-row{display:flex;align-items:center;gap:10px;padding:16px 0;border-bottom:1px solid var(--line)}
+.av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:.8rem;font-weight:800;color:#fff;flex-shrink:0}
+.org-text{font-size:.9rem;color:var(--ink)}
+.org-text b{font-weight:700}
+
+/* Protected */
+.prot-badge{display:flex;align-items:center;padding:10px 0 16px;width:100%}
+.prot-badge-inner{display:inline-flex;align-items:center;gap:7px;background:#CCEFF5;border-radius:8px;padding:7px 13px;font-size:.83rem;font-weight:700;color:#0A6E82}
+.prot-badge-inner svg{color:#0A6E82;flex-shrink:0}
+
+/* Story */
+.story{font-size:.93rem;color:#2d3748;line-height:1.88;padding:20px 0}
+.story p{margin-bottom:14px}
+.story p:last-child{margin-bottom:0}
+.story-fade{max-height:220px;overflow:hidden;position:relative}
+.story-fade::after{content:'';position:absolute;bottom:0;left:0;right:0;height:72px;background:linear-gradient(transparent,#fff)}
+/* Story inline images — GoFundMe style */
+.story-img-wrap{margin:20px 0;border-radius:12px;overflow:hidden;line-height:0}
+.story-img-wrap img{width:100%;max-width:100%;border-radius:12px;display:block;border:1px solid var(--line);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.story-img-caption{font-size:.78rem;color:var(--muted);text-align:center;margin-top:8px;font-style:italic;line-height:1.4}
+.btn-more{display:inline-flex;align-items:center;gap:4px;font-size:.88rem;font-weight:700;color:var(--blue);background:none;border:none;cursor:pointer;font-family:var(--font-body);padding:0;margin-bottom:20px}
+.btn-more:hover{color:var(--blue-dark)}
+
+/* Divider */
+hr{border:none;border-top:1px solid var(--line);margin:4px 0}
+
+/* React row — GoFundMe style */
+.react-row{display:flex;align-items:center;gap:6px;padding:14px 0;flex-wrap:wrap}
+.react-wrap{position:relative;display:inline-flex;align-items:center;gap:6px}
+/* React button */
+.btn-reagir{display:flex;align-items:center;gap:6px;background:none;border:1.5px solid #d1d5db;border-radius:100px;cursor:pointer;font-family:var(--font-body);font-size:.84rem;font-weight:600;color:var(--ink3);padding:6px 14px;transition:all .15s;flex-shrink:0;user-select:none}
+.btn-reagir:hover{border-color:#9ca3af;background:var(--surface)}
+.btn-reagir.reacted{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+/* Inline small emojis — always visible */
+.emoji-inline{display:flex;align-items:center;gap:1px}
+.emoji-inline .emoji-sm{font-size:1.15rem;cursor:pointer;padding:3px 4px;border-radius:50%;border:none;background:none;line-height:1;transition:transform .13s,background .13s}
+.emoji-inline .emoji-sm:hover{transform:scale(1.3);background:#f3f4f6}
+.emoji-inline .emoji-sm.chosen{transform:scale(1.2);background:var(--blue-light)}
+/* Floating large picker on click */
+.emoji-picker{position:absolute;bottom:calc(100% + 10px);left:0;background:#fff;border-radius:100px;padding:8px 14px;display:flex;gap:3px;box-shadow:0 4px 24px rgba(0,0,0,.15);opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;transform:translateY(6px);z-index:300;white-space:nowrap;border:1px solid var(--line)}
+.emoji-picker.open{opacity:1;pointer-events:all;transform:translateY(0)}
+.emoji-opt{font-size:1.6rem;cursor:pointer;padding:5px;border-radius:50%;transition:transform .14s,background .13s;border:none;background:none;line-height:1;display:flex;align-items:center;justify-content:center;position:relative}
+.emoji-opt:hover{transform:scale(1.5);background:#f3f4f6}
+.emoji-opt.chosen{transform:scale(1.25);background:var(--blue-light)}
+.emoji-opt .etip{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:.6rem;font-weight:700;padding:3px 7px;border-radius:100px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;font-family:var(--font-body)}
+.emoji-opt:hover .etip{opacity:1}
+/* Count */
+.react-total{font-size:.84rem;color:var(--blue);font-weight:700;cursor:pointer;text-decoration:underline;text-underline-offset:2px;margin-left:2px}
+.react-total:hover{color:var(--blue-dark)}
+/* Reactions modal */
+.react-modal-row{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--line)}
+.react-modal-av{width:38px;height:38px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative}
+.react-modal-av svg{color:var(--muted)}
+.react-modal-emoji{position:absolute;bottom:-4px;right:-4px;font-size:.85rem;line-height:1}
+.react-modal-name{font-weight:600;font-size:.88rem;color:var(--ink)}
+.react-modal-sub{font-size:.74rem;color:var(--muted);margin-top:1px}
+
+/* Action buttons */
+.action-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px 0}
+.btn-act{padding:13px;border-radius:100px;font-weight:600;font-size:.92rem;cursor:pointer;border:1.5px solid #d1d5db;background:var(--white);color:var(--ink3);font-family:var(--font-body);transition:all .15s;display:flex;align-items:center;justify-content:center;gap:7px}
+.btn-act:hover{border-color:#9ca3af;background:var(--surface)}
+
+/* Share section */
+.share-sec{padding:24px 0}
+.share-sec h3{font-family:var(--font-head);font-size:1rem;font-weight:800;color:var(--ink);margin-bottom:6px}
+.share-sec p{font-size:.84rem;color:var(--muted);margin-bottom:18px;line-height:1.6}
+.share-preview{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;gap:14px;align-items:center;margin-bottom:16px}
+.share-prev-img{width:80px;height:54px;border-radius:8px;flex-shrink:0;background:var(--blue-light);overflow:hidden}
+.share-prev-img div{width:100%;height:100%;background-size:cover;background-position:center}
+.share-prev-title{font-family:var(--font-head);font-size:.84rem;font-weight:700;color:var(--ink);margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.share-prev-sub{font-size:.76rem;color:var(--muted)}
+.share-icons{display:flex;gap:10px;flex-wrap:wrap}
+.sico{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--slate);transition:all .15s}
+.sico:hover{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
+
+/* Words of support */
+.words-sec{padding:24px 0}
+.words-sec-hdr{display:flex;align-items:center;gap:10px;margin-bottom:5px}
+.words-sec-title{font-family:var(--font-head);font-size:1.05rem;font-weight:800;color:var(--ink)}
+.words-count{display:inline-flex;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--line);border-radius:100px;font-size:.77rem;font-weight:700;color:var(--slate);padding:2px 11px}
+.words-sec-sub{font-size:.82rem;color:var(--muted);margin:4px 0 18px}
+.word-card{padding:14px 0;border-bottom:1px solid var(--line)}
+.word-card:last-child{border-bottom:none}
+.word-card-hdr{display:flex;align-items:center;gap:11px;margin-bottom:0}
+.word-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:.72rem;font-weight:700;color:var(--ink3);flex-shrink:0;background:var(--surface);border:1px solid var(--line)}
+.word-meta .word-name{font-size:.9rem;font-weight:700;color:var(--ink)}
+.word-meta .word-info{font-size:.76rem;color:var(--muted);margin-top:2px}
+.word-msg{font-size:.87rem;color:var(--blue);line-height:1.7;margin-top:10px;padding-left:49px}
+
+/* Organizer section */
+.org-sec{padding:24px 0}
+.org-sec-title{font-family:var(--font-head);font-size:.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px}
+.org-card{display:flex;align-items:center;gap:12px}
+.org-card-text .name{font-size:.9rem;font-weight:700;color:var(--ink)}
+.org-card-text .role{font-size:.78rem;color:var(--muted)}
+
+/* Camp meta */
+.camp-meta{font-size:.82rem;color:var(--muted);padding:16px 0;display:flex;align-items:center;gap:6px}
+.camp-meta a{color:var(--blue);font-weight:600}
+
+/* Report */
+.report-btn{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;color:var(--muted);background:none;border:none;cursor:pointer;font-family:var(--font-body);padding:0}
+.report-btn:hover{color:var(--ink)}
+.legal{font-size:.74rem;color:var(--subtle);line-height:1.6;margin-top:8px}
+
+/* ── SIDEBAR ── */
+.sidebar{position:sticky;top:88px}
+.scard{background:var(--white);border-radius:12px;border:1px solid var(--line);box-shadow:0 2px 16px rgba(0,0,0,.08);padding:22px}
+
+/* Raised ring */
+.raised-row{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.ring-wrap{width:80px;height:80px;flex-shrink:0;position:relative}
+.ring-svg{width:80px;height:80px;transform:rotate(-90deg);position:absolute;inset:0}
+.ring-pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:1.1rem;font-weight:800;color:var(--ink)}
+.ring-bg{fill:none;stroke:var(--line);stroke-width:3}
+.ring-fill{fill:none;stroke:#27AE60;stroke-width:3;stroke-linecap:round;transition:stroke-dasharray 1s ease}
+.raised-n{font-family:var(--font-head);font-size:1.7rem;font-weight:900;color:var(--ink);line-height:1}
+.raised-lbl{font-size:.72rem;color:var(--muted);margin-top:2px;font-weight:600;text-transform:lowercase}
+.raised-s{font-size:.82rem;color:var(--muted);margin-bottom:2px}
+.don-stat{display:flex;align-items:center;gap:5px;font-size:.82rem;color:var(--ink);font-weight:700;margin-bottom:18px;color:#5B21B6}
+.don-stat svg{color:#5B21B6;flex-shrink:0}
+
+.btn-sd{width:100%;padding:14px;border-radius:100px;font-weight:700;font-size:.92rem;cursor:pointer;font-family:var(--font-body);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:10px}
+.btn-sd.primary{border:none;background:var(--orange);color:#fff;box-shadow:0 2px 8px rgba(240,120,0,.3)}
+.btn-sd.primary:hover{background:var(--orange-dark)}
+.btn-sd.secondary{border:none;background:var(--blue-dark);color:#fff;box-shadow:0 2px 8px rgba(15,79,138,.2)}
+.btn-sd.secondary:hover{background:var(--blue)}
+
+/* Donors */
+.donors-wrap{margin:16px 0 0;border-top:1px solid var(--line);padding-top:12px}
+.donors-label{display:flex;align-items:center;gap:6px;font-size:.8rem;font-weight:700;color:#5B21B6;margin-bottom:10px}
+.donors-label svg{color:#5B21B6}
+.drow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.drow:last-child{border-bottom:none}
+.dav{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:.72rem;font-weight:700;color:var(--ink3);flex-shrink:0;background:var(--surface);border:1px solid var(--line)}
+.dav.named{background:var(--surface);color:var(--ink3)}
+.dinfo{flex:1;min-width:0}
+.dname{font-size:.84rem;font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.damt-lbl{display:flex;align-items:center;gap:4px;margin-top:1px;flex-wrap:wrap}
+.damt{font-size:.78rem;font-weight:700;color:var(--ink)}
+.dlbl{font-size:.74rem;color:var(--muted)}
+.see-row{display:flex;gap:8px;margin-top:14px}
+.btn-see{flex:1;padding:9px 12px;border-radius:100px;font-size:.8rem;font-weight:600;cursor:pointer;border:1.5px solid var(--line);background:var(--white);color:var(--ink);font-family:var(--font-body);transition:all .15s;display:flex;align-items:center;justify-content:center;gap:5px}
+.btn-see:hover{background:var(--surface);border-color:var(--slate)}
+.btn-see.active{background:var(--ink);border-color:var(--ink);color:#fff}
+/* Donations modal */
+.don-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;display:none;align-items:flex-end;justify-content:center}
+.don-overlay.open{display:flex}
+.don-modal{background:#fff;border-radius:16px 16px 0 0;width:100%;max-width:480px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 -4px 32px rgba(0,0,0,.15)}
+@media(min-width:601px){.don-overlay{align-items:center}.don-modal{border-radius:16px;max-height:80vh}}
+.don-modal-hdr{display:flex;align-items:center;justify-content:space-between;padding:20px 20px 0}
+.don-modal-title{font-family:var(--font-head);font-size:1.1rem;font-weight:800;color:var(--ink)}
+.don-modal-badge{font-size:.78rem;font-weight:600;color:var(--muted);margin-left:6px}
+.don-modal-close{width:32px;height:32px;border-radius:50%;border:none;background:var(--surface);cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;color:var(--ink);flex-shrink:0}
+.don-modal-tabs{display:flex;gap:6px;padding:12px 20px 0}
+.don-tab{padding:8px 20px;border-radius:100px;font-size:.85rem;font-weight:600;cursor:pointer;border:none;background:var(--surface);color:var(--slate);font-family:var(--font-body);transition:all .15s}
+.don-tab.active{background:var(--ink);color:#fff}
+.don-modal-sub{font-size:.78rem;color:var(--muted);padding:8px 20px 0}
+.don-modal-list{flex:1;overflow-y:auto;padding:4px 0}
+.don-modal-row{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--line)}
+.don-modal-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.72rem;color:#fff;flex-shrink:0}
+.don-modal-name{font-weight:600;font-size:.88rem;color:var(--ink)}
+.don-modal-meta{font-size:.78rem;color:var(--muted);margin-top:1px}
+.don-modal-foot{padding:14px 20px;border-top:1px solid var(--line)}
+
+/* Contact modal */
+.contact-inp{width:100%;padding:11px 14px;border:1.5px solid var(--line);border-radius:10px;font-family:var(--font-body);font-size:.9rem;color:var(--ink);background:var(--white);margin-bottom:10px;box-sizing:border-box;outline:none;resize:vertical}
+.contact-inp:focus{border-color:var(--blue)}
+.contact-org-row{display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.contact-org-lbl{font-size:.78rem;color:var(--muted)}
+
+/* Protected + Organizer in sidebar */
+.s-prot{display:flex;align-items:center;gap:8px;font-size:.77rem;color:var(--muted);padding:12px 0;border-top:1px solid var(--line);margin-top:6px}
+.s-prot svg{color:#27AE60;flex-shrink:0}
+.s-org{display:flex;flex-direction:column;gap:10px;padding:12px 0;border-top:1px solid var(--line)}
+.s-org-inner{display:flex;align-items:center;gap:10px}
+.s-org-text .n{font-size:.88rem;font-weight:700;color:var(--ink)}
+.s-org-text .s{font-size:.76rem;color:var(--muted)}
+.btn-contact{width:100%;padding:9px 16px;border-radius:100px;border:1.5px solid var(--line);background:var(--white);font-family:var(--font-body);font-size:.83rem;font-weight:600;color:var(--ink);cursor:pointer;transition:all .15s}
+.btn-contact:hover{background:var(--surface);border-color:var(--slate)}
+
+/* ── TRUST BAR ── */
+.trust{background:#f8fafc;border-top:1px solid var(--line);padding:60px 5%;margin-top:36px}
+.trust-inner{max-width:1040px;margin:0 auto}
+.trust h3{font-family:var(--font-head);font-size:1.12rem;font-weight:800;color:var(--ink);margin-bottom:48px;letter-spacing:-.01em}
+.trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:56px}
+.titem{display:flex;align-items:flex-start;gap:22px}
+.titem-icon{flex-shrink:0;display:flex;align-items:flex-start;justify-content:center;padding-top:2px}
+.titem-icon svg{width:52px;height:52px;overflow:visible}
+.titem-body{padding-top:4px}
+.titem-body h4{font-size:.97rem;font-weight:800;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em}
+.titem-body p{font-size:.84rem;color:var(--muted);line-height:1.72}
+.titem-body a{color:var(--blue);text-decoration:underline;font-weight:600}
+.titem-body a:hover{color:var(--blue-dark)}
+
+/* ── RELATED ── */
+/* ── RELATED SECTION — green GGF style ── */
+.rel-wrap{background:linear-gradient(135deg,var(--blue-dark) 0%,#1E8449 60%,#27AE60 100%);padding:64px 5% 80px;margin-top:0}
+.rel-inner{max-width:1200px;margin:0 auto}
+.rel-title{font-family:var(--font-head);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:#fff;line-height:1.2;letter-spacing:-.04em;margin-bottom:36px;max-width:600px}
+.rel-subrow{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;gap:12px}
+.rel-filter-btn{display:inline-flex;align-items:center;gap:9px;border:1.5px solid rgba(255,255,255,.55);border-radius:100px;padding:10px 20px;color:#fff;font-size:.9rem;font-weight:600;font-family:var(--font-body);background:transparent;cursor:pointer;transition:all .18s}
+.rel-filter-btn:hover{background:rgba(255,255,255,.1);border-color:#fff}
+.rel-filter-btn svg{flex-shrink:0;opacity:.8}
+.rel-filter-btn.open{background:rgba(255,255,255,.15);border-color:#fff}
+.rel-filter-wrap{position:relative;display:inline-flex}
+.rel-drop{position:absolute;top:calc(100% + 10px);left:0;background:#fff;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.22),0 2px 8px rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.06);padding:8px;min-width:280px;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .18s,transform .18s,visibility .18s;z-index:200}
+.rel-drop.open{opacity:1;visibility:visible;transform:translateY(0)}
+.rel-drop-item{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border-radius:10px;cursor:pointer;text-decoration:none;transition:background .12s;color:#0D1117}
+.rel-drop-item:hover{background:#F7F8FA}
+.rel-drop-icon{width:36px;height:36px;border-radius:9px;background:#EAFAF1;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.rel-drop-icon svg{color:#27AE60}
+.rel-drop-label{font-size:.88rem;font-weight:700;color:#0D1117;margin-bottom:2px}
+.rel-drop-desc{font-size:.74rem;color:#718096;line-height:1.4}
+.rel-nav{display:flex;gap:10px;flex-shrink:0}
+.rel-nav-btn{width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(255,255,255,.5);background:transparent;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.rel-nav-btn:hover{background:rgba(255,255,255,.15);border-color:#fff}
+/* Cards — no white box, text on dark bg */
+.rgrid{display:flex;gap:22px;overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+.rgrid::-webkit-scrollbar{height:0}
+.rgrid .cc{min-width:270px;flex:0 0 270px;scroll-snap-align:start}
+.cc{background:transparent;border-radius:0;overflow:visible;cursor:pointer;transition:opacity .18s}
+.cc:hover{opacity:.88}
+.cc-img{height:200px;position:relative;overflow:hidden;background-size:cover;background-position:center;background-color:#1a3a6a;border-radius:14px}
+.cc-don-badge{position:absolute;bottom:10px;left:10px;display:flex;align-items:center;gap:5px;background:rgba(5,15,10,.65);backdrop-filter:blur(6px);color:#fff;font-size:.69rem;font-weight:700;padding:5px 11px;border-radius:100px;letter-spacing:.02em}
+.cc-don-badge svg{opacity:.85;flex-shrink:0}
+.cc-body{padding:13px 2px 0}
+.cc-org{font-size:.75rem;color:rgba(255,255,255,.55);margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cc-org span{color:#2ECC71;font-weight:600}
+.cc-title{font-family:var(--font-head);font-size:.95rem;font-weight:700;color:#fff;margin-bottom:14px;line-height:1.38;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.62em}
+.cc-bar-wrap{background:rgba(255,255,255,.18);border-radius:100px;height:4px;margin-bottom:10px;overflow:hidden}
+.cc-bar{height:100%;border-radius:100px;background:#27AE60}
+.cc-raised{font-size:.88rem;font-weight:800;color:#fff;letter-spacing:-.01em}
+.cc-sup{display:none}
+
+/* ── SHARE PANEL ── */
+.share-panel{background:#fff;padding:72px 5%;border-top:1px solid var(--line)}
+.share-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.share-text h2{font-family:var(--font-head);font-size:clamp(1.8rem,3.5vw,2.75rem);font-weight:900;color:var(--ink);line-height:1.12;letter-spacing:-.04em;margin-bottom:18px}
+.share-text p{font-size:1rem;color:var(--slate);line-height:1.75;margin-bottom:36px;max-width:430px}
+.share-text p strong{color:var(--ink);font-weight:700}
+.share-btns{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.share-btn{width:64px;height:64px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .18s,box-shadow .18s;flex-shrink:0}
+.share-btn:hover{transform:translateY(-4px) scale(1.07)}
+.share-btn.fb{background:#1877F2;box-shadow:0 3px 14px rgba(24,119,242,.45)}
+.share-btn.ig{background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285AEB 90%);box-shadow:0 3px 14px rgba(214,36,159,.4)}
+.share-btn.tk{background:#000;box-shadow:0 3px 14px rgba(0,0,0,.35)}
+.share-btn.wa{background:#25D366;box-shadow:0 3px 14px rgba(37,211,102,.4)}
+.share-btn.more{background:#f2f2f2;border:1.5px solid #e0e0e0;box-shadow:0 2px 6px rgba(0,0,0,.07)}
+.share-btn.more:hover{background:#e8e8e8}
+.share-phones{position:relative;height:360px;display:flex;align-items:flex-end;justify-content:center}
+.ph{position:absolute;bottom:0;border-radius:26px;overflow:hidden;box-shadow:0 24px 56px rgba(0,0,0,.32),0 8px 18px rgba(0,0,0,.14);background:#111}
+.ph-center{width:188px;height:312px;z-index:3;left:50%;transform:translateX(-50%)}
+.ph-left{width:156px;height:268px;z-index:2;left:calc(50% - 192px);bottom:18px;transform:rotate(-9deg);transform-origin:bottom right}
+.ph-right{width:156px;height:268px;z-index:2;right:calc(50% - 192px);bottom:18px;transform:rotate(9deg);transform-origin:bottom left}
+.ph-screen{width:100%;height:100%;box-sizing:border-box}
+.ph-img{width:100%;height:114px;border-radius:13px;background:#1A3A60;flex-shrink:0;margin-bottom:10px;overflow:hidden;position:relative}
+.ph-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;border-radius:13px}
+.ph-title{font-size:.7rem;font-weight:800;color:#fff;line-height:1.28;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ph-org{font-size:.58rem;color:rgba(255,255,255,.5);margin-bottom:8px}
+.ph-org b{color:rgba(255,255,255,.85);font-weight:600}
+.ph-mid{display:flex;align-items:center;justify-content:space-between;margin-top:auto;margin-bottom:6px}
+.ph-raised{font-size:.66rem;font-weight:800;color:#fff}
+.ph-pct-wrap{position:relative;width:46px;height:46px;flex-shrink:0}
+.ph-pct-wrap svg{position:absolute;inset:0}
+.ph-pct-val{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:800;color:#fff}
+.ph-btn{width:100%;padding:8px 0;border-radius:100px;background:#2ECC71;color:#fff;font-size:.68rem;font-weight:700;border:none;text-align:center;letter-spacing:.01em;cursor:default}
+
+/* ── CAMPAIGN INFO STRIP ── */
+.camp-strip{background:#fff;padding:32px 5% 44px;border-top:1px solid var(--line)}
+.camp-strip-inner{max-width:1100px;margin:0 auto}
+.camp-strip-meta{display:flex;align-items:center;gap:7px;font-size:.83rem;color:var(--muted);font-weight:500;margin-bottom:18px;flex-wrap:wrap}
+.camp-strip-dot{color:var(--subtle)}
+.camp-strip-cat{color:var(--blue);font-weight:600}
+.badge-prot{display:inline-flex;align-items:center;gap:9px;background:#E8F8F5;color:#0A7A6A;font-size:.82rem;font-weight:700;padding:10px 22px;border-radius:100px;border:1.5px solid #B2E8DF;margin-bottom:24px;cursor:default;user-select:none}
+.camp-strip-divider{height:1px;background:var(--line);margin:20px 0}
+.report-btn{display:inline-flex;align-items:center;gap:9px;font-size:.84rem;color:var(--slate);font-weight:600;cursor:pointer;background:none;border:none;padding:0;font-family:var(--font-body);transition:color .12s}
+.report-btn:hover{color:var(--ink)}
+.camp-disclaimer{font-size:.76rem;color:var(--subtle);line-height:1.65;margin-top:11px;max-width:700px}
+.camp-disclaimer a{color:var(--blue)}
+@media(max-width:860px){
+  .share-inner{grid-template-columns:1fr;gap:44px}
+  .share-phones{height:290px}
+  .ph-center{width:158px;height:262px}
+  .ph-left,.ph-right{width:130px;height:224px}
+  .ph-left{left:calc(50% - 162px)}
+  .ph-right{right:calc(50% - 162px)}
+}
+
+/* ── FOOTER ── */
+footer{background:#0D1117;color:#718096;padding:52px 4% 28px}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;max-width:1040px;margin:0 auto 44px}
+.fb p{font-size:.83rem;line-height:1.75;color:#718096;margin-top:12px;max-width:260px}
+.fc h4{font-size:.7rem;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px}
+.fc ul{list-style:none}
+.fc li{margin-bottom:9px}
+.fc a{color:#718096;font-size:.82rem;transition:color .15s}
+.fc a:hover{color:#CBD5E0}
+.fb-bot{max-width:1040px;margin:0 auto;border-top:1px solid #1C2333;padding-top:20px;display:flex;justify-content:space-between;font-size:.77rem;color:#4A5568;flex-wrap:wrap;gap:6px}
+.fsoc{display:flex;gap:8px;margin-top:16px}
+.sb{width:64px;height:64px;border-radius:100px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;transition:all .15s;text-decoration:none;flex-shrink:0}
+.sb img{width:32px;height:32px;object-fit:contain;filter:brightness(0) invert(1)}
+.sb:hover{background:#2ECC71;border-color:#2ECC71}
+
+/* MODAL */
+.moverlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;display:none;align-items:center;justify-content:center;padding:16px}
+.moverlay.open{display:flex}
+.modal{background:#fff;border-radius:14px;padding:26px;max-width:400px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal h3{font-family:var(--font-head);font-size:1rem;font-weight:800;color:var(--ink);margin-bottom:6px}
+.modal p{font-size:.84rem;color:var(--muted);margin-bottom:18px}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.sbtn{padding:11px;border-radius:100px;border:1.5px solid var(--line);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;font-family:var(--font-body);font-size:.82rem;font-weight:700;color:var(--slate);transition:all .15s}
+.sbtn:hover{border-color:var(--blue);background:var(--blue-light);color:var(--blue)}
+.slink-row{display:flex;gap:8px}
+.slink-inp{flex:1;padding:9px 12px;border:1.5px solid var(--line);border-radius:100px;font-family:var(--font-body);font-size:.8rem;color:var(--slate);outline:none;background:var(--surface)}
+.scopy{padding:9px 16px;border-radius:100px;border:none;background:var(--blue);color:#fff;font-family:var(--font-body);font-size:.8rem;font-weight:700;cursor:pointer}
+.scopy:hover{background:var(--blue-dark)}
+.mclose{margin-top:12px;width:100%;padding:10px;border-radius:100px;border:1.5px solid var(--line);background:#fff;font-family:var(--font-body);font-size:.84rem;font-weight:600;color:var(--muted);cursor:pointer}
+
+.not-found{text-align:center;padding:80px 20px;grid-column:1/-1}
+
+/* RESPONSIVE — TABLET */
+@media(max-width:860px){
+  .page{grid-template-columns:1fr}
+  .sidebar{position:static}
+  .trust-grid{grid-template-columns:1fr}
+  .fg{grid-template-columns:1fr 1fr}
+}
+
+/* ═══════════════════════════════════════════════
+   MOBILE GOFUNDME-STYLE LAYOUT (≤ 600 px)
+   ═══════════════════════════════════════════════ */
+
+/* Mobile nav menu */
+.mob-nav-links{display:none;position:fixed;top:72px;left:0;width:100%;background:#fff;z-index:998;box-shadow:0 8px 24px rgba(0,0,0,.12);border-top:1px solid var(--line)}
+.mob-nav-links.open{display:block}
+.mob-nav-link{display:block;padding:14px 20px;color:var(--ink3);font-size:.95rem;font-weight:600;border-bottom:1px solid var(--line);text-decoration:none;font-family:var(--font-body)}
+.mob-nav-link:last-child{border-bottom:none}
+.mob-nav-link:hover{background:var(--surface);color:var(--blue)}
+@media(max-width:600px){.mob-nav-links{top:56px}}
+
+/* Always in DOM, hidden on desktop */
+.car-mob-top{display:none}
+.car-mob-title{display:none}
+.mob-progress{display:none}
+.mob-donors-sec{display:none}
+/* Mobile sticky — slide-up card */
+.mob-sticky{
+  display:flex;flex-direction:column;
+  position:fixed;bottom:8px;left:8px;right:8px;
+  background:#fff;
+  border-radius:18px;
+  z-index:950;
+  padding:12px 14px 14px;
+  box-shadow:0 8px 32px rgba(0,0,0,.18),0 2px 8px rgba(0,0,0,.10);
+  transform:translateY(calc(100% + 30px));
+  opacity:0;
+  pointer-events:none;
+  transition:transform .42s cubic-bezier(.34,1.18,.64,1), opacity .28s ease;
+  will-change:transform,opacity;
+}
+.mob-sticky.visible{
+  transform:translateY(0);
+  opacity:1;
+  pointer-events:auto;
+}
+.mob-sticky-top{display:flex;align-items:center;gap:10px;margin-bottom:2px}
+.mob-sticky-main{flex:1;min-width:0}
+.mob-sticky-raised{font-family:var(--font-head);font-size:1.1rem;font-weight:900;color:var(--ink);line-height:1;display:inline}
+.mob-sticky-rlbl{font-size:.68rem;color:var(--muted);font-weight:600;margin-left:4px}
+.mob-sticky-goal{font-size:.76rem;color:var(--muted);margin-top:2px}
+.mob-sticky-lastdon{font-size:.73rem;color:var(--muted);margin:4px 0 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+.mob-sticky-lastdon b{color:var(--ink3);font-weight:600}
+.mob-sticky-lastdon .arr{color:var(--blue);margin-left:2px}
+.mob-sticky-btns2{display:grid;grid-template-columns:1fr;gap:8px}
+.mob-sticky-btns2 .btn-mob-donate{
+  padding:12px 10px;border-radius:100px;font-weight:700;font-size:.92rem;
+  cursor:pointer;border:none;background:var(--orange);color:#fff;
+  font-family:var(--font-body);transition:background .15s,transform .15s;
+  box-shadow:0 2px 10px rgba(240,120,0,.35);letter-spacing:.01em
+}
+.mob-sticky-btns2 .btn-mob-donate:active{transform:scale(.97);background:var(--orange-dark)}
+.mob-sticky-btns2 .btn-mob-share{
+  padding:12px 10px;border-radius:100px;font-weight:700;font-size:.92rem;
+  cursor:pointer;border:none;background:var(--blue-dark);color:#fff;
+  font-family:var(--font-body);transition:background .15s,transform .15s;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  box-shadow:0 2px 10px rgba(15,79,138,.28);letter-spacing:.01em
+}
+.mob-sticky-btns2 .btn-mob-share:active{transform:scale(.97);background:var(--blue)}
+
+@media(max-width:600px){
+  /* ── Prevent horizontal overflow ── */
+  html,body{overflow-x:hidden;width:100%}
+
+  /* ── Nav: logo + hamburger only ── */
+  nav{height:56px;padding:0 16px;display:flex;justify-content:space-between;grid-template-columns:none}
+  .nav-links{display:none!important}
+  .logo{transform:none}
+  .logo-img{height:48px}
+  .nav-actions{display:none!important}
+  .hamburger{display:flex!important;right:auto}
+  .breadcrumb{display:none}
+
+  /* ── Page: block layout, no grid ── */
+  .page{display:block!important;padding:0!important;max-width:100%}
+
+  /* Title hidden on mobile (shown in image overlay) */
+  .camp-title{display:none}
+
+  /* ── Full-bleed carousel ── */
+  .car-wrap{
+    border-radius:0;
+    margin:0;
+    width:100%;
+    height:82vw;
+    max-height:480px;
+    aspect-ratio:unset
+  }
+  /* Hide arrows on mobile — swipe only */
+  .car-btn{display:none!important}
+  .car-dots{bottom:34px;z-index:3}
+  .car-img{transition:opacity .22s ease}
+
+  /* ── Organizer overlay (top of image) ── */
+  .car-mob-top{
+    display:flex;
+    position:absolute;
+    top:0;left:0;right:0;
+    padding:14px 16px;
+    z-index:6;
+    align-items:center;
+    background:linear-gradient(to bottom,rgba(0,0,0,.55) 0%,transparent 100%)
+  }
+  .car-mob-av{
+    width:32px;height:32px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-head);font-size:.65rem;font-weight:800;
+    color:#fff;flex-shrink:0;
+    background:rgba(255,255,255,.25);
+    border:2px solid rgba(255,255,255,.7);
+    backdrop-filter:blur(4px)
+  }
+  .car-mob-name{
+    color:#fff;font-size:.88rem;font-weight:700;
+    margin-left:9px;
+    text-shadow:0 1px 4px rgba(0,0,0,.6);
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+  }
+
+  /* ── Title overlay (bottom of image, stops at card boundary) ── */
+  .car-mob-title{
+    display:block;
+    position:absolute;
+    bottom:24px;left:0;right:0;
+    padding:48px 16px 14px;
+    z-index:4;
+    background:linear-gradient(transparent,rgba(0,0,0,.68));
+    color:#fff;
+    font-family:var(--font-head);
+    font-size:1.2rem;font-weight:800;
+    line-height:1.25;
+    text-shadow:0 1px 6px rgba(0,0,0,.55)
+  }
+
+  /* ── Hide desktop organizer row ── */
+  .org-row{display:none}
+
+  /* ── Hide desktop sidebar ── */
+  .sidebar{display:none!important}
+
+  /* ── Mobile progress block — white card overlapping image bottom ── */
+  .mob-progress{
+    display:block;
+    padding:22px 16px 4px;
+    background:#fff;
+    border-radius:22px 22px 0 0;
+    margin-top:-24px;
+    position:relative;
+    z-index:20
+  }
+  .mob-prog-top{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .mob-ring{width:68px;height:68px;flex-shrink:0;position:relative}
+  .mob-ring svg{width:68px;height:68px;transform:rotate(-90deg);position:absolute;inset:0}
+  .mob-ring .ring-pct-mob{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:.95rem;font-weight:800;color:var(--ink)}
+  .mob-ring .ring-bg{stroke-width:4}
+  .mob-ring .ring-fill{stroke-width:4;stroke:#27AE60}
+  .mob-raised-n{font-family:var(--font-head);font-size:1.5rem;font-weight:800;color:var(--ink);line-height:1.1}
+  .mob-raised-goal{font-size:.82rem;color:var(--muted);margin-top:2px}
+  .mob-last-donor{font-size:.8rem;color:#6d28d9;margin-top:6px;font-weight:500;cursor:pointer}
+  .mob-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .btn-mob-donate{
+    padding:15px;border-radius:100px;
+    font-weight:700;font-size:1rem;cursor:pointer;
+    border:none;background:var(--orange);color:#fff;
+    font-family:var(--font-body);transition:background .15s;
+    box-shadow:0 2px 8px rgba(240,120,0,.3)
+  }
+  .btn-mob-donate:hover{background:var(--orange-dark)}
+  .btn-mob-share{
+    padding:15px;border-radius:100px;
+    font-weight:700;font-size:1rem;cursor:pointer;
+    border:none;background:var(--blue-dark);color:#fff;
+    font-family:var(--font-body);
+    display:flex;align-items:center;justify-content:center;gap:7px;
+    transition:background .15s;
+    box-shadow:0 2px 8px rgba(15,79,138,.2)
+  }
+  .btn-mob-share:hover{background:var(--blue)}
+
+  /* ── Content sections padding ── */
+  .prot-badge{padding:12px 16px 14px}
+  .story{padding:18px 16px 0}
+  .btn-more{margin:6px 16px 16px}
+  #campMain>hr{margin-left:16px;margin-right:16px}
+
+  /* ── React row ── */
+  .react-row{padding:14px 16px}
+
+  /* ── Action row (Donate / Share outline buttons) ── */
+  .action-row{padding:10px 16px;grid-template-columns:1fr 1fr!important}
+  .btn-act{font-size:.9rem;padding:12px}
+
+  /* ── Hide share CTA block ── */
+  .share-sec{display:none}
+
+  /* ── Mobile donations section ── */
+  .mob-donors-sec.has-donors{display:block}
+  .mob-don-hdr{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 16px 0
+  }
+  .mob-don-title{font-family:var(--font-head);font-size:1.05rem;font-weight:800;color:var(--ink)}
+  .mob-don-badge{
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:100px;font-size:.76rem;font-weight:700;
+    color:var(--muted);padding:3px 10px;margin-left:6px
+  }
+  .mob-don-top-btn{
+    display:flex;align-items:center;gap:4px;
+    font-size:.78rem;font-weight:600;color:var(--slate);
+    background:none;border:1.5px solid var(--line);
+    border-radius:100px;cursor:pointer;
+    font-family:var(--font-body);padding:6px 12px;white-space:nowrap
+  }
+  .mob-don-recent{color:#6d28d9;font-size:.84rem;font-weight:700;padding:10px 16px 4px}
+  .mob-don-list{padding:0 16px}
+  .mob-don-list .drow{padding:10px 0;border-bottom:1px solid var(--line)}
+  .mob-don-list .drow:last-child{border-bottom:none}
+  .mob-don-see{padding:10px 16px 16px}
+
+  /* ── Words of support ── */
+  .words-sec{padding:20px 16px}
+  .words-sec-sub{margin:4px 0 16px}
+
+  /* ── Organizer section ── */
+  .org-sec{padding:20px 16px}
+  .org-sec-title{font-size:.75rem}
+  .btn-contact{margin-top:12px;padding:9px 20px;display:inline-block;width:auto}
+
+  /* ── Camp meta + report ── */
+  .camp-meta{padding:14px 16px}
+  .report-btn{margin:0 16px 6px}
+  .legal{margin:0 16px 16px;font-size:.72rem}
+
+  /* ── Sticky bar ── */
+  .mob-sticky-ring{width:52px;height:52px;flex-shrink:0;position:relative}
+  .mob-sticky-ring svg{width:52px;height:52px;transform:rotate(-90deg);position:absolute;inset:0}
+  .mob-sticky-ring .ring-pct-sticky{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:.75rem;font-weight:800;color:var(--ink)}
+  .mob-sticky-ring .ring-bg{stroke-width:4}
+  .mob-sticky-ring .ring-fill{stroke-width:4;stroke:#27AE60}
+
+  /* ── Trust bar ── */
+  .trust{padding:36px 18px;margin-top:0}
+  .trust h3{margin-bottom:32px}
+  .trust-grid{grid-template-columns:1fr!important;gap:32px}
+
+  /* ── Footer ── */
+  .fg{grid-template-columns:1fr!important;gap:24px}
+  .fb-bot{flex-direction:column;align-items:flex-start;gap:4px}
+  footer{padding-bottom:80px}
+}
+
+@media (max-width: 768px) {
+  /* Footer Director/EIN row — stack vertically on mobile */
+  .footer-main > div[style*="justify-content:space-between"] { flex-direction: column !important; gap: 14px !important; align-items: flex-start !important; }
+  .footer-main > div[style*="justify-content:space-between"] > div { text-align: left !important; }
+}
+
+/* ══════════════════════════════════════════════
+   SKELETON LOADER
+══════════════════════════════════════════════ */
+@keyframes sk-shimmer{
+  0%  {background-position:-700px 0}
+  100%{background-position: 700px 0}
+}
+.sk{
+  background:linear-gradient(90deg,#e6f4ec 25%,#c8e8d4 50%,#e6f4ec 75%);
+  background-size:700px 100%;
+  animation:sk-shimmer 1.5s infinite linear;
+  border-radius:8px;
+  display:block;
+}
+#skeletonLoader{
+  display:grid;
+  grid-template-columns:1fr 340px;
+  gap:44px;
+  max-width:1040px;
+  margin:0 auto;
+  padding:36px 4% 64px;
+  opacity:1;
+  transition:opacity .3s ease;
+}
+/* ── Left column ── */
+.sk-title{height:34px;width:82%;margin-bottom:22px;border-radius:10px}
+.sk-img{width:100%;aspect-ratio:16/9;border-radius:12px;margin-bottom:18px}
+/* mobile progress (hidden on desktop) */
+.sk-mob-prog{display:none;padding:22px 16px 20px;background:#fff;border-radius:22px 22px 0 0;margin-top:-24px;position:relative;z-index:20;box-shadow:0 -4px 12px rgba(0,0,0,.05)}
+.sk-mob-top{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.sk-circle{width:68px;height:68px;border-radius:50%;flex-shrink:0}
+.sk-mob-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sk-mob-btn{height:48px;border-radius:100px}
+/* org row */
+.sk-org{display:flex;align-items:center;gap:10px;padding:16px 0;border-bottom:1px solid var(--line)}
+.sk-av{width:40px;height:40px;border-radius:50%;flex-shrink:0}
+.sk-lines{flex:1;display:flex;flex-direction:column}
+/* story */
+.sk-story{padding:20px 0;display:flex;flex-direction:column;gap:10px}
+.sk-story-line{height:14px;border-radius:6px}
+/* ── Sidebar ── */
+.sk-scard{border:1px solid var(--line);border-radius:16px;padding:24px}
+.sk-raised-row{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.sk-ring{width:64px;height:64px;border-radius:50%;flex-shrink:0}
+.sk-btn{height:44px;width:100%;border-radius:100px}
+.sk-don-rows{margin-top:20px;border-top:1px solid var(--line);padding-top:14px}
+.sk-don-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f0f5f1}
+.sk-don-row:last-child{border-bottom:none}
+.sk-av-sm{width:36px;height:36px;border-radius:50%;flex-shrink:0}
+
+@media(max-width:600px){
+  #skeletonLoader{display:block;padding:0;max-width:100%}
+  .sk-sidebar{display:none}
+  .sk-title{display:none}
+  .sk-img{border-radius:0;margin:0;width:100%;height:82vw;max-height:480px;aspect-ratio:unset}
+  .sk-mob-prog{display:block}
+  .sk-org{margin:0 16px;padding:14px 0}
+  .sk-story{padding:18px 16px}
+}
+</style>
+<link rel="stylesheet" href="site.css?v=112">
+</head>
+<body>
+
+<style>
+nav .nav-links{order:1;display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0}.filter-bar{top:140px!important}
+nav .logo{order:2;justify-self:center;display:flex;align-items:center;}
+nav .logo-img{height:165px;width:auto;display:block;}
+nav .nav-actions{order:3;justify-self:end;display:flex;align-items:center;gap:12px;}
+nav .hamburger{order:4;}nav{background:transparent!important;box-shadow:none!important;border:none!important;position:relative!important;}
+@media(max-width:768px){nav{display:flex!important;justify-content:center!important;align-items:center!important;position:relative!important;}nav .nav-links{display:none!important}nav .hamburger{display:flex!important;position:absolute!important;right:16px!important;top:50%!important;transform:translateY(-50%)!important;}nav .nav-actions{display:none!important}nav .logo-img{height:155px!important}nav .logo{justify-content:center!important;}}
+</style><nav style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 5%;border-bottom:none;background:transparent;z-index:999;">
+  <ul class="nav-links">
+    <li class="nav-item">
+      <button class="nav-trigger">How to help <span class="nc">▾</span></button>
+      <div class="dropdown">
+        <a href="campaigns.html">Campaigns</a>
+        <a href="causes.html">Causes</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-trigger">Discover <span class="nc">▾</span></button>
+      <div class="dropdown">
+        <a href="most-loved.html">Most Loved</a>
+        <a href="events.html">Events</a>
+        <a href="blog.html">Blog</a>
+      </div>
+    </li>
+  </ul>
+  <a class="logo" href="index.html"><img class="logo-img" src="logo-ggf.png" alt="Good Green Foundation" style="height:165px;width:auto;" /></a>
+  <div class="nav-actions">
+    <button class="btn-nav hide-mobile">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Search
+    </button>
+    <button class="btn-cta" onclick="location.href='start-yourself.html'">Start a Campaign</button>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- MOBILE NAV MENU -->
+<div class="mob-nav-links" id="mobNavLinks">
+  <a class="mob-nav-link" href="campaigns.html">Campaigns</a>
+  <a class="mob-nav-link" href="causes.html">Causes</a>
+  <a class="mob-nav-link" href="most-loved.html">Most Loved</a>
+  <a class="mob-nav-link" href="events.html">Events</a>
+  <a class="mob-nav-link" href="blog.html">Blog</a>
+  <a class="mob-nav-link" href="start-yourself.html" style="color:var(--orange);font-weight:800">Start a Campaign</a>
+</div>
+
+<div class="breadcrumb">
+  <a href="index.html">Home</a> <span>›</span>
+  <a href="campaigns.html">Campaigns</a> <span>›</span>
+  <span id="bct">Loading...</span>
+</div>
+
+<div id="urgentBanner" class="urgent-banner">⚡ Final Chance to Help — This Campaign Is Ending Soon</div>
+
+<div class="page" id="page">
+
+  <!-- ══ SKELETON LOADER ══ -->
+  <div id="skeletonLoader">
+
+    <!-- Left column skeleton -->
+    <div class="sk-main">
+      <div class="sk sk-title"></div>
+      <div class="sk sk-img"></div>
+
+      <!-- Mobile progress skeleton (visible only on mobile) -->
+      <div class="sk-mob-prog">
+        <div class="sk-mob-top">
+          <div class="sk sk-circle"></div>
+          <div class="sk-lines">
+            <div class="sk" style="height:22px;width:65%;border-radius:6px"></div>
+            <div class="sk" style="height:13px;width:45%;border-radius:6px;margin-top:7px"></div>
+          </div>
+        </div>
+        <div class="sk-mob-btns">
+          <div class="sk sk-mob-btn"></div>
+          <div class="sk sk-mob-btn"></div>
+        </div>
+      </div>
+
+      <!-- Organizer row skeleton -->
+      <div class="sk-org">
+        <div class="sk sk-av"></div>
+        <div class="sk-lines">
+          <div class="sk" style="height:14px;width:55%;border-radius:6px"></div>
+          <div class="sk" style="height:12px;width:38%;border-radius:6px;margin-top:6px"></div>
+        </div>
+      </div>
+
+      <!-- Story lines skeleton -->
+      <div class="sk-story">
+        <div class="sk sk-story-line" style="width:100%"></div>
+        <div class="sk sk-story-line" style="width:100%"></div>
+        <div class="sk sk-story-line" style="width:78%"></div>
+        <div class="sk sk-story-line" style="width:100%"></div>
+        <div class="sk sk-story-line" style="width:91%"></div>
+        <div class="sk sk-story-line" style="width:55%"></div>
+      </div>
+    </div>
+
+    <!-- Sidebar skeleton (desktop only) -->
+    <div class="sk-sidebar">
+      <div class="sk-scard">
+        <div class="sk-raised-row">
+          <div class="sk sk-ring"></div>
+          <div class="sk-lines">
+            <div class="sk" style="height:26px;width:70%;border-radius:6px"></div>
+            <div class="sk" style="height:13px;width:48%;border-radius:6px;margin-top:7px"></div>
+          </div>
+        </div>
+        <div class="sk" style="height:13px;width:42%;border-radius:6px;margin-bottom:22px;margin-top:6px"></div>
+        <div class="sk sk-btn" style="margin-bottom:10px"></div>
+        <div class="sk sk-btn" style="opacity:.5"></div>
+        <div class="sk-don-rows">
+          <div class="sk" style="height:13px;width:55%;border-radius:6px;margin-bottom:14px"></div>
+          <div class="sk-don-row">
+            <div class="sk sk-av-sm"></div>
+            <div class="sk-lines">
+              <div class="sk" style="height:13px;width:62%;border-radius:5px"></div>
+              <div class="sk" style="height:11px;width:38%;border-radius:5px;margin-top:5px"></div>
+            </div>
+          </div>
+          <div class="sk-don-row">
+            <div class="sk sk-av-sm"></div>
+            <div class="sk-lines">
+              <div class="sk" style="height:13px;width:70%;border-radius:5px"></div>
+              <div class="sk" style="height:11px;width:32%;border-radius:5px;margin-top:5px"></div>
+            </div>
+          </div>
+          <div class="sk-don-row">
+            <div class="sk sk-av-sm"></div>
+            <div class="sk-lines">
+              <div class="sk" style="height:13px;width:55%;border-radius:5px"></div>
+              <div class="sk" style="height:11px;width:44%;border-radius:5px;margin-top:5px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /#skeletonLoader -->
+
+  <!-- LEFT -->
+  <div id="campMain" style="display:none">
+
+    <!-- 1. Title -->
+    <h1 class="camp-title" id="campTitle"></h1>
+
+    <!-- 2. Image carousel -->
+    <div class="car-wrap">
+      <div class="car-img" id="carImg"></div>
+      <!-- Mobile overlays -->
+      <div class="car-mob-top">
+        <div class="av car-mob-av" id="orgAvCar"></div>
+        <span class="car-mob-name" id="orgNameCar"></span>
+      </div>
+      <div class="car-mob-title" id="carMobTitle"></div>
+      <button class="car-btn prev" id="carPrev" onclick="carNav(-1)">‹</button>
+      <button class="car-btn next" id="carNext" onclick="carNav(1)">›</button>
+      <!-- Summary slide (last carousel item) -->
+      <div class="car-summary" id="carSummary">
+        <div class="car-sum-card">
+          <p class="car-sum-text" id="carSumText"></p>
+          <div class="car-sum-row">
+            <div class="car-sum-avs" id="carSumAvs"></div>
+            <span class="car-sum-count" id="carSumCount"></span>
+          </div>
+          <button class="car-sum-btn" onclick="scrollToStory()">
+            Read full story ↓
+          </button>
+        </div>
+      </div>
+      <div class="car-dots" id="carDots"></div>
+    </div>
+
+    <!-- MOBILE PROGRESS BLOCK -->
+    <div class="mob-progress" id="mobProgress">
+      <div class="mob-prog-top">
+        <div class="mob-ring">
+          <svg class="ring-svg" viewBox="0 0 36 36">
+            <circle class="ring-bg" cx="18" cy="18" r="15.915"/>
+            <circle class="ring-fill" id="ringFillMob" cx="18" cy="18" r="15.915" stroke-dasharray="0 100"/>
+          </svg>
+          <div class="ring-pct-mob" id="ringPctMob">0%</div>
+        </div>
+        <div>
+          <div class="mob-raised-n" id="mobAmt"></div>
+          <div class="mob-raised-goal" id="mobGoal"></div>
+          <div class="mob-last-donor" id="mobLastDonor"></div>
+        </div>
+      </div>
+      <div class="mob-btns" id="mobBtns">
+        <button class="btn-mob-donate" onclick="goToDonate()">Donate</button>
+        <button class="btn-mob-share" onclick="openShare()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          Share
+        </button>
+      </div>
+    </div>
+
+    <!-- 3. Organizer row -->
+    <div class="org-row">
+      <div class="av" id="orgAvTop"></div>
+      <div class="org-text"><b id="orgNameTop"></b> is organizing this fundraiser.</div>
+    </div>
+
+
+    <!-- 5. Story -->
+    <div class="story story-fade" id="storyBox"></div>
+    <button class="btn-more" id="readMoreBtn" onclick="toggleStory()" style="display:none">Read more ↓</button>
+
+    <hr>
+
+    <!-- 6. React -->
+    <div class="react-row">
+      <div class="react-wrap" id="reactWrap">
+        <button class="btn-reagir" id="reactBtn" onclick="toggleReactPicker(event)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/><line x1="12" y1="8" x2="12" y2="14"/><line x1="9" y1="11" x2="15" y2="11"/></svg>
+          React
+        </button>
+        <!-- Floating large picker (appears on click) -->
+        <div class="emoji-picker" id="emojiPicker">
+          <button class="emoji-opt" data-emoji="🙏" onclick="pickEmoji('🙏')">🙏<span class="etip">Support</span></button>
+          <button class="emoji-opt" data-emoji="💗" onclick="pickEmoji('💗')">💗<span class="etip">Love</span></button>
+          <button class="emoji-opt" data-emoji="💚" onclick="pickEmoji('💚')">💚<span class="etip">Care</span></button>
+          <button class="emoji-opt" data-emoji="🌺" onclick="pickEmoji('🌺')">🌺<span class="etip">Beautiful</span></button>
+          <button class="emoji-opt" data-emoji="🔥" onclick="pickEmoji('🔥')">🔥<span class="etip">Incredible</span></button>
+          <button class="emoji-opt" data-emoji="✨" onclick="pickEmoji('✨')">✨<span class="etip">Inspired</span></button>
+        </div>
+      </div>
+      <!-- Inline small emojis — always visible, click opens modal -->
+      <div class="emoji-inline" id="emojiInline" onclick="openReactModal()" style="cursor:pointer">
+        <span class="emoji-sm" data-emoji="🙏">🙏</span>
+        <span class="emoji-sm" data-emoji="💗">💗</span>
+        <span class="emoji-sm" data-emoji="💚">💚</span>
+        <span class="emoji-sm" data-emoji="🌺">🌺</span>
+        <span class="emoji-sm" data-emoji="🔥">🔥</span>
+        <span class="emoji-sm" data-emoji="✨">✨</span>
+      </div>
+      <span class="react-total" id="reactCount" onclick="openReactModal()">0</span>
+    </div>
+
+    <hr>
+
+    <!-- 7. Donate / Share -->
+    <div class="action-row">
+      <button class="btn-act" onclick="goToDonate()">Donate</button>
+      <button class="btn-act" onclick="openShare()">Share</button>
+    </div>
+
+    <!-- 8. Share CTA -->
+    <div class="share-sec">
+      <hr style="margin:0 0 24px">
+      <h3>Sharing helps more than you think</h3>
+      <p>On average, every share generates more donations — helping this fundraiser reach more people.</p>
+      <div class="share-preview">
+        <div class="share-prev-img"><div id="prevImg"></div></div>
+        <div style="flex:1;min-width:0">
+          <div class="share-prev-title" id="prevTitle"></div>
+          <div class="share-prev-sub" id="prevOrg"></div>
+        </div>
+      </div>
+      <div class="share-icons">
+        <button class="sico" onclick="shareVia('whatsapp')" title="WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
+        <button class="sico" onclick="shareVia('facebook')" title="Facebook"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></button>
+        <button class="sico" onclick="shareVia('instagram')" title="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></button>
+        <button class="sico" onclick="shareVia('email')" title="Email"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></button>
+        <button class="sico" onclick="copyShareLink()" title="Copy link"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- MOBILE DONATIONS SECTION -->
+    <div class="mob-donors-sec" id="mobDonorsSec">
+      <hr>
+      <div class="mob-don-hdr">
+        <div style="display:flex;align-items:center;gap:6px">
+          <span class="mob-don-title">Donations</span>
+          <span class="mob-don-badge" id="mobDonBadge"></span>
+        </div>
+        <button class="mob-don-top-btn" id="mobSeeTop" onclick="showTopDonors()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          See top
+        </button>
+      </div>
+      <div class="mob-don-recent" id="mobDonRecent"></div>
+      <div class="mob-don-list" id="mobDonorList"></div>
+      <div class="mob-don-see">
+        <button class="btn-see active" id="mobSeeAll" style="width:100%;padding:12px" onclick="showAllDonors()">See all</button>
+      </div>
+    </div>
+
+    <!-- 8b. Words of support -->
+    <div class="words-sec" id="wordsSec" style="display:none">
+      <div class="words-sec-hdr">
+        <span class="words-sec-title">Words of support</span>
+        <span class="words-count" id="wordsCount"></span>
+      </div>
+      <div class="words-sec-sub">Donate to share words of support.</div>
+      <div id="wordsList"></div>
+    </div>
+
+    <hr id="wordsHr" style="display:none">
+
+    <!-- 9. Organizer & Beneficiary -->
+    <div class="org-sec">
+      <div class="org-sec-title">Organizer and beneficiary</div>
+      <div class="org-card">
+        <div class="av" id="orgAvBottom"></div>
+        <div class="org-card-text">
+          <div class="name" id="orgNameBottom"></div>
+          <div class="role">Organizer · <span id="orgLocation"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- 10. Camp info -->
+    <div class="camp-meta">
+      <span id="campMetaText"></span>
+      <span>·</span>
+      <a id="campCatLink" href="campaigns.html"></a>
+    </div>
+
+    <!-- Donation protected badge -->
+    <div class="prot-badge">
+      <div class="prot-badge-inner">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Donation protected
+      </div>
+    </div>
+
+    <hr style="margin-bottom:14px">
+
+    <!-- 11. Report -->
+    <button class="report-btn" onclick="alert('Report submitted.')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+      Report fundraiser
+    </button>
+    <p class="legal">The content on this page is the sole responsibility of the campaign creator and does not represent the opinion or endorsement of Good Green Foundation.</p>
+
+    <div style="height:52px"></div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside id="campSidebar" style="display:none" class="sidebar">
+    <div class="scard">
+      <div class="raised-row">
+        <div class="ring-wrap">
+          <svg class="ring-svg" viewBox="0 0 36 36">
+            <circle class="ring-bg" cx="18" cy="18" r="15.915"/>
+            <circle class="ring-fill" id="ringFill" cx="18" cy="18" r="15.915" stroke-dasharray="0 100"/>
+          </svg>
+          <div class="ring-pct" id="ringPct">0%</div>
+        </div>
+        <div>
+          <div class="raised-n" id="raisedAmt">$0</div>
+          <div class="raised-lbl">raised</div>
+        </div>
+      </div>
+      <div class="raised-s" id="raisedGoal">of $0</div>
+      <div class="don-stat">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <span><b id="statSup">0</b> recent donations</span>
+      </div>
+
+      <button class="btn-sd primary" onclick="goToDonate()">I Want to Help</button>
+      <button class="btn-sd secondary" onclick="openShare()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Share
+      </button>
+
+      <div id="donorsWrap" class="donors-wrap" style="display:none">
+        <div class="donors-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Recent donations
+        </div>
+        <div id="donorList"></div>
+        <div class="see-row">
+          <button class="btn-see active" id="sdSeeAll" onclick="showAllDonors()">See all</button>
+          <button class="btn-see" id="sdSeeTop" onclick="showTopDonors()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            See top
+          </button>
+        </div>
+      </div>
+
+      <div class="s-prot" style="display:none">
+      </div>
+      <div class="s-org">
+        <div class="s-org-inner">
+          <div class="av" id="orgAv"></div>
+          <div class="s-org-text">
+            <div class="n" id="orgName"></div>
+            <div class="s" id="orgSince"></div>
+          </div>
+        </div>
+        <button class="btn-contact" onclick="openContact()">Contact</button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="not-found" id="notFound" style="display:none">
+    <h2 style="font-family:var(--font-head);font-size:1.5rem;font-weight:800;margin-bottom:12px">Campaign not found</h2>
+    <p style="color:var(--muted);margin-bottom:24px">This campaign may have ended or the link is incorrect.</p>
+    <a href="campaigns.html"><button class="btn-sd primary" style="width:auto;padding:12px 32px">Browse Campaigns</button></a>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust" id="trustBar" style="display:none">
+  <div class="trust-inner">
+    <h3>Your trusted, powerful and easy place to get help</h3>
+    <div class="trust-grid">
+
+      <!-- Easy -->
+      <div class="titem">
+        <div class="titem-icon">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Paper airplane body -->
+            <path d="M6 26L46 6L30 46L24 30L6 26Z" fill="#DBEAFE" stroke="#27AE60" stroke-width="1.8" stroke-linejoin="round"/>
+            <!-- Center fold line -->
+            <line x1="46" y1="6" x2="24" y2="30" stroke="#27AE60" stroke-width="1.8" stroke-linecap="round" opacity=".45"/>
+            <!-- Tail fold -->
+            <path d="M24 30L28 38" stroke="#27AE60" stroke-width="1.8" stroke-linecap="round" opacity=".55"/>
+            <!-- Speed lines -->
+            <line x1="2" y1="20" x2="10" y2="20" stroke="#2ECC71" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+            <line x1="4" y1="26" x2="8" y2="26" stroke="#2ECC71" stroke-width="2" stroke-linecap="round" opacity=".45"/>
+            <line x1="2" y1="32" x2="9" y2="32" stroke="#2ECC71" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+          </svg>
+        </div>
+        <div class="titem-body">
+          <h4>Easy</h4>
+          <p>Donate quickly and easily to causes that matter to you.</p>
+        </div>
+      </div>
+
+      <!-- Powerful -->
+      <div class="titem">
+        <div class="titem-icon">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Central heart -->
+            <path d="M26 40s-16-9-16-21a11 11 0 0 1 16-9.5A11 11 0 0 1 42 19c0 12-16 21-16 21z" fill="#DBEAFE" stroke="#27AE60" stroke-width="1.8" stroke-linejoin="round"/>
+            <!-- Radiate lines -->
+            <line x1="26" y1="4" x2="26" y2="8" stroke="#27AE60" stroke-width="1.8" stroke-linecap="round" opacity=".55"/>
+            <line x1="40" y1="9" x2="37.5" y2="12" stroke="#27AE60" stroke-width="1.8" stroke-linecap="round" opacity=".55"/>
+            <line x1="46" y1="22" x2="42" y2="23" stroke="#27AE60" stroke-width="1.8" stroke-linecap="round" opacity=".55"/>
+            <line x1="12" y1="9" x2="14.5" y2="12" stroke="#27AE60" stroke-width="1.8" stroke-linecap="round" opacity=".55"/>
+            <line x1="6" y1="22" x2="10" y2="23" stroke="#27AE60" stroke-width="1.8" stroke-linecap="round" opacity=".55"/>
+          </svg>
+        </div>
+        <div class="titem-body">
+          <h4>Powerful</h4>
+          <p>Send help directly to people and important causes.</p>
+        </div>
+      </div>
+
+      <!-- Trusted -->
+      <div class="titem">
+        <div class="titem-icon">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Shield body -->
+            <path d="M26 5l17 6v12c0 12-8 20-17 24C17 43 9 35 9 23V11l17-6z" fill="#DBEAFE" stroke="#27AE60" stroke-width="1.8" stroke-linejoin="round"/>
+            <!-- Inner shield highlight -->
+            <path d="M26 11l11 4v9c0 7-5 13-11 15-6-2-11-8-11-15v-9l11-4z" fill="white" opacity=".5"/>
+            <!-- Checkmark -->
+            <path d="M18 26l6 6 10-10" stroke="#27AE60" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="titem-body">
+          <h4>Trusted</h4>
+          <p>Your donation is protected by the <a href="guarantee.html">Good Green Foundation Guarantee</a>.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- SHARE PANEL -->
+<div class="share-panel" id="sharePanel" style="display:none">
+  <div class="share-inner">
+    <div class="share-text">
+      <h2>Sharing helps more than you think</h2>
+      <p>On average, <strong>each share can inspire $50</strong> in donations by helping this fundraiser reach more people.</p>
+      <div class="share-btns">
+        <button class="share-btn fb" title="Share on Facebook" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),'_blank')">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </button>
+        <button class="share-btn ig" title="Share on Instagram" onclick="window.open('https://www.instagram.com/','_blank')">
+          <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </button>
+        <button class="share-btn tk" title="Share on TikTok" onclick="window.open('https://www.tiktok.com/','_blank')">
+          <svg width="23" height="23" viewBox="0 0 24 24" fill="#fff"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.08a8.22 8.22 0 0 0 4.8 1.54V7.17a4.85 4.85 0 0 1-1.03-.48z"/></svg>
+        </button>
+        <button class="share-btn wa" title="Share on WhatsApp" onclick="window.open('https://wa.me/?text='+encodeURIComponent('Check out this campaign: '+location.href),'_blank')">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+        </button>
+        <button class="share-btn more" title="More options" onclick="if(navigator.share){navigator.share({title:document.title,url:location.href})}else{alert('Copy the URL to share!');}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="5" cy="12" r="1.5" fill="#888"/><circle cx="12" cy="12" r="1.5" fill="#888"/><circle cx="19" cy="12" r="1.5" fill="#888"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="share-phones">
+      <div class="ph ph-left"><div class="ph-screen" id="phScreenL"></div></div>
+      <div class="ph ph-center"><div class="ph-screen" id="phScreenC"></div></div>
+      <div class="ph ph-right"><div class="ph-screen" id="phScreenR"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- RELATED -->
+<div class="rel-wrap" id="relatedSection" style="display:none">
+  <div class="rel-inner">
+    <div class="rel-title">More ways to make a difference. Find fundraisers inspired by what matters to you.</div>
+    <div class="rel-subrow">
+      <div class="rel-filter-wrap">
+        <button class="rel-filter-btn" id="relFilterBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Happening around the world
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="rel-drop" id="relDrop">
+          <a class="rel-drop-item" href="campaigns.html?status=almost">
+            <div class="rel-drop-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></div>
+            <div><div class="rel-drop-label">Close to goal</div><div class="rel-drop-desc">Fundraisers within 5% of their goal</div></div>
+          </a>
+          <a class="rel-drop-item" href="campaigns.html?sort=newest">
+            <div class="rel-drop-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+            <div><div class="rel-drop-label">Newly launched</div><div class="rel-drop-desc">Fundraisers started in the last two days</div></div>
+          </a>
+          <a class="rel-drop-item" href="campaigns.html?sort=endingsoon">
+            <div class="rel-drop-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+            <div><div class="rel-drop-label">Needs a boost</div><div class="rel-drop-desc">Fundraisers that could use some extra support</div></div>
+          </a>
+          <a class="rel-drop-item" href="campaigns.html">
+            <div class="rel-drop-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+            <div><div class="rel-drop-label">Happening around the world</div><div class="rel-drop-desc">Fundraisers in areas with high donor activity</div></div>
+          </a>
+          <a class="rel-drop-item" href="campaigns.html?filter=nonprofit">
+            <div class="rel-drop-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+            <div><div class="rel-drop-label">Nonprofit organizations</div><div class="rel-drop-desc">Fundraisers for popular charitable organizations</div></div>
+          </a>
+        </div>
+      </div>
+      <div class="rel-nav">
+        <button class="rel-nav-btn" onclick="relScroll(-1)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="rel-nav-btn" onclick="relScroll(1)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="rgrid" id="relGrid"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<style id='footer-fix'>
+.footer-col a{color:rgba(255,255,255,.8)!important}
+.footer-col a::before{background:rgba(255,255,255,.3)!important}
+.footer-col a:hover{color:#fff!important}
+.footer-col h4{color:rgba(255,255,255,.45)!important}
+.footer-bottom{color:rgba(255,255,255,.45)!important;border-top:1px solid rgba(255,255,255,.1)!important}
+.footer-bottom-links a{color:rgba(255,255,255,.45)!important}
+.footer-bottom-links a:hover{color:#fff!important}
+.footer-brand p{color:rgba(255,255,255,.6)!important}
+.footer-social{display:flex!important;gap:10px!important;margin-top:14px!important}
+.soc-btn{display:none!important}
+</style><footer style="background:#0A2B18;color:rgba(255,255,255,0.75);">
+  <div class="footer-cta-strip">
+    <div>
+      <h3>Ready to make a difference?</h3>
+      <p>Launch your campaign in minutes — no fees, full transparency.</p>
+    </div>
+    <a href="start-yourself.html" class="footer-cta-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Start a Campaign
+    </a>
+  </div>
+  <div class="footer-main">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo-text-footer.png" alt="Good Green Foundation" style="width:200px;height:auto;display:block;margin-bottom:16px;">
+        <p class="footer-brand-desc">Connecting people and causes that transform communities across America. Transparent, secure, and making real impact since 2026.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/goodgreenfoundation/" class="soc-btn" title="Instagram">
+            <img src="social-instagram.png" alt="Instagram">
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="campaigns.html">Explore Campaigns</a></li>
+          <li><a href="index.html#start">Start a Campaign</a></li>
+          <li><a href="most-loved.html">Most Loved</a></li>
+          <li><a href="causes.html">All Causes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="help-center.html">Help Center</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-of-use.html">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 ALL GOOD GREEN TAG FOUNDATION</span>
+        <div class="footer-bottom-links">
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="terms-of-use.html">Terms</a>
+        <a href="contact.html">Contact</a>
+        </div>
+    </div>
+  </div>
+</footer>
+
+<!-- MOBILE STICKY BAR -->
+<div class="mob-sticky" id="mobSticky">
+  <div class="mob-sticky-top">
+    <div class="mob-sticky-ring">
+      <svg class="ring-svg" viewBox="0 0 36 36">
+        <circle class="ring-bg" cx="18" cy="18" r="15.915"/>
+        <circle class="ring-fill" id="ringFillSticky" cx="18" cy="18" r="15.915" stroke-dasharray="0 100"/>
+      </svg>
+      <div class="ring-pct-sticky" id="ringPctSticky">0%</div>
+    </div>
+    <div class="mob-sticky-main">
+      <div><span class="mob-sticky-raised" id="stickyAmt"></span><span class="mob-sticky-rlbl">raised</span></div>
+      <div class="mob-sticky-goal" id="stickyGoal"></div>
+    </div>
+  </div>
+  <div class="mob-sticky-lastdon" id="stickyDonor"></div>
+  <div class="mob-sticky-btns2">
+    <button class="btn-mob-donate" onclick="goToDonate()">Donate</button>
+  </div>
+</div>
+
+<!-- SHARE MODAL -->
+<div class="moverlay" id="shareModal">
+  <div class="modal">
+    <h3>Share this campaign</h3>
+    <p id="shareDesc"></p>
+    <div class="sgrid">
+      <button class="sbtn" onclick="shareVia('whatsapp')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> WhatsApp</button>
+      <button class="sbtn" onclick="shareVia('facebook')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> Facebook</button>
+      <button class="sbtn" onclick="shareVia('instagram')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg> Instagram</button>
+      <button class="sbtn" onclick="shareVia('email')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Email</button>
+    </div>
+    <div class="slink-row">
+      <input class="slink-inp" type="text" id="shareLinkInput" readonly>
+      <button class="scopy" id="shareCopyBtn" onclick="copyLink()">Copy</button>
+    </div>
+    <button class="mclose" onclick="closeShare()">Close</button>
+  </div>
+</div>
+
+<!-- DONATIONS MODAL -->
+<div class="don-overlay" id="donModal">
+  <div class="don-modal">
+    <div class="don-modal-hdr">
+      <div class="don-modal-title">Donations <span class="don-modal-badge" id="donModalBadge"></span></div>
+      <button class="don-modal-close" onclick="closeDonModal()">×</button>
+    </div>
+    <div class="don-modal-tabs">
+      <button class="don-tab active" id="donTabAll" onclick="donModalTab('all')">All</button>
+      <button class="don-tab" id="donTabTop" onclick="donModalTab('top')">Top</button>
+    </div>
+    <div class="don-modal-sub" id="donModalSub" style="display:none"></div>
+    <div class="don-modal-list" id="donModalList"></div>
+    <div class="don-modal-foot">
+      <button class="btn-sd primary" style="width:100%" onclick="goToDonate()">Donate now</button>
+    </div>
+  </div>
+</div>
+
+<!-- REACTIONS MODAL -->
+<div class="don-overlay" id="reactModal">
+  <div class="don-modal">
+    <div class="don-modal-hdr">
+      <div>
+        <div class="don-modal-title" id="reactModalTitle">Reactions</div>
+        <div style="font-size:.8rem;color:var(--muted);margin-top:3px">Join the community and show your support.</div>
+      </div>
+      <button class="don-modal-close" onclick="closeReactModal()">×</button>
+    </div>
+    <div class="don-modal-list" id="reactModalList"></div>
+    <div class="don-modal-foot">
+      <button class="btn-sd primary" style="width:100%" onclick="goToDonate()">Donate now</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT MODAL -->
+<div class="moverlay" id="contactModal">
+  <div class="modal">
+    <button class="mclose" onclick="closeContact()" style="float:right;margin:-8px -8px 0 0">×</button>
+    <h3>Write a message to <span id="contactName2"></span></h3>
+    <div class="contact-org-row">
+      <div class="av" id="contactAv" style="width:38px;height:38px;font-size:.72rem;flex-shrink:0"></div>
+      <div>
+        <div style="font-weight:600;font-size:.88rem" id="contactOrgName"></div>
+        <div class="contact-org-lbl">Organizer</div>
+      </div>
+    </div>
+    <input class="contact-inp" id="contactInputName" type="text" placeholder="Your name">
+    <input class="contact-inp" id="contactInputEmail" type="email" placeholder="Your email">
+    <textarea class="contact-inp" id="contactInputMsg" placeholder="Your message" rows="4" style="min-height:90px"></textarea>
+    <button class="btn-sd primary" style="width:100%;margin-top:4px" onclick="submitContact()">Send message</button>
+  </div>
+</div>
+
+<script>
+
+// ── Random American donor generator ──
+const FIRST_NAMES=['James','John','Robert','Michael','William','David','Richard','Joseph','Thomas','Charles','Patricia','Jennifer','Linda','Barbara','Elizabeth','Susan','Jessica','Sarah','Karen','Lisa','Christopher','Daniel','Paul','Mark','Donald','Emily','Ashley','Amanda','Melissa','Stephanie','Rebecca','Laura','Sharon','Cynthia','Angela','Emma','Olivia','Ava','Isabella','Sophia','Mia','Charlotte','Amelia','Harper','Evelyn','Andrew','Joshua','Kevin','Brian','George','Edward','Ronald','Anthony','Kenneth','Steven','Tyler','Brandon','Nathan','Samantha','Madison','Hannah','Alexis','Rachel','Anna','Katherine','Brittany','Nicole'];
+const LAST_NAMES=['Smith','Johnson','Williams','Brown','Jones','Garcia','Miller','Davis','Rodriguez','Martinez','Hernandez','Lopez','Gonzalez','Wilson','Anderson','Thomas','Taylor','Moore','Jackson','Martin','Lee','Perez','Thompson','White','Harris','Sanchez','Clark','Ramirez','Lewis','Robinson','Walker','Young','Allen','King','Wright','Scott','Torres','Nguyen','Hill','Flores','Green','Adams','Nelson','Baker','Hall','Rivera','Campbell','Mitchell','Carter','Roberts','Phillips','Evans','Turner','Parker','Collins','Edwards','Stewart','Flores','Morris','Murphy','Cook','Rogers','Reed','Bailey','Bell','Cooper','Richardson','Cox','Howard'];
+const DON_AMTS=[25,50,100,300,500,1000];
+const DON_TIMES=['Just now','2 minutes ago','5 minutes ago','12 minutes ago','25 minutes ago','34 minutes ago','1 hour ago','2 hours ago','3 hours ago','5 hours ago','8 hours ago','1 day ago','2 days ago','3 days ago'];
+function randInt(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+const MALE_FIRST_NAMES=new Set(['James','John','Robert','Michael','William','David','Richard','Joseph','Thomas','Charles','Christopher','Daniel','Paul','Mark','Donald','Andrew','Joshua','Kevin','Brian','George','Edward','Ronald','Anthony','Kenneth','Steven','Tyler','Brandon','Nathan']);
+function nameToAvatarUrl(name){
+  const firstName=name.split(' ')[0];
+  const isMale=MALE_FIRST_NAMES.has(firstName);
+  let h=0;
+  for(let i=0;i<name.length;i++)h=(h*31+name.charCodeAt(i))&0x7fffffff;
+  const n=h%100;
+  return`https://randomuser.me/api/portraits/${isMale?'men':'women'}/${n}.jpg`;
+}
+function genDonors(n,sym,raisedCap){
+  sym=sym||'$';
+  const validAmts=raisedCap>0?DON_AMTS.filter(a=>a<=raisedCap):DON_AMTS;
+  if(validAmts.length===0)return[];
+  const minAmt=validAmts[0];
+  const out=[];
+  let budget=raisedCap>0?raisedCap:Infinity;
+  for(let i=0;i<n;i++){
+    // Reserve minimum for each remaining donor so the budget never runs dry
+    const remaining=n-i-1;
+    const maxForThis=budget-(minAmt*remaining);
+    const affordable=validAmts.filter(a=>a<=maxForThis);
+    if(affordable.length===0)break;
+    const fn=FIRST_NAMES[randInt(0,FIRST_NAMES.length-1)];
+    const ln=LAST_NAMES[randInt(0,LAST_NAMES.length-1)];
+    const isAnon=i>0&&Math.random()<0.15;
+    const fullName=fn+' '+ln;
+    const amt=affordable[randInt(0,affordable.length-1)];
+    budget-=amt;
+    const time=i===0?'Recent donation':DON_TIMES[randInt(1,DON_TIMES.length-1)];
+    const avatar=isAnon?null:nameToAvatarUrl(fullName);
+    out.push({name:isAnon?'Anonymous':fullName,amount:sym+amt.toLocaleString(),time,color:'#718096',avatar});
+  }
+  if(out.length===0)return out;
+  // Mark the highest non-anonymous donor as "Top donation"
+  const maxAmt=Math.max(...out.map(d=>parseInt(d.amount.replace(/[^0-9]/g,''))));
+  let topDone=false;
+  return out.map(d=>{
+    const v=parseInt(d.amount.replace(/[^0-9]/g,''));
+    if(!topDone&&v===maxAmt&&d.name!=='Anonymous'){topDone=true;return{...d,time:'Top donation'};}
+    return d;
+  });
+}
+
+const SUPA_URL='https://zcrrknmpzfwazzhfxdyi.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjcnJrbm1wemZ3YXp6aGZ4ZHlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4MzkzNjEsImV4cCI6MjA5MTQxNTM2MX0.ahqK2wA418U9TcO4rqqkPb36_NPpBdhHXPrEswoR-zc';
+
+const GRADS={1:'linear-gradient(135deg,#1E8449,#27AE60)',2:'linear-gradient(135deg,#1E8449,#27AE60)',3:'linear-gradient(135deg,#27AE60,#2ECC71)',4:'linear-gradient(135deg,#9D174D,#DB2777)',5:'linear-gradient(135deg,#5B21B6,#7C3AED)',6:'linear-gradient(135deg,#0E7490,#0891B2)',7:'linear-gradient(135deg,#475569,#64748B)',8:'linear-gradient(135deg,#92400E,#D97706)'};
+
+const EXTRA_IMGS={};
+
+let camp=null,liked=false,carIdx=0,imgs=[];
+let CAMPAIGNS_DB=[];
+
+function fmtMoney(n){
+  if(!n&&n!==0)return '$0';
+  if(n>=1000000)return '$'+(n/1000000).toFixed(1).replace(/\.0$/,'')+'M';
+  return '$'+n.toLocaleString('en-US');
+}
+
+
+function parseStory(text) {
+  if (!text) return [];
+  // Split by double newlines (paragraphs) or single newlines
+  const lines = text.split(/\n\n|\n/).map(l => l.trim()).filter(l => l.length > 0);
+  return lines.map(line => {
+    // Detect IMAGE:url|caption format (from editor and extra photos)
+    const imageBlockMatch = line.match(/^IMAGE:(https?:\/\/\S+?)(?:\|(.*))?$/i);
+    if (imageBlockMatch) {
+      return { type: 'img', src: imageBlockMatch[1], caption: imageBlockMatch[2] || '' };
+    }
+    // Detect bare image URLs ending in image extension
+    const imgMatch = line.match(/^(https?:\/\/\S+\.(?:jpg|jpeg|png|gif|webp))(\s+(.*))?$/i);
+    if (imgMatch) {
+      return { type: 'img', src: imgMatch[1], caption: imgMatch[3] || '' };
+    }
+    return line;
+  });
+}
+
+function adaptCampaign(c){
+  const pct=c.goal>0?Math.min(Math.round((c.raised/c.goal)*100),100):0;
+  return {
+    ...c,
+    cat: c.category,
+    label: {children:'Children & Family',animals:'Animals & Pets',health:'Health',disaster:'Disaster Relief'}[c.category]||c.category,
+    imgs: [...(c.image_url?[c.image_url]:[]), ...(Array.isArray(c.images)?c.images: (c.images?JSON.parse(c.images):[]) ), ...(EXTRA_IMGS[c.id]||[])],
+    img: 1,
+    raised: fmtMoney(c.raised),
+    goal: fmtMoney(c.goal),
+    raisedN: c.raised,
+    goalN: c.goal,
+    pct: pct,
+    sup: c.raised>0?Math.max(Math.floor(c.raised/50),1).toLocaleString():'0',
+    supN: c.raised>0?Math.max(Math.floor(c.raised/50),1):0,
+    daysLeft: 30,
+    urgent: c.urgent===true,
+    full: c.raised>=c.goal,
+    organizer: c.organizer||'Good Green Foundation',
+    organizerInitials: (c.organizer||'BF').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase(),
+    organizerSince: new Date(c.created_at).toLocaleDateString('en-US',{month:'long',year:'numeric'}),
+    location: c.location||'United States',
+    story: c.description?parseStory(c.description):[],
+    donors: [],
+    updates: []
+  };
+}
+
+(async function init(){
+  let campId=null;
+  try{campId=new URLSearchParams(window.location.search).get('id');}catch(e){}
+
+  function hideSkeleton(){
+    var skel=document.getElementById('skeletonLoader');
+    if(skel){skel.style.opacity='0';setTimeout(function(){skel.style.display='none';},300);}
+  }
+
+  if(!campId){
+    hideSkeleton();
+    document.getElementById('notFound').style.display='block';
+    document.getElementById('bct').textContent='Not found';
+    return;
+  }
+
+  try{
+    // Fetch campaign + all campaigns in parallel (≈40% faster)
+    const headers={'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY};
+    const [res, resAll]=await Promise.all([
+      fetch(`${SUPA_URL}/rest/v1/campaigns?id=eq.${campId}&active=eq.true`,{headers}),
+      fetch(`${SUPA_URL}/rest/v1/campaigns?active=eq.true`,{headers})
+    ]);
+    const [data, allData]=await Promise.all([res.json(), resAll.json()]);
+    if(!data||!data.length){throw new Error('not found');}
+    camp=adaptCampaign(data[0]);
+    CAMPAIGNS_DB=allData.map(adaptCampaign);
+  }catch(e){
+    hideSkeleton();
+    document.getElementById('notFound').style.display='block';
+    document.getElementById('bct').textContent='Not found';
+    return;
+  }
+
+if(true){
+  document.title=camp.title+' — Good Green Foundation';
+  document.getElementById('bct').textContent=camp.title.length>50?camp.title.slice(0,50)+'…':camp.title;
+
+  // ── TikTok: ViewContent ──────────────────────────────────────────────
+  try {
+    if (window.ttq) {
+      window.ttq.track('ViewContent', {
+        content_id:   camp.id,
+        content_name: camp.title,
+        content_type: 'product',
+        value: 0, currency: 'USD'
+      });
+    }
+  } catch(e) {}
+
+  // ── Facebook: ViewContent ─────────────────────────────────────────────
+  try {
+    if (window.GGF && window.GGF.fbSendEvent) {
+      window.GGF.fbSendEvent('ViewContent', {
+        content_ids:  [String(camp.id)],
+        content_name: camp.title,
+        content_type: 'product',
+        currency:     'USD',
+        value:        0
+      });
+    }
+  } catch(e) {}
+
+  // Remove skeleton — conteúdo real está pronto
+  hideSkeleton();
+
+  if(camp.urgent){document.getElementById('urgentBanner').style.display='block';}
+  document.getElementById('campMain').style.display='block';
+  document.getElementById('campSidebar').style.display='block';
+  document.getElementById('relatedSection').style.display='block';
+  document.getElementById('trustBar').style.display='block';
+  document.getElementById('sharePanel').style.display='block';
+  // Phone mockups — three distinct designs
+  const elL=document.getElementById('phScreenL');
+  const elC=document.getElementById('phScreenC');
+  const elR=document.getElementById('phScreenR');
+  if(elL) elL.innerHTML=buildPhoneLeft(camp);
+  if(elC) elC.innerHTML=buildPhoneCenter(camp);
+  if(elR) elR.innerHTML=buildPhoneRight(camp);
+
+  // Title
+  document.getElementById('campTitle').textContent=camp.title;
+
+  // Carousel
+  imgs=camp.imgs&&camp.imgs.length>0?camp.imgs:[];
+  const ci=document.getElementById('carImg');
+  const cd=document.getElementById('carDots');
+  const sumEl=document.getElementById('carSummary');
+  function hideSummary(){if(sumEl)sumEl.classList.remove('active');ci.style.opacity='1';}
+  function setImg(i,animate){
+    hideSummary();
+    carIdx=i;
+    const bg=imgs.length>0?`url("${imgs[i]}") center/cover no-repeat`:(GRADS[camp.img]||GRADS[1]);
+    if(animate){
+      ci.style.opacity='0';
+      setTimeout(()=>{
+        ci.style.background=bg;
+        ci.style.opacity='1';
+      },160);
+    }else{
+      ci.style.background=bg;
+    }
+    cd.querySelectorAll('.cdot').forEach((d,j)=>d.classList.toggle('on',j===i));
+  }
+  function showSummary(animate){
+    carIdx=imgs.length;
+    if(animate){ci.style.opacity='0';setTimeout(()=>{if(sumEl)sumEl.classList.add('active');},160);}
+    else{if(sumEl)sumEl.classList.add('active');}
+    cd.querySelectorAll('.cdot').forEach((d,j)=>d.classList.toggle('on',j===imgs.length));
+  }
+  // Always add dots: one per image + one for summary
+  const totalSlides=imgs.length+1;
+  if(totalSlides>1){
+    document.getElementById('carPrev').style.display='flex';
+    document.getElementById('carNext').style.display='flex';
+    imgs.forEach((_,i)=>{const d=document.createElement('button');d.className='cdot'+(i===0?' on':'');d.onclick=()=>setImg(i,true);cd.appendChild(d);});
+    const sd=document.createElement('button');sd.className='cdot';sd.onclick=()=>showSummary(true);cd.appendChild(sd);
+  } else {
+    // Only summary slide
+    const sd=document.createElement('button');sd.className='cdot';sd.onclick=()=>showSummary(false);cd.appendChild(sd);
+  }
+  setImg(0,false);
+  window.carNav=function(d){
+    const next=(carIdx+d+totalSlides)%totalSlides;
+    if(next===imgs.length)showSummary(true);else setImg(next,true);
+  };
+
+  // Touch swipe for mobile carousel
+  (function(){
+    const wrap=document.querySelector('.car-wrap');
+    if(!wrap)return;
+    let tx=0,ty=0,dragging=false;
+    wrap.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;dragging=true;},{passive:true});
+    wrap.addEventListener('touchmove',e=>{
+      if(!dragging)return;
+      const dx=e.touches[0].clientX-tx;
+      const dy=e.touches[0].clientY-ty;
+      if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>8)e.preventDefault();
+    },{passive:false});
+    wrap.addEventListener('touchend',e=>{
+      if(!dragging)return;
+      dragging=false;
+      const dx=e.changedTouches[0].clientX-tx;
+      const dy=e.changedTouches[0].clientY-ty;
+      if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>22&&totalSlides>1){
+        carNav(dx<0?1:-1);
+      }
+    },{passive:true});
+  })();
+
+  // Avatars
+  const g=GRADS[camp.img]||GRADS[1];
+  ['orgAvTop','orgAvBottom','orgAv'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){el.textContent=camp.organizerInitials;el.style.background=g;}
+  });
+  document.getElementById('orgNameTop').textContent=camp.organizer;
+  document.getElementById('orgNameBottom').textContent=camp.organizer;
+  document.getElementById('orgName').textContent=camp.organizer;
+  document.getElementById('orgSince').textContent='Active since '+camp.organizerSince;
+  document.getElementById('orgLocation').textContent=camp.location;
+
+  // Story
+  document.getElementById('storyBox').innerHTML=camp.story.map(item=>{
+    if(typeof item==='object'&&item.type==='img'){
+      return `<div class="story-img-wrap"><img src="${item.src}" alt="${item.caption||''}" loading="lazy">${item.caption?`<div class="story-img-caption">${item.caption}</div>`:''}</div>`;
+    }
+    return `<p>${item}</p>`;
+  }).join('');
+
+  // Share preview
+  document.getElementById('prevTitle').textContent=camp.title;
+  document.getElementById('prevOrg').textContent='Organized by '+camp.organizer;
+  const pi=document.getElementById('prevImg');
+  if(imgs[0])pi.style.background=`url("${imgs[0]}") center/cover no-repeat`;
+  else pi.style.background=g;
+  pi.style.width='100%';pi.style.height='100%';
+
+  // Camp meta
+  document.getElementById('campMetaText').textContent='Created · '+camp.organizerSince;
+  document.getElementById('campCatLink').textContent=camp.label;
+
+  // Sidebar
+  document.getElementById('raisedAmt').textContent=camp.raised;
+  document.getElementById('raisedGoal').textContent='of '+camp.goal;
+  document.getElementById('statSup').textContent=camp.sup;
+  document.getElementById('reactCount').textContent=camp.supN;
+  if(document.getElementById('shareLinkInput'))document.getElementById('shareLinkInput').value='https://goodgreenfoundation.org/campaign-detail.html?id='+camp.id;
+  if(document.getElementById('shareDesc'))document.getElementById('shareDesc').textContent='Help "'+camp.title+'" reach its goal.';
+
+  // Donors — only show if campaign has raised > $0
+  {
+    const raisedAmt=parseFloat((camp.raised||'0').replace(/[^0-9.]/g,''))||0;
+    if(raisedAmt>0){
+      const sym=camp.raised?camp.raised.replace(/[\d,. ]/g,'').trim()||'$':'$';
+      const realDonors=camp.donors&&camp.donors.length>0?camp.donors:[];
+      const needed=Math.max(5-realDonors.length, randInt(3,7));
+      const fakeDonors=genDonors(needed,sym,raisedAmt);
+      const allDonors=[...realDonors,...fakeDonors];
+      camp._allDonors=allDonors;
+      if(allDonors.length>0){
+        document.getElementById('donorsWrap').style.display='block';
+        document.getElementById('donorList').innerHTML=buildDonorRows(getRotatedSlice(allDonors, 5, 'donors_'+camp.id));
+      }
+    }
+  }
+
+  // Words of support
+  const SUPPORT_MSGS=[
+    "Wishing you all the strength and courage you need. You are not alone in this journey. ❤️",
+    "Sending so much love and support your way. Every little bit counts, and we believe in you!",
+    "Your story moved us deeply. We hope this small contribution helps make a difference.",
+    "Praying for you and your family. Stay strong — this community is behind you all the way.",
+    "Thank you for sharing your story. We are honored to be part of your journey. Stay strong!",
+    "You are an inspiration. Keep fighting — better days are ahead. Sending prayers from our family.",
+    "We saw your campaign and couldn't scroll past. You deserve all the support in the world.",
+    "Donating with love and hope. May you find the strength to get through this difficult time.",
+    "Our whole family is rooting for you. You have more people in your corner than you know.",
+    "What an incredible story. So grateful to be able to help in a small way. God bless you.",
+    "Sharing this far and wide — you deserve every bit of support coming your way. Stay hopeful!",
+    "This touched my heart. I hope this donation, however small, brings some comfort and hope.",
+  ];
+  const raisedAmtW=parseFloat((camp.raised||'0').replace(/[^0-9.]/g,''))||0;
+  const wordPool=raisedAmtW>0&&camp._allDonors&&camp._allDonors.length?camp._allDonors:(raisedAmtW>0?camp.donors||[]:[]);
+  const wordsWithMsg=wordPool.map((d,i)=>({...d,message:d.message||(i%2===0?SUPPORT_MSGS[i%SUPPORT_MSGS.length]:'')})).filter(d=>d.message);
+  if(wordsWithMsg.length>0){
+    document.getElementById('wordsSec').style.display='block';
+    document.getElementById('wordsHr').style.display='block';
+    document.getElementById('wordsCount').textContent=wordsWithMsg.length;
+    const shownWords=getRotatedSlice(wordsWithMsg, 5, 'words_'+camp.id);
+    document.getElementById('wordsList').innerHTML=shownWords.map(d=>{
+      const ini=d.name==='Anonymous'?'?':d.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+      return `<div class="word-card">
+        <div class="word-card-hdr">
+          <div class="word-av">${ini}</div>
+          <div class="word-meta">
+            <div class="word-name">${d.name}</div>
+            <div class="word-info">${d.amount} · ${d.time}</div>
+          </div>
+        </div>
+        <div class="word-msg">${d.message}</div>
+      </div>`;
+    }).join('');
+  }
+
+  // Related
+  const sameCat=CAMPAIGNS_DB.filter(c=>c.id!==camp.id&&c.cat===camp.cat);
+  const others=CAMPAIGNS_DB.filter(c=>c.id!==camp.id&&c.cat!==camp.cat);
+  // close async IIFE below after the closing brace of the if(true) block
+  const rel=[...sameCat,...others];
+  document.getElementById('relGrid').innerHTML=rel.map(c=>{
+    const donCount=c.sup>0?c.sup.toLocaleString()+(c.sup>=1000?'':'')+' donations':'Be the first to donate';
+    const imgStyle=c.imgs&&c.imgs[0]?"background-image:url('"+c.imgs[0]+"')":'background:'+GRADS[c.img];
+    const pctBar=Math.min(c.pct||0,100);
+    return `<div class="cc" onclick="location.href='campaign-detail.html?id=${c.id}'">
+      <div class="cc-img" style="${imgStyle}">
+        <div class="cc-don-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+          ${donCount}
+        </div>
+      </div>
+      <div class="cc-body">
+        <div class="cc-org">by ${c.organizer} for <span>${c.label}</span></div>
+        <div class="cc-title">${c.title}</div>
+        <div class="cc-bar-wrap"><div class="cc-bar" style="width:${pctBar}%"></div></div>
+        <div class="cc-raised">${c.raised} raised</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  setTimeout(()=>{
+    const pct=Math.min(camp.pct,100);
+    document.getElementById('ringFill').setAttribute('stroke-dasharray',pct+' '+(100-pct));
+    const ringPctEl=document.getElementById('ringPct');
+    if(ringPctEl)ringPctEl.textContent=pct+'%';
+    const ringPctMob=document.getElementById('ringPctMob');
+    if(ringPctMob)ringPctMob.textContent=pct+'%';
+    const ringPctSticky=document.getElementById('ringPctSticky');
+    if(ringPctSticky)ringPctSticky.textContent=pct+'%';
+    // Mobile rings
+    ['ringFillMob','ringFillSticky'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el)el.setAttribute('stroke-dasharray',pct+' '+(100-pct));
+    });
+  },300);
+
+  // Summary slide content
+  const sumTextEl=document.getElementById('carSumText');
+  if(sumTextEl&&camp.story)sumTextEl.textContent=camp.story[0];
+  const sumCountEl=document.getElementById('carSumCount');
+  if(sumCountEl)sumCountEl.textContent=camp.sup+' donors';
+  const sumAvsEl=document.getElementById('carSumAvs');
+  if(sumAvsEl){
+    const avDonors=camp._allDonors&&camp._allDonors.length>0?camp._allDonors.slice(0,3):(camp.donors&&camp.donors.length>0?camp.donors.slice(0,3):[]);
+    const fallbackAvatars=[{avatar:'https://randomuser.me/api/portraits/women/44.jpg'},{avatar:'https://randomuser.me/api/portraits/men/32.jpg'},{avatar:'https://randomuser.me/api/portraits/women/68.jpg'}];
+    sumAvsEl.innerHTML=(avDonors.length>0?avDonors:fallbackAvatars).slice(0,3).map((d,i)=>{
+      if(d.avatar) return `<img src="${d.avatar}" alt="" style="width:28px;height:28px;border-radius:50%;object-fit:cover;border:2px solid #fff;margin-left:${i>0?'-8px':'0'};display:block">`;
+      const ini=d.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+      return `<div class="car-sum-av" style="background:#27AE60;margin-left:${i>0?'-8px':'0'}">${ini}</div>`;
+    }).join('');
+  }
+
+  // Mobile carousel overlays
+  const carAv=document.getElementById('orgAvCar');
+  if(carAv){carAv.textContent=camp.organizerInitials;carAv.style.background=g;}
+  const carName=document.getElementById('orgNameCar');
+  if(carName)carName.textContent=camp.organizer;
+  const carTitle=document.getElementById('carMobTitle');
+  if(carTitle)carTitle.textContent=camp.title;
+
+  // Mobile progress block
+  document.getElementById('mobAmt').textContent=camp.raised;
+  document.getElementById('mobGoal').textContent='of '+camp.goal;
+  document.getElementById('stickyAmt').textContent=camp.raised;
+  if(document.getElementById('stickyGoal'))document.getElementById('stickyGoal').textContent='of '+camp.goal;
+  const lastDonor=(camp._allDonors&&camp._allDonors[0])||(camp.donors&&camp.donors[0])||null;
+  if(lastDonor){
+    const ld=lastDonor.name+' donated '+lastDonor.amount;
+    if(document.getElementById('mobLastDonor'))document.getElementById('mobLastDonor').textContent=ld+' ›';
+    const sdEl=document.getElementById('stickyDonor');
+    if(sdEl)sdEl.innerHTML=`<b>${lastDonor.name}</b> donated ${lastDonor.amount} <span class="arr">›</span>`;
+  }
+
+  // Mobile donors section
+  const mobDonors=camp._allDonors&&camp._allDonors.length>0?camp._allDonors:(camp.donors||[]);
+  if(mobDonors.length>0){
+    document.getElementById('mobDonorsSec').classList.add('has-donors');
+    document.getElementById('mobDonBadge').textContent=camp.sup;
+    document.getElementById('mobDonRecent').textContent=camp.sup+' recent donations';
+    const topAmt=Math.max(...mobDonors.map(d=>parseFloat((d.amount||'0').replace(/[^0-9.]/g,''))));
+    document.getElementById('mobDonorList').innerHTML=mobDonors.slice(0,4).map(d=>{
+      const amt=parseFloat((d.amount||'0').replace(/[^0-9.]/g,''));
+      const lbl=amt===topAmt?'Top donation':d.time;
+      return `<div class="drow">${donorAvatar(d,36)}<div class="dinfo"><div class="dname">${d.name}</div><div class="damt-lbl"><span class="damt">${d.amount}</span><span class="dlbl">· ${lbl}</span></div></div></div>`;
+    }).join('');
+  }
+
+  // Read more
+  setTimeout(()=>{
+    const box=document.getElementById('storyBox');
+    const btn=document.getElementById('readMoreBtn');
+    // Remove fade first to measure true height
+    box.classList.remove('story-fade');
+    if(box.scrollHeight>230){
+      box.classList.add('story-fade');
+      btn.style.display='inline-flex';
+    }
+  },200);
+} // end if(true)
+})(); // end async IIFE
+
+// Scroll to story from summary slide
+function scrollToStory(){
+  const el=document.getElementById('storyBox');
+  if(el){el.scrollIntoView({behavior:'smooth',block:'start'});setTimeout(()=>{if(!expanded)toggleStory();},600);}
+}
+
+// Mobile sticky bar scroll trigger
+(function(){
+  const stickyEl=document.getElementById('mobSticky');
+  const btnsEl=document.getElementById('mobBtns');
+  if(!stickyEl||!btnsEl)return;
+  let ticking=false;
+  window.addEventListener('scroll',function(){
+    if(ticking)return;
+    ticking=true;
+    requestAnimationFrame(function(){
+      ticking=false;
+      if(window.innerWidth>600){stickyEl.classList.remove('visible');return;}
+      const relatedEl=document.getElementById('relatedSection');
+      const btnsGone=btnsEl.getBoundingClientRect().bottom<0;
+      let nearCards=false;
+      if(relatedEl&&relatedEl.style.display!=='none'){
+        const spRect=relatedEl.getBoundingClientRect();
+        nearCards=spRect.top<=window.innerHeight;
+      }
+      const shouldShow=btnsGone&&!nearCards;
+      if(shouldShow!==stickyEl.classList.contains('visible')){
+        stickyEl.classList.toggle('visible',shouldShow);
+      }
+    });
+  },{passive:true});
+})();
+
+// Functions
+let expanded=false;
+function toggleStory(){
+  expanded=!expanded;
+  document.getElementById('storyBox').classList.toggle('story-fade',!expanded);
+  document.getElementById('readMoreBtn').textContent=expanded?'Show less ↑':'Read more ↓';
+}
+
+let chosenEmoji=null;
+// Simulated reaction pool (populated from donors on load)
+let reactors=[];
+
+function toggleReactPicker(e){
+  if(e)e.stopPropagation();
+  const picker=document.getElementById('emojiPicker');
+  if(picker)picker.classList.toggle('open');
+}
+
+function pickEmoji(emoji){
+  const rb=document.getElementById('reactBtn');
+  const picker=document.getElementById('emojiPicker');
+  if(picker)picker.classList.remove('open');
+  if(chosenEmoji===emoji){
+    chosenEmoji=null;
+    rb.classList.remove('reacted');
+  } else {
+    chosenEmoji=emoji;
+    rb.classList.add('reacted');
+  }
+  // Sync chosen state on picker buttons only
+  document.querySelectorAll('.emoji-opt').forEach(b=>{
+    b.classList.toggle('chosen', b.dataset.emoji===chosenEmoji);
+  });
+  updateReactSummary();
+}
+
+function updateReactSummary(){
+  const cnt=document.getElementById('reactCount');
+  const baseN=camp?camp.supN:0;
+  if(cnt){
+    cnt.textContent=(baseN+(chosenEmoji?1:0)).toLocaleString();
+    cnt.style.display='inline';
+  }
+}
+
+document.addEventListener('click',function(e){
+  const wrap=document.getElementById('reactWrap');
+  if(wrap&&!wrap.contains(e.target)){
+    const picker=document.getElementById('emojiPicker');
+    if(picker)picker.classList.remove('open');
+  }
+});
+
+function openReactModal(){
+  if(!camp)return;
+  const baseN=camp.supN+(chosenEmoji?1:0);
+  document.getElementById('reactModalTitle').textContent=(baseN).toLocaleString()+' reactions';
+  const emojis=['💚','💚','🙏','💜','💚','🙏','💜','👏','✨','💚','🙏','💜'];
+  // Use donors as reactors + fill with generic names
+  const names=[...camp.donors.map(d=>d.name),...['Alex T.','Maria S.','João P.','Laura M.','Carlos R.','Ana B.','Pedro C.','Sofia L.','Rui F.','Isabel G.']];
+  if(chosenEmoji){names.unshift('You');}
+  const rows=names.slice(0,Math.min(names.length,15)).map((name,i)=>{
+    const e=i===0&&chosenEmoji?chosenEmoji:emojis[i%emojis.length];
+    return `<div class="react-modal-row">
+      <div class="react-modal-av">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <span class="react-modal-emoji">${e}</span>
+      </div>
+      <div><div class="react-modal-name">${name}</div></div>
+    </div>`;
+  }).join('');
+  document.getElementById('reactModalList').innerHTML=rows;
+  document.getElementById('reactModal').classList.add('open');
+}
+function closeReactModal(){document.getElementById('reactModal').classList.remove('open');}
+
+const reactOv=document.getElementById('reactModal');
+if(reactOv)reactOv.addEventListener('click',e=>{if(e.target===reactOv)closeReactModal();});
+
+// ── Phone card helpers ──
+function _phData(camp){
+  const imgSrc = camp.imgs && camp.imgs[0] ? camp.imgs[0] : '';
+  const pct = Math.min(camp.pct || 0, 100);
+  // Usa <img> para evitar problemas de parsing de URL no CSS inline
+  const imgBlock = imgSrc
+    ? `<img src="${imgSrc}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" alt="">`
+    : '';
+  const fallbackBg = imgSrc ? '' : 'background:linear-gradient(135deg,#1E8449,#27AE60);';
+  return { imgSrc, imgBlock, fallbackBg, pct };
+}
+function _pctRing(pct, size, r, stroke, color, trackColor){
+  const circ = +(2 * Math.PI * r).toFixed(2);
+  const offset = +(circ * (1 - pct / 100)).toFixed(2);
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+    <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${trackColor}" stroke-width="${stroke}"/>
+    <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${color}" stroke-width="${stroke}"
+      stroke-linecap="round" stroke-dasharray="${circ} ${circ}" stroke-dashoffset="${offset}" transform="rotate(-90 ${size/2} ${size/2})"/>
+  </svg>`;
+}
+
+// LEFT (156×268) — photo top, title + org + raised below (no ring, no button)
+function buildPhoneLeft(camp){
+  const {imgSrc} = _phData(camp);
+  const imgInner = imgSrc ? `<img src="${imgSrc}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" alt="">` : '';
+  // image 120px | content 148px
+  return `<div style="width:100%;height:100%;background:#111827;display:flex;flex-direction:column;border-radius:22px;overflow:hidden;box-sizing:border-box">
+    <div style="position:relative;width:100%;height:120px;flex-shrink:0;background:#1A3A60">
+      ${imgInner}
+    </div>
+    <div style="padding:11px 12px 14px;display:flex;flex-direction:column;justify-content:space-between;flex:1">
+      <div>
+        <div style="font-size:.66rem;font-weight:800;color:#fff;line-height:1.28;margin-bottom:6px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">${camp.title}</div>
+        <div style="font-size:.54rem;color:rgba(255,255,255,.5)">by <b style="color:rgba(255,255,255,.85);font-weight:600">${camp.organizer}</b></div>
+      </div>
+      <div>
+        <div style="font-size:.78rem;font-weight:900;color:#fff;line-height:1;margin-bottom:3px">${camp.raised}</div>
+        <div style="font-size:.5rem;color:rgba(255,255,255,.4)">raised of ${camp.goal}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// CENTER (188×312) — full card: image 95px + content 217px
+function buildPhoneCenter(camp){
+  const {imgSrc, pct} = _phData(camp);
+  const ring = _pctRing(pct, 44, 18, 3.5, '#27AE60', 'rgba(255,255,255,.15)');
+  const initials = camp.organizerInitials || camp.organizer.slice(0,2).toUpperCase();
+  const imgInner = imgSrc ? `<img src="${imgSrc}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" alt="">` : '';
+  // image 95px | content 217px | padding 10px top + 12px bottom = 195px usable
+  return `<div style="width:100%;height:100%;background:#0A2040;display:flex;flex-direction:column;border-radius:22px;overflow:hidden;box-sizing:border-box">
+    <div style="position:relative;width:100%;height:95px;flex-shrink:0;background:#1A3A60">
+      ${imgInner}
+    </div>
+    <div style="padding:10px 11px 12px;display:flex;flex-direction:column;height:217px;box-sizing:border-box">
+      <div style="font-size:.68rem;font-weight:800;color:#fff;line-height:1.27;margin-bottom:5px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-break:break-word">${camp.title}</div>
+      <div style="display:flex;align-items:center;gap:5px;margin-bottom:10px;flex-shrink:0">
+        <div style="width:16px;height:16px;border-radius:50%;background:#27AE60;display:flex;align-items:center;justify-content:center;font-size:.42rem;font-weight:800;color:#fff;flex-shrink:0">${initials}</div>
+        <div style="font-size:.54rem;color:rgba(255,255,255,.5);overflow:hidden;white-space:nowrap;text-overflow:ellipsis">by <b style="color:rgba(255,255,255,.8)">${camp.organizer}</b></div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-shrink:0">
+        <div>
+          <div style="font-size:.66rem;font-weight:800;color:#fff;line-height:1">${camp.raised}</div>
+          <div style="font-size:.5rem;color:rgba(255,255,255,.4);margin-top:2px">raised</div>
+        </div>
+        <div style="position:relative;width:44px;height:44px;flex-shrink:0">
+          ${ring}
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:800;color:#fff">${pct}%</div>
+        </div>
+      </div>
+      <div style="width:100%;padding:9px 0;border-radius:100px;background:#2ECC71;color:#fff;font-size:.68rem;font-weight:700;text-align:center;flex-shrink:0;margin-top:auto">Donate now!</div>
+    </div>
+  </div>`;
+}
+
+// RIGHT (156×268) — progress focus: image 82px + content 186px
+function buildPhoneRight(camp){
+  const {imgSrc, pct} = _phData(camp);
+  const ring = _pctRing(pct, 64, 26, 4, '#27AE60', 'rgba(255,255,255,.12)');
+  const imgInner = imgSrc ? `<img src="${imgSrc}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block" alt="">` : '';
+  // image 82px | content 186px | padding 10px t + 12px b = 164px usable
+  return `<div style="width:100%;height:100%;background:#0D1B2E;display:flex;flex-direction:column;border-radius:22px;overflow:hidden;box-sizing:border-box">
+    <div style="position:relative;width:100%;height:82px;flex-shrink:0;background:#1A3A60">
+      ${imgInner}
+      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 35%,rgba(13,27,46,.85))"></div>
+    </div>
+    <div style="padding:10px 11px 12px;display:flex;flex-direction:column;align-items:center;height:186px;box-sizing:border-box">
+      <div style="font-size:.62rem;font-weight:800;color:#fff;line-height:1.25;text-align:center;margin-bottom:8px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-break:break-word;width:100%">${camp.title}</div>
+      <div style="position:relative;width:64px;height:64px;flex-shrink:0;margin-bottom:6px">
+        ${ring}
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <span style="font-size:.76rem;font-weight:900;color:#fff;line-height:1">${pct}%</span>
+          <span style="font-size:.4rem;color:rgba(255,255,255,.45);margin-top:1px">funded</span>
+        </div>
+      </div>
+      <div style="font-size:.54rem;color:rgba(255,255,255,.4);text-align:center;margin-bottom:auto">Goal: <b style="color:rgba(255,255,255,.7)">${camp.goal}</b></div>
+      <div style="width:100%;padding:8px 0;border-radius:100px;background:linear-gradient(135deg,#27AE60,#1E8449);color:#fff;font-size:.64rem;font-weight:700;text-align:center;flex-shrink:0">Donate now!</div>
+    </div>
+  </div>`;
+}
+
+function relScroll(dir){
+  const g=document.getElementById('relGrid');
+  if(g)g.scrollLeft+=dir*(220+16)*2;
+}
+
+// Happening Around dropdown
+(function(){
+  const btn = document.getElementById('relFilterBtn');
+  const drop = document.getElementById('relDrop');
+  if(!btn || !drop) return;
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    const isOpen = drop.classList.contains('open');
+    drop.classList.toggle('open', !isOpen);
+    btn.classList.toggle('open', !isOpen);
+  });
+  document.addEventListener('click', function(){
+    drop.classList.remove('open');
+    btn.classList.remove('open');
+  });
+  drop.addEventListener('click', function(e){ e.stopPropagation(); });
+})();
+function goToDonate(){
+  let id='1';
+  try{id=new URLSearchParams(window.location.search).get('id')||'1';}catch(e){}
+  location.href='donate.html?id='+id;
+}
+
+function openShare(){const m=document.getElementById('shareModal');if(m)m.classList.add('open');}
+function closeShare(){const m=document.getElementById('shareModal');if(m)m.classList.remove('open');}
+
+// Contact modal
+function openContact(){
+  if(!camp)return;
+  document.getElementById('contactName2').textContent=camp.organizer;
+  document.getElementById('contactOrgName').textContent=camp.organizer;
+  const av=document.getElementById('contactAv');
+  av.textContent=camp.organizerInitials;
+  av.style.background=GRADS[camp.img]||GRADS[1];
+  document.getElementById('contactInputName').value='';
+  document.getElementById('contactInputEmail').value='';
+  document.getElementById('contactInputMsg').value='';
+  document.getElementById('contactModal').classList.add('open');
+}
+function closeContact(){document.getElementById('contactModal').classList.remove('open');}
+function submitContact(){
+  const name=document.getElementById('contactInputName').value.trim();
+  const email=document.getElementById('contactInputEmail').value.trim();
+  const msg=document.getElementById('contactInputMsg').value.trim();
+  if(!name||!email||!msg){alert('Please fill in all fields.');return;}
+  closeContact();
+  alert('Message sent successfully!');
+}
+
+// ── Hourly rotation helper ───────────────────────────
+// Rotates which subset is shown every 1h using localStorage.
+function getRotatedSlice(arr, size, key) {
+  if (!arr || arr.length === 0) return [];
+  try {
+    const ONE_HOUR = 60 * 60 * 1000;
+    const stored = JSON.parse(localStorage.getItem('bff_rot_' + key) || '{"page":0,"ts":0}');
+    const now = Date.now();
+    let page = stored.page;
+    if (now - stored.ts >= ONE_HOUR) {
+      const maxPages = Math.ceil(arr.length / size);
+      page = (page + 1) % maxPages;
+      localStorage.setItem('bff_rot_' + key, JSON.stringify({page, ts: now}));
+    }
+    const start = (page * size) % arr.length;
+    return [...arr.slice(start), ...arr.slice(0, start)].slice(0, size);
+  } catch(e) {
+    return arr.slice(0, size);
+  }
+}
+
+// Donor list helpers
+function donorAvatar(d,size){
+  size=size||36;
+  if(d.avatar){
+    return `<img src="${d.avatar}" alt="" style="width:${size}px;height:${size}px;border-radius:50%;object-fit:cover;flex-shrink:0;display:block;border:1.5px solid var(--line)">`;
+  }
+  const ini=d.name==='Anonymous'?'?':d.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  return `<div class="dav">${ini}</div>`;
+}
+function buildDonorRows(donors){
+  return donors.map(d=>{
+    const isTop=d.time==='Top donation';
+    const lblClass=isTop?'style="color:#2ECC71;font-weight:700"':'';
+    return `<div class="drow">
+      ${donorAvatar(d,36)}
+      <div class="dinfo">
+        <div class="dname">${d.name}</div>
+        <div class="damt-lbl"><span class="damt">${d.amount}</span><span class="dlbl" ${lblClass}>· ${d.time}</span></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function donorRowHtml(d){return buildDonorRows([d]);}
+function donModalRowHtml(d){
+  const ini=d.name==='Anonymous'?'?':d.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  const isTop=d.time==='Top donation';
+  const av=d.avatar
+    ?`<img src="${d.avatar}" alt="" style="width:38px;height:38px;border-radius:50%;object-fit:cover;flex-shrink:0;display:block;border:1.5px solid var(--line)">`
+    :`<div class="don-modal-av" style="background:var(--surface);color:var(--ink3);border:1px solid var(--line)">${ini}</div>`;
+  return `<div class="don-modal-row">${av}<div><div class="don-modal-name">${d.name}</div><div class="don-modal-meta" ${isTop?'style="color:#2ECC71;font-weight:700"':''}>${d.amount} · ${d.time}</div></div></div>`;
+}
+function openDonModal(mode){
+  const donors=camp&&camp._allDonors?camp._allDonors:(camp&&camp.donors?camp.donors:[]);
+  if(!camp||!donors.length)return;
+  document.getElementById('donModalBadge').textContent=camp.sup;
+  document.getElementById('donModal').classList.add('open');
+  donModalTab(mode||'all');
+}
+function closeDonModal(){document.getElementById('donModal').classList.remove('open');}
+function donModalTab(mode){
+  const all=mode==='all';
+  document.getElementById('donTabAll').classList.toggle('active',all);
+  document.getElementById('donTabTop').classList.toggle('active',!all);
+  const sub=document.getElementById('donModalSub');
+  const pool=(camp._allDonors&&camp._allDonors.length?camp._allDonors:(camp.donors||[]));
+  if(!all){
+    const topAmt=pool.reduce((m,d)=>Math.max(m,parseFloat((d.amount||'0').replace(/[^0-9.]/g,''))),0);
+    const sym=pool[0]?(pool[0].amount.replace(/[0-9.,]/g,'')||'$'):'$';
+    sub.textContent=`Be one of the top donors for ${camp.organizer} with ${sym}${topAmt.toLocaleString()} or more.`;
+    sub.style.display='block';
+  }else{sub.style.display='none';}
+  const donors=all?pool:[...pool].sort((a,b)=>parseFloat((b.amount||'0').replace(/[^0-9.]/g,''))-parseFloat((a.amount||'0').replace(/[^0-9.]/g,'')));
+  document.getElementById('donModalList').innerHTML=donors.map(donModalRowHtml).join('');
+}
+function showAllDonors(){openDonModal('all');}
+function showTopDonors(){openDonModal('top');}
+function shareVia(p){
+  const url=encodeURIComponent('https://goodgreenfoundation.org/campaign-detail.html?id='+(camp?camp.id:1));
+  const txt=encodeURIComponent(camp?camp.title+' — Good Green Foundation':'Good Green Foundation');
+  if(p==='instagram'){navigator.clipboard.writeText(decodeURIComponent(url)).catch(()=>{});window.open('https://www.instagram.com/','_blank');return;}
+  const links={whatsapp:`https://wa.me/?text=${txt}%20${url}`,facebook:`https://www.facebook.com/sharer/sharer.php?u=${url}`,email:`mailto:?subject=${txt}&body=${url}`};
+  window.open(links[p],'_blank');
+}
+function copyLink(){
+  const i=document.getElementById('shareLinkInput');
+  if(i)navigator.clipboard.writeText(i.value).catch(()=>{});
+  const b=document.getElementById('shareCopyBtn');
+  if(b){b.textContent='✓';setTimeout(()=>{b.textContent='Copy';},2000);}
+}
+function copyShareLink(){
+  navigator.clipboard.writeText('https://goodgreenfoundation.org/campaign-detail.html?id='+(camp?camp.id:1)).catch(()=>{});
+  alert('Link copied!');
+}
+
+// Modal close on backdrop
+document.querySelectorAll('.moverlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');}));
+const donOv=document.getElementById('donModal');
+if(donOv)donOv.addEventListener('click',e=>{if(e.target===donOv)closeDonModal();});
+
+// Nav
+document.querySelectorAll('.nav-item').forEach(item=>{
+  const t=item.querySelector('.nav-trigger');
+  if(!t)return;
+  t.addEventListener('click',e=>{
+    e.stopPropagation();
+    const open=item.classList.contains('open');
+    document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('open'));
+    if(!open)item.classList.add('open');
+  });
+});
+document.addEventListener('click',()=>document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('open')));
+const hbg=document.getElementById('hamburger');
+const mobNavEl=document.getElementById('mobNavLinks');
+if(hbg&&mobNavEl){
+  hbg.addEventListener('click',e=>{
+    e.stopPropagation();
+    mobNavEl.classList.toggle('open');
+    // animate hamburger
+    hbg.classList.toggle('active');
+  });
+  document.addEventListener('click',e=>{
+    if(mobNavEl.classList.contains('open')&&!mobNavEl.contains(e.target)&&e.target!==hbg&&!hbg.contains(e.target)){
+      mobNavEl.classList.remove('open');
+      hbg.classList.remove('active');
+    }
+  });
+}
+</script>
+
+<script src="sidebar.js"></script>
+<script src="ggf-tracker.js"></script>
+</body>
+</html>

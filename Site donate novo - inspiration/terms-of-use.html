@@ -1,0 +1,639 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Use — Good Green Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#27AE60;--blue-dark:#1E8449;--blue-light:#EAFAF1;
+  --orange:#2ECC71;--orange-dark:#27AE60;--orange-light:#D5F5E3;
+  --green:#27AE60;--green-dark:#1E8449;--green-light:#EAFAF1;
+  --ink:#0D1117;--ink2:#1C2333;--ink3:#2D3748;--slate:#4A5568;
+  --muted:#718096;--subtle:#A0AEC0;--line:#E2E8F0;--surface:#F7F8FA;--white:#FFFFFF;
+  --font-head:'Plus Jakarta Sans',sans-serif;--font-body:'Plus Jakarta Sans',sans-serif;
+  --r-xs:6px;--r-sm:100px;--r:100px;--r-lg:100px;--r-xl:100px;
+  --s-xs:0 1px 2px rgba(0,0,0,.05);
+  --s-sm:0 1px 3px rgba(0,0,0,.06),0 2px 8px rgba(0,0,0,.04);
+  --s-md:0 4px 12px rgba(0,0,0,.08),0 8px 28px rgba(0,0,0,.06);
+  --s-lg:0 8px 24px rgba(0,0,0,.10),0 20px 48px rgba(0,0,0,.08);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--surface);color:var(--ink);overflow-x:hidden;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+nav{background:var(--white);border-bottom:1px solid var(--line);height:80px;padding:0 4%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;position:sticky;top:0;z-index:999;box-shadow:0 1px 0 var(--line),0 2px 12px rgba(0,0,0,.04)}
+.logo{display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none}
+.logo-img{height:72px;width:auto;object-fit:contain;display:block}
+.logo-mobile{display:none}
+.logo-desktop{display:block}
+@media(max-width:900px){.logo-desktop{display:none}.logo-mobile{display:block;height:44px;width:auto}.logo{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important}}
+.nav-links{display:flex;align-items:center;gap:0;list-style:none}
+.nav-item{position:relative}
+.nav-trigger{display:flex;align-items:center;gap:6px;color:var(--slate);font-family:var(--font-body);font-weight:700;font-size:1rem;letter-spacing:.01em;padding:8px 12px;border-radius:0;cursor:pointer;background:none;border:none;height:80px;transition:color .15s;white-space:nowrap;border-bottom:2.5px solid transparent}
+.nav-trigger:hover{color:var(--ink);border-bottom-color:var(--line)}
+.nav-item.open .nav-trigger{color:var(--blue);border-bottom-color:var(--blue)}
+.nc{width:16px;height:16px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;font-size:.48rem;color:var(--muted);transition:transform .2s,background .15s;flex-shrink:0}
+.nav-item.open .nc{transform:rotate(180deg);background:var(--blue-light);border-color:var(--blue);color:var(--blue)}
+.dropdown{position:absolute;top:100%;left:0;background:var(--white);border-radius:0 0 12px 12px;box-shadow:0 8px 24px rgba(0,0,0,.10),0 2px 6px rgba(0,0,0,.05);border:1px solid var(--line);border-top:3px solid var(--blue);min-width:230px;padding:8px;opacity:0;visibility:hidden;transform:translateY(-2px);transition:opacity .15s,transform .15s,visibility .15s;z-index:1000}
+.nav-item.open .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.dropdown a{display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:8px;color:var(--slate);font-weight:500;font-size:.92rem;transition:background .12s,color .12s}
+.dropdown a:before{content:'';width:6px;height:6px;border-radius:50%;background:var(--line);flex-shrink:0;transition:background .12s}
+.dropdown a:hover{background:var(--surface);color:var(--ink)}
+.dropdown a:hover:before{background:var(--blue)}
+.dropdown a.active{background:var(--blue-light);color:var(--blue-dark);font-weight:600}
+.dropdown a.active:before{background:var(--blue)}
+.nav-actions{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.nav-search-wrap{position:relative;display:flex;align-items:center}
+.nav-search-btn{display:flex;align-items:center;gap:7px;padding:9px 16px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--white);font-family:var(--font-body);font-size:.92rem;font-weight:600;color:var(--slate);cursor:pointer;transition:all .15s;white-space:nowrap;height:42px}
+.nav-search-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+.nav-search-btn svg{flex-shrink:0}
+.nav-search-box{position:absolute;right:0;top:calc(100% + 10px);background:var(--white);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.06);border:1px solid var(--line);padding:20px;width:310px;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .18s,transform .18s,visibility .18s;z-index:1000}
+.nav-search-box.open{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-search-label{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.nav-search-label:after{content:'';flex:1;height:1px;background:var(--line)}
+.nav-search-cats{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.nav-search-cat{padding:6px 13px;border-radius: 16px;font-size:.78rem;font-weight:600;border:1.5px solid var(--line);background:var(--white);color:var(--slate);cursor:pointer;transition:all .12s;font-family:var(--font-body)}
+.nav-search-cat:hover{border-color:var(--blue);color:var(--blue-dark);background:var(--blue-light)}
+.nav-search-cat.active{border-color:var(--blue);background:var(--blue);color:var(--white);box-shadow:0 2px 6px rgba(43,127,212,.25)}
+.nav-search-go{width:100%;padding:11px;border-radius:var(--r-sm);border:none;background:var(--blue);color:var(--white);font-family:var(--font-body);font-size:.88rem;font-weight:700;cursor:pointer;transition:background .15s;box-shadow:0 2px 6px rgba(43,127,212,.25)}
+.nav-search-go:hover{background:var(--blue-dark)}
+.btn-signin{padding:9px 18px;border-radius:100px;font-weight:600;font-size:.92rem;cursor:pointer;border:1.5px solid var(--line);background:var(--white);color:var(--slate);font-family:var(--font-body);transition:all .15s;white-space:nowrap;height:42px}
+.btn-signin:hover{border-color:var(--ink3);color:var(--ink);background:var(--surface)}
+.btn-cta{padding:11px 26px;border-radius:100px;font-weight:700;font-size:.95rem;letter-spacing:.02em;cursor:pointer;border:none;background:var(--orange);color:var(--white);font-family:var(--font-body);transition:background .15s,box-shadow .15s,transform .1s;white-space:nowrap;box-shadow:0 2px 8px rgba(232,114,10,.35)}
+.btn-cta:hover{background:var(--orange-dark);box-shadow:0 4px 16px rgba(232,114,10,.42);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px;border:none;background:none;position:absolute;right:4%}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink3);border-radius:2px}
+
+/* PAGE HEADER */
+.page-header{background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue) 60%,#27AE60 100%);padding:64px 5% 60px;text-align:center;position:relative;overflow:hidden}
+.page-header::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 80% 20%,rgba(255,255,255,.07) 0%,transparent 70%);pointer-events:none}
+.page-tag{font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:12px;position:relative;z-index:1}
+.page-title{font-family:var(--font-head);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:#ffffff;line-height:1.15;letter-spacing:-.03em;margin-bottom:14px;position:relative;z-index:1}
+.page-desc{font-size:.95rem;color:rgba(255,255,255,.82);line-height:1.75;max-width:540px;margin:0 auto;position:relative;z-index:1}
+
+/* CONTENT */
+.terms-outer{background:var(--surface);padding:56px 5% 80px}
+.terms-wrap{max-width:820px;margin:0 auto;background:var(--white);border-radius:16px;box-shadow:0 2px 16px rgba(0,0,0,.07);border:1px solid var(--line);padding:48px 52px}
+@media(max-width:760px){.terms-wrap{padding:28px 20px}.terms-outer{padding:32px 4% 60px}}
+.last-updated{display:inline-flex;align-items:center;gap:8px;background:var(--orange-light);color:var(--orange-dark);font-size:.78rem;font-weight:600;padding:6px 14px;border-radius:100px;margin-bottom:28px}
+.terms-content h2{font-family:var(--font-head);font-size:1.15rem;font-weight:800;color:var(--ink);margin:40px 0 14px;padding-top:8px;letter-spacing:-.015em}
+.terms-content h2:first-child{margin-top:0}
+.terms-content p{font-size:.9rem;color:var(--slate);line-height:1.85;margin-bottom:14px}
+.terms-content ul{margin:10px 0 16px 20px}
+.terms-content li{font-size:.9rem;color:var(--slate);line-height:1.8;margin-bottom:6px}
+.terms-content a{color:var(--blue);font-weight:600}
+.terms-content a:hover{color:var(--blue-dark)}
+.terms-content strong{color:var(--ink);font-weight:700}
+.section-divider{border:none;border-top:1px solid var(--line);margin:36px 0}
+
+/* FOOTER */
+footer{background:var(--ink);color:var(--subtle);padding:60px 5% 28px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand p{font-size:.83rem;line-height:1.75;color:#718096}
+.footer-col h4{font-size:.7rem;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:16px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{color:#718096;font-size:.83rem;transition:color .15s}
+.footer-col a:hover{color:#CBD5E0}
+.footer-bottom{border-top:1px solid #1C2333;padding-top:22px;display:flex;justify-content:space-between;font-size:.78rem;color:#4A5568;flex-wrap:wrap;gap:6px}
+.footer-social{display:flex;gap:8px;margin-top:18px}
+.soc-btn{width:64px;height:64px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;text-decoration:none;flex-shrink:0}.soc-btn img{width:32px;height:32px;object-fit:contain;filter:brightness(0) invert(1);display:block}.soc-btn:hover{background:#2ECC71;border-color:#2ECC71}
+@media(max-width:900px){.nav-links{display:none}.hamburger{display:flex}nav{display:flex;justify-content:center;align-items:center}.nav-actions{display:none}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.footer-grid{grid-template-columns:1fr}}
+
+/* ── GLOBAL VISUAL UPGRADES ── */
+
+/* Campaign/content cards */
+.cc, .value-card, .how-card, .faq-item, .info-card, .form-card,
+.sidebar-card, .badge-item, .contact-box {
+  border-radius: 16px !important;
+}
+
+/* Section accent line */
+.section::before, .values-section::before, .faq-wrap > .faq-section:first-child::before {
+  display: none;
+}
+
+/* Page headers — dark green GGF hero */
+.page-header {
+  background: linear-gradient(135deg, #1E8449 0%, #27AE60 60%, #2ECC71 100%) !important;
+  position: relative;
+  overflow: hidden;
+}
+.page-header::before { display: none !important; }
+.page-header h1 { color: #ffffff !important; }
+.page-header p { color: rgba(255,255,255,.82) !important; }
+.page-header .page-tag { color: rgba(255,255,255,.75) !important; }
+.page-header > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Section top accent stripe */
+.section, .faq-wrap, .terms-wrap, .policy-wrap, .contact-wrap {
+  position: relative;
+}
+
+/* Cards hover upgrade */
+.value-card:hover, .how-card:hover, .info-card:hover {
+  box-shadow: 0 12px 32px rgba(26,109,181,.13) !important;
+  transform: translateY(-4px) !important;
+  border-color: rgba(26,109,181,.2) !important;
+}
+
+/* Section backgrounds alternation */
+.values-section {
+  background: linear-gradient(180deg, #F0F5FC 0%, #E8F4EA 100%) !important;
+  position: relative;
+}
+.values-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--blue), var(--orange), var(--green));
+}
+
+/* How-it-works upgrade */
+.how-grid .how-num, .how-card .how-num {
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark)) !important;
+  border-radius: 50% !important;
+  width: 44px !important; height: 44px !important;
+  box-shadow: 0 4px 12px rgba(26,109,181,.3) !important;
+}
+
+/* CTA banners */
+.cta-banner {
+  background: linear-gradient(135deg, #1E8449 0%, #27AE60 60%, #52D68A 100%) !important;
+  position: relative;
+  overflow: hidden;
+}
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 100% at 80% 50%, rgba(240,120,0,.3) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 80% at 20% 50%, rgba(46,139,58,.2) 0%, transparent 70%);
+}
+.cta-banner > * { position: relative; z-index: 1; }
+.cta-banner h2 { color: #fff !important; }
+.cta-banner p { color: rgba(255,255,255,.85) !important; }
+
+/* Form inputs focus */
+.field input:focus, .field textarea:focus, .field select:focus {
+  border-color: var(--blue) !important;
+  box-shadow: 0 0 0 3px rgba(26,109,181,.1) !important;
+}
+
+/* Buttons */
+.btn-send, .btn-contact, .btn-confirm-donate, .btn-donate {
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark)) !important;
+  box-shadow: 0 4px 14px rgba(26,109,181,.3) !important;
+}
+.btn-send:hover, .btn-contact:hover, .btn-confirm-donate:hover, .btn-donate:hover {
+  background: linear-gradient(135deg, var(--blue-dark), #092C52) !important;
+  transform: translateY(-1px) !important;
+}
+.btn-banner {
+  background: var(--white) !important;
+  color: var(--blue-dark) !important;
+  border-color: var(--white) !important;
+  font-weight: 700 !important;
+}
+.btn-banner:hover {
+  background: transparent !important;
+  color: var(--white) !important;
+}
+
+/* FAQ accordion upgrade */
+.faq-item {
+  border-radius: 12px !important;
+  border: 1px solid var(--line) !important;
+  overflow: hidden !important;
+  margin-bottom: 10px !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,.04) !important;
+}
+.faq-item.open {
+  box-shadow: 0 6px 20px rgba(26,109,181,.1) !important;
+  border-color: rgba(26,109,181,.2) !important;
+}
+.faq-item.open .faq-icon {
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark)) !important;
+  border-color: var(--blue) !important;
+}
+
+/* Info cards */
+.info-icon.blue { background: linear-gradient(135deg, var(--blue-light), #C8DFF4) !important; }
+.info-icon.orange { background: linear-gradient(135deg, var(--orange-light), #FDDDB8) !important; }
+.info-icon.green { background: linear-gradient(135deg, var(--green-light), #C0E8C8) !important; }
+
+/* Mission visual box */
+.mission-visual {
+  background: linear-gradient(135deg, #1E8449 0%, #27AE60 60%, #52D68A 100%) !important;
+}
+
+/* Blog/events section cards */
+.blog-card, .event-card, .event-item {
+  border-radius: 16px !important;
+}
+.blog-card:hover, .event-card:hover {
+  box-shadow: 0 12px 32px rgba(26,109,181,.13) !important;
+  transform: translateY(-4px) !important;
+}
+
+/* Progress bars */
+.cc-bar {
+  background: linear-gradient(90deg, var(--blue), var(--orange)) !important;
+}
+.prog-bar {
+  background: linear-gradient(90deg, var(--green-dark), var(--green)) !important;
+}
+
+/* last-updated badge */
+.last-updated {
+  background: var(--blue-light) !important;
+  color: var(--blue-dark) !important;
+}
+
+/* Contact form card */
+.form-card {
+  box-shadow: 0 8px 32px rgba(26,109,181,.1) !important;
+  border-color: rgba(26,109,181,.12) !important;
+}
+
+/* Terms/Policy content headings accent */
+.terms-content h2, .policy-content h2 {
+  border-left: 3px solid var(--orange);
+  padding-left: 12px;
+}
+
+
+/* Card radius overrides - prevent pill on containers */
+.article-card, .ac-img, .cc, .cc-img, .value-card, .how-card,
+.start-card, .plan-card, .event-card, .cause-card, .help-card,
+.faq-item, .mission-visual, .sidebar-card, .donate-card,
+.camp-summary, .guarantee-box, .cover-wrap, .feat-wrap,
+.modal, .form-card, .info-card, .partner-card, .solution-card,
+.nonprofit-card, .contact-card, .most-loved-card, .trending-card,
+.blog-card, .story-card, .update-item, .donor-item,
+.nav-search-box, .heroCatBox, #heroCatBox { border-radius: 16px !important; }
+.ac-img, .cc-img { border-radius: 16px 16px 0 0 !important; }
+.ac-body, .cc-body { border-radius: 0 0 16px 16px !important; }
+</style>
+<style id="mobile-global">
+@media (max-width: 768px) {
+  nav { height: 64px; padding: 0 4%; }
+  .logo-img { height: 52px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-actions { gap: 6px; }
+  .btn-signin { display: none; }
+  .btn-cta { padding: 9px 16px; font-size: .82rem; }
+  .nav-search-btn { padding: 8px 12px; font-size: .82rem; }
+  .nav-search-box { width: calc(100vw - 32px); right: -60px; }
+  .breadcrumb { font-size: .72rem; padding: 10px 4%; flex-wrap: wrap; gap: 4px; }
+  .hero { min-height: auto; padding: 32px 16px; }
+  .hero-card { padding: 28px 20px 32px; margin: 0; border-radius: 16px; }
+  .hero-card h1 { font-size: 1.55rem; margin-bottom: 20px; }
+  .hero-tag { font-size: .62rem; padding: 5px 14px; }
+  .campaign-wrap { grid-template-columns: 1fr !important; gap: 20px; padding: 16px 4% 60px; }
+  .camp-sidebar { position: static !important; margin-top: 0; }
+  .sidebar-card { border-radius: 16px; padding: 20px; }
+  .raised-amount { font-size: 1.6rem; }
+  .stats-row { gap: 8px; }
+  .stat-box { padding: 10px 12px; border-radius: 12px; }
+  .stat-box-val { font-size: .9rem; }
+  .btn-donate { padding: 14px; font-size: .92rem; }
+  .camp-title { font-size: 1.2rem; }
+  .cover-wrap { border-radius: 12px; margin-bottom: 18px; }
+  .tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tab { padding: 10px 14px; font-size: .8rem; white-space: nowrap; }
+  .camp-meta { flex-wrap: wrap; gap: 6px; }
+  .urgent-banner { font-size: .7rem; padding: 8px 4%; }
+  .page-header { padding: 36px 4% 32px; }
+  .page-title { font-size: 1.5rem; }
+  .filter-bar { top: 64px; padding: 12px 4%; gap: 8px; flex-wrap: wrap; }
+  .filter-search { min-width: 100%; order: -1; }
+  .filter-chips { width: 100%; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+  .chip { white-space: nowrap; }
+  .filter-sort { margin-left: 0; width: 100%; }
+  .campaigns-layout { flex-direction: column; }
+  .sidebar { display: none; }
+  .campaigns-main { padding: 20px 4%; }
+  .cgrid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .section { padding: 48px 4%; }
+  .sec-title { font-size: 1.3rem; }
+  .values-grid { grid-template-columns: 1fr; gap: 14px; }
+  .how-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .how-connector { display: none; }
+  .mission-grid { grid-template-columns: 1fr; gap: 32px; }
+  .rel-grid { grid-template-columns: 1fr; }
+  .page-wrap { grid-template-columns: 1fr !important; gap: 20px; padding: 20px 4% 60px; }
+  .donate-card { position: static; }
+  .donate-card-header { padding: 22px 20px 18px; }
+  .donate-card-body { padding: 20px; }
+  .amount-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .amt-btn { padding: 12px 6px; font-size: .9rem; }
+  .btn-lift { padding: 15px; font-size: .9rem; }
+  .modal-overlay { padding: 0; align-items: flex-end; }
+  .modal { padding: 24px 20px; margin: 0; border-radius: 16px 16px 0 0; max-width: 100%; width: 100%; }
+  .modal-title { font-size: 1rem; }
+  .share-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .footer-grid { grid-template-columns: 1fr !important; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 8px; font-size: .72rem; }
+  footer { padding: 40px 4% 24px; }
+  .about-hero { padding: 48px 4% 44px; }
+  .about-hero h1 { font-size: 1.7rem; }
+  .cta-banner { padding: 40px 4%; }
+  .cta-banner h2 { font-size: 1.3rem; }
+  .blog-layout { flex-direction: column; }
+  .blog-sidebar { display: none; }
+  .start-options { grid-template-columns: 1fr; }
+  .start-card { padding: 24px 20px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .help-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 400px) {
+  .cgrid { grid-template-columns: 1fr; }
+  .amount-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-card h1 { font-size: 1.35rem; }
+  .raised-amount { font-size: 1.4rem; }
+}
+@media (max-width: 768px) {
+  /* Footer Director/EIN row — stack vertically on mobile */
+  .footer-main > div[style*="justify-content:space-between"] { flex-direction: column !important; gap: 14px !important; align-items: flex-start !important; }
+  .footer-main > div[style*="justify-content:space-between"] > div { text-align: left !important; }
+}
+</style>
+<link rel="stylesheet" href="site.css?v=112">
+</head>
+<body>
+
+<style>
+nav .nav-links{order:1;display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0}.filter-bar{top:140px!important}
+nav .logo{order:2;justify-self:center;display:flex;align-items:center;}
+nav .logo-img{height:165px;width:auto;display:block;}
+nav .nav-actions{order:3;justify-self:end;display:flex;align-items:center;gap:12px;}
+nav .hamburger{order:4;}nav{background:transparent!important;box-shadow:none!important;border:none!important;position:relative!important;}
+@media(max-width:768px){nav{display:flex!important;justify-content:center!important;align-items:center!important;position:relative!important;}nav .nav-links{display:none!important}nav .hamburger{display:flex!important;position:absolute!important;right:16px!important;top:50%!important;transform:translateY(-50%)!important;}nav .nav-actions{display:none!important}nav .logo-img{height:155px!important}nav .logo{justify-content:center!important;}}
+/* Hero override — must come after site.css */
+.page-header{background:linear-gradient(135deg,#1E8449 0%,#27AE60 60%,#2ECC71 100%)!important}
+.page-header h1,.page-title{color:#ffffff!important}
+.page-header .page-tag,.page-tag{color:rgba(255,255,255,.75)!important}
+.page-header .page-desc{color:rgba(255,255,255,.82)!important}
+</style><nav style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 5%;border-bottom:none;background:transparent;z-index:999;">
+  <ul class="nav-links">
+    <li class="nav-item">
+      <button class="nav-trigger">How to help <span class="nc">▾</span></button>
+      <div class="dropdown">
+        <a href="campaigns.html">Campaigns</a>
+        <a href="causes.html">Causes</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-trigger">Discover <span class="nc">▾</span></button>
+      <div class="dropdown">
+        <a href="most-loved.html">Most Loved</a>
+        <a href="events.html">Good Green Foundation Events</a>
+        <a href="blog.html">Blog</a>
+      </div>
+    </li>
+  </ul>
+
+  <a class="logo" href="index.html">
+    <img class="logo-img" src="logo-ggf.png" alt="Good Green Foundation" style="height:165px;width:auto;" />
+  </a>
+
+  <div class="nav-actions">
+    
+    
+    <button class="btn-cta" onclick="location.href='start-yourself.html'">Start a Campaign</button>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-header">
+  <div class="page-tag">Legal</div>
+  <h1 class="page-title">Terms of Use</h1>
+  <p class="page-desc">Please read these terms carefully before using Good Green Foundation. By accessing our platform, you agree to be bound by these terms.</p>
+</div>
+
+<div class="terms-outer"><div class="terms-wrap">
+  <div class="last-updated"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Last updated: March 20, 2026</div>
+
+  <div class="terms-content">
+
+    <h2 id="acceptance">1. Acceptance of Terms</h2>
+    <p>These Terms of Use ("Terms") govern your access to and use of the Good Green Foundation platform ("Platform"), operated at goodgreenfoundation.org. By visiting the Platform, creating an account, launching a campaign, or making a donation, you acknowledge that you have read, understood, and agreed to be bound by these Terms in their entirety. If you are unwilling to accept these Terms, please discontinue use of the Platform immediately.</p>
+    <hr class="section-divider">
+
+    <h2 id="eligibility">2. Eligibility</h2>
+    <p>Using the Platform to create an account, start a campaign, or contribute to one requires that you be at least 18 years of age. Minors between the ages of 13 and 17 may browse public content with a parent or legal guardian present and actively supervising. By proceeding with any account-based activity, you confirm that you satisfy this age requirement and that you are legally permitted to enter into a binding agreement.</p>
+    <hr class="section-divider">
+
+    <h2 id="accounts">3. User Accounts</h2>
+    <p>Certain platform features — including starting a campaign and tracking your donation history — require a registered account. When you create one, you take on the following responsibilities:</p>
+    <ul>
+      <li>Supply truthful, current, and complete information at registration and keep it updated</li>
+      <li>Keep your login credentials confidential and accept full responsibility for all activity performed under your account</li>
+      <li>Contact us promptly if you discover or suspect any unauthorized access to your account</li>
+      <li>Refrain from transferring, selling, or sharing your account with anyone else</li>
+    </ul>
+    <p>We reserve the right to suspend or permanently close any account that breaches these Terms, engages in deceptive behavior, or harms the integrity of our community.</p>
+    <hr class="section-divider">
+
+    <h2 id="campaigns">4. Campaign Rules</h2>
+    <p>Good Green Foundation is built on transparency and genuine impact. Every campaign on our platform must uphold those values. By publishing a campaign, you confirm that:</p>
+    <ul>
+      <li>Every fact stated in your campaign — goals, background, beneficiaries — is accurate and not designed to mislead supporters</li>
+      <li>You hold all necessary legal rights to solicit funds for the described purpose</li>
+      <li>Every dollar raised will go toward the cause you have publicly committed to</li>
+      <li>You will keep donors informed with meaningful progress updates throughout the campaign</li>
+      <li>Your campaign complies fully with federal, state, and local laws</li>
+    </ul>
+    <p><strong>Campaigns we will remove</strong> include those that promote illegal conduct, incite hatred or violence against any group, misrepresent the identity of beneficiaries, or serve primarily as a vehicle for personal enrichment under false pretenses. We act on violations promptly and without prior notice.</p>
+    <hr class="section-divider">
+
+    <h2 id="donations">5. Donations</h2>
+    <p>Contributions made through Good Green Foundation are direct voluntary gifts to campaign organizers. Before you give, please understand the following:</p>
+    <ul>
+      <li>Contributions are ordinarily final and non-refundable once your payment is confirmed</li>
+      <li>Good Green Foundation facilitates transactions but does not control how organizers deploy the funds they receive</li>
+      <li>Reaching a stated fundraising target is never guaranteed</li>
+      <li>Donations carry tax-deductible status only when the receiving campaign is operated by a qualified nonprofit organization — always verify this before giving</li>
+    </ul>
+    <p>When we confirm that fraud has occurred, we may authorize refunds at our discretion. Report suspected fraud right away through our <a href="contact.html">contact page</a> so we can act quickly.</p>
+    <hr class="section-divider">
+
+    <h2 id="prohibited">6. Prohibited Conduct</h2>
+    <p>To keep Good Green Foundation a safe and trustworthy space for donors, organizers, and the communities they serve, the following behaviors are strictly off-limits:</p>
+    <ul>
+      <li>Posting false, exaggerated, or deceptive campaign information</li>
+      <li>Intimidating, harassing, or threatening other users in any form</li>
+      <li>Submitting content that is defamatory, pornographic, or infringes on third-party intellectual property</li>
+      <li>Deploying automated scripts, bots, or crawlers to extract data or manipulate platform features</li>
+      <li>Attempting to probe, bypass, or exploit security measures protecting the Platform</li>
+      <li>Taking any action that degrades the performance or availability of the Platform for others</li>
+    </ul>
+    <hr class="section-divider">
+
+    <h2 id="intellectual">7. Intellectual Property</h2>
+    <p>The Good Green Foundation name, logo, visual identity, written content, and underlying software are owned by Good Green Foundation and protected under U.S. and international intellectual property law. Copying, redistributing, or creating derivative works from any of these assets without our explicit written consent is prohibited.</p>
+    <p>When you post content to the Platform — such as a campaign story, images, or updates — you retain ownership but grant Good Green Foundation a worldwide, royalty-free, non-exclusive license to display, share, and promote that content in ways that support the Platform and its fundraising mission.</p>
+    <hr class="section-divider">
+
+    <h2 id="liability">8. Limitation of Liability</h2>
+    <p>To the maximum extent allowed by law, Good Green Foundation will not be held liable for indirect, incidental, punitive, or consequential losses — including lost donations, data loss, or reputational harm — arising from your use of, or inability to use, the Platform.</p>
+    <p>Good Green Foundation operates as a technology intermediary that connects donors with causes. We make no guarantees about the conduct or representations of individual campaign organizers, and we are not a party to the relationship between donors and the people they support.</p>
+    <hr class="section-divider">
+
+    <h2 id="termination">9. Termination</h2>
+    <p>We may limit, suspend, or permanently revoke your access to the Platform at any time if we determine that you have violated these Terms, engaged in conduct that harms other users or the broader community, or acted in a way inconsistent with our community standards and values. Termination takes effect immediately and extinguishes all licenses granted to you under these Terms.</p>
+    <hr class="section-divider">
+
+    <h2 id="governing">10. Governing Law</h2>
+    <p>These Terms are governed by the laws of the United States, without regard to conflict-of-law principles. Any legal action or proceeding arising from these Terms or your use of the Platform will be resolved exclusively in courts of competent jurisdiction within the United States, and you consent to personal jurisdiction in those courts.</p>
+    <hr class="section-divider">
+
+    <h2 id="changes">11. Changes to These Terms</h2>
+    <p>We may revise these Terms to reflect platform improvements, new features, or changes in law. When we do, we will update the "Last Updated" date and — for significant changes — notify registered users by email. Your continued use of the Platform following any revision signals your acceptance of the updated Terms. We encourage you to review this page from time to time.</p>
+    <hr class="section-divider">
+
+    <h2 id="contact">12. Contact Us</h2>
+    <p>If something in these Terms is unclear, or if you have concerns about how they apply to your situation, we want to hear from you:</p>
+    <ul>
+      <li>Email: <a href="mailto:contact@goodgreenfoundation.com">contact@goodgreenfoundation.com</a></li>
+      <li>Contact form: <a href="contact.html">Contact Us page</a></li>
+    </ul>
+
+  </div>
+</div></div>
+
+<style id='footer-fix'>
+.footer-col a{color:rgba(255,255,255,.8)!important}
+.footer-col a::before{background:rgba(255,255,255,.3)!important}
+.footer-col a:hover{color:#fff!important}
+.footer-col h4{color:rgba(255,255,255,.45)!important}
+.footer-bottom{color:rgba(255,255,255,.45)!important;border-top:1px solid rgba(255,255,255,.1)!important}
+.footer-bottom-links a{color:rgba(255,255,255,.45)!important}
+.footer-bottom-links a:hover{color:#fff!important}
+.footer-brand p{color:rgba(255,255,255,.6)!important}
+.footer-social{display:flex!important;gap:10px!important;margin-top:14px!important}
+.soc-btn{display:none!important}
+</style><footer style="background:#0A2B18;color:rgba(255,255,255,0.75);">
+  <div class="footer-cta-strip">
+    <div>
+      <h3>Ready to make a difference?</h3>
+      <p>Launch your campaign in minutes — no fees, full transparency.</p>
+    </div>
+    <a href="start-yourself.html" class="footer-cta-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Start a Campaign
+    </a>
+  </div>
+  <div class="footer-main">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo-text-footer.png" alt="Good Green Foundation" style="width:200px;height:auto;display:block;margin-bottom:16px;">
+        <p class="footer-brand-desc">Connecting people and causes that transform communities across America. Transparent, secure, and making real impact since 2026.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/goodgreenfoundation/" class="soc-btn" title="Instagram">
+            <img src="social-instagram.png" alt="Instagram">
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="campaigns.html">Explore Campaigns</a></li>
+          <li><a href="index.html#start">Start a Campaign</a></li>
+          <li><a href="most-loved.html">Most Loved</a></li>
+          <li><a href="causes.html">All Causes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="help-center.html">Help Center</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-of-use.html">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 ALL GOOD GREEN TAG FOUNDATION</span>
+        <div class="footer-bottom-links">
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="terms-of-use.html">Terms</a>
+        <a href="contact.html">Contact</a>
+        </div>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+document.querySelectorAll('.nav-item').forEach(item => {
+  const trigger = item.querySelector('.nav-trigger');
+  if (!trigger) return;
+  trigger.addEventListener('click', e => {
+    e.stopPropagation();
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('open'));
+    if (document.getElementById('navSearchBox')) document.getElementById('navSearchBox').classList.remove('open');
+    if (!isOpen) item.classList.add('open');
+  });
+});
+document.addEventListener('click', () => {
+  document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('open'));
+  if (document.getElementById('navSearchBox')) document.getElementById('navSearchBox').classList.remove('open');
+});
+const _nsBtn = document.getElementById('navSearchBtn');
+const _nsBox = document.getElementById('navSearchBox');
+if (_nsBtn && _nsBox) {
+  _nsBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('open'));
+    _nsBox.classList.toggle('open');
+  });
+  document.querySelectorAll('.nav-search-cat').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.nav-search-cat').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+  document.getElementById('navSearchGo').addEventListener('click', () => {
+    const cat = document.querySelector('.nav-search-cat.active')?.dataset.cat || 'all';
+    window.location.href = 'campaigns.html' + (cat !== 'all' ? '?cat=' + cat : '');
+  });
+}
+const _hbg = document.getElementById('hamburger');
+if (_hbg) {
+  _hbg.addEventListener('click', () => {
+    const links = document.querySelector('.nav-links');
+    const open = links.style.display === 'flex';
+    links.style.cssText = open ? '' : 'display:flex;flex-direction:column;position:absolute;top:80px;left:0;width:100%;background:#fff;padding:12px 5%;gap:2px;box-shadow:0 8px 24px rgba(0,0,0,.08);z-index:998;border-top:1px solid #E2E8F0';
+  });
+}
+</script>
+
+<script src="sidebar.js"></script>
+<script src="ggf-tracker.js"></script>
+</body>
+</html>

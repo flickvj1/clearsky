@@ -1,0 +1,492 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Good Green Foundation Guarantee — Your Donation, Protected</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#27AE60;--blue-dark:#1E8449;--blue-light:#EAFAF1;
+  --orange:#2ECC71;--orange-dark:#27AE60;--orange-light:#D5F5E3;
+  --green:#27AE60;--green-dark:#1E8449;--green-light:#EAFAF1;
+  --ink:#0D1117;--ink2:#1C2333;--ink3:#2D3748;--slate:#4A5568;
+  --muted:#718096;--subtle:#A0AEC0;--line:#E2E8F0;--surface:#F7F8FA;--white:#FFFFFF;
+  --font-head:'Plus Jakarta Sans',sans-serif;--font-body:'Plus Jakarta Sans',sans-serif;
+  --r-xs:6px;--r-sm:100px;--r:100px;--r-lg:100px;--r-xl:100px;
+  --s-xs:0 1px 2px rgba(0,0,0,.05);
+  --s-sm:0 1px 3px rgba(0,0,0,.06),0 2px 8px rgba(0,0,0,.04);
+  --s-md:0 4px 12px rgba(0,0,0,.08),0 8px 28px rgba(0,0,0,.06);
+  --s-lg:0 8px 24px rgba(0,0,0,.10),0 20px 48px rgba(0,0,0,.08);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--surface);color:var(--ink);overflow-x:hidden;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+nav{background:var(--white);border-bottom:1px solid var(--line);height:80px;padding:0 4%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;position:sticky;top:0;z-index:999;box-shadow:0 1px 0 var(--line),0 2px 12px rgba(0,0,0,.04)}
+.logo{display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none}
+.logo-img{height:72px;width:auto;object-fit:contain;display:block}
+.logo-mobile{display:none}
+.logo-desktop{display:block}
+@media(max-width:900px){.logo-desktop{display:none}.logo-mobile{display:block;height:44px;width:auto}.logo{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important}}
+.nav-links{display:flex;align-items:center;gap:0;list-style:none}
+.nav-item{position:relative}
+.nav-trigger{display:flex;align-items:center;gap:6px;color:var(--slate);font-family:var(--font-body);font-weight:700;font-size:1rem;letter-spacing:.01em;padding:8px 12px;border-radius:0;cursor:pointer;background:none;border:none;height:80px;transition:color .15s;white-space:nowrap;border-bottom:2.5px solid transparent}
+.nav-trigger:hover{color:var(--ink);border-bottom-color:var(--line)}
+.nav-item.open .nav-trigger{color:var(--blue);border-bottom-color:var(--blue)}
+.nc{width:16px;height:16px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;font-size:.48rem;color:var(--muted);transition:transform .2s,background .15s;flex-shrink:0}
+.nav-item.open .nc{transform:rotate(180deg);background:var(--blue-light);border-color:var(--blue);color:var(--blue)}
+.dropdown{position:absolute;top:100%;left:0;background:var(--white);border-radius:0 0 12px 12px;box-shadow:0 8px 24px rgba(0,0,0,.10),0 2px 6px rgba(0,0,0,.05);border:1px solid var(--line);border-top:3px solid var(--blue);min-width:230px;padding:8px;opacity:0;visibility:hidden;transform:translateY(-2px);transition:opacity .15s,transform .15s,visibility .15s;z-index:1000}
+.nav-item.open .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.dropdown a{display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:8px;color:var(--slate);font-weight:500;font-size:.92rem;transition:background .12s,color .12s}
+.dropdown a:before{content:'';width:6px;height:6px;border-radius:50%;background:var(--line);flex-shrink:0;transition:background .12s}
+.dropdown a:hover{background:var(--surface);color:var(--ink)}
+.dropdown a:hover:before{background:var(--blue)}
+.dropdown a.active{background:var(--blue-light);color:var(--blue-dark);font-weight:600}
+.dropdown a.active:before{background:var(--blue)}
+.nav-actions{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.nav-search-wrap{position:relative;display:flex;align-items:center}
+.nav-search-btn{display:flex;align-items:center;gap:7px;padding:9px 16px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--white);font-family:var(--font-body);font-size:.92rem;font-weight:600;color:var(--slate);cursor:pointer;transition:all .15s;white-space:nowrap;height:42px}
+.nav-search-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+.nav-search-btn svg{flex-shrink:0}
+.nav-search-box{position:absolute;right:0;top:calc(100% + 10px);background:var(--white);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.06);border:1px solid var(--line);padding:20px;width:310px;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .18s,transform .18s,visibility .18s;z-index:1000}
+.nav-search-box.open{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-search-label{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.nav-search-label:after{content:'';flex:1;height:1px;background:var(--line)}
+.nav-search-cats{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.nav-search-cat{padding:6px 13px;border-radius:16px;font-size:.78rem;font-weight:600;border:1.5px solid var(--line);background:var(--white);color:var(--slate);cursor:pointer;transition:all .12s;font-family:var(--font-body)}
+.nav-search-cat:hover{border-color:var(--blue);color:var(--blue-dark);background:var(--blue-light)}
+.nav-search-cat.active{border-color:var(--blue);background:var(--blue);color:var(--white);box-shadow:0 2px 6px rgba(43,127,212,.25)}
+.nav-search-go{width:100%;padding:11px;border-radius:var(--r-sm);border:none;background:var(--blue);color:var(--white);font-family:var(--font-body);font-size:.88rem;font-weight:700;cursor:pointer;transition:background .15s;box-shadow:0 2px 6px rgba(43,127,212,.25)}
+.nav-search-go:hover{background:var(--blue-dark)}
+.btn-signin{padding:9px 18px;border-radius:100px;font-weight:600;font-size:.92rem;cursor:pointer;border:1.5px solid var(--line);background:var(--white);color:var(--slate);font-family:var(--font-body);transition:all .15s;white-space:nowrap;height:42px}
+.btn-signin:hover{border-color:var(--ink3);color:var(--ink);background:var(--surface)}
+.btn-cta{padding:11px 26px;border-radius:100px;font-weight:700;font-size:.95rem;letter-spacing:.02em;cursor:pointer;border:none;background:var(--orange);color:var(--white);font-family:var(--font-body);transition:background .15s,box-shadow .15s,transform .1s;white-space:nowrap;box-shadow:0 2px 8px rgba(232,114,10,.35)}
+.btn-cta:hover{background:var(--orange-dark);box-shadow:0 4px 16px rgba(232,114,10,.42);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px;border:none;background:none;position:absolute;right:4%}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink3);border-radius:2px}
+
+/* PAGE HEADER */
+.page-header{background:linear-gradient(135deg,#1E8449 0%,#27AE60 60%,#52D68A 100%);padding:72px 5% 64px;text-align:center;position:relative;overflow:hidden}
+.page-header::before{content:'';position:absolute;top:-60px;right:-60px;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,.06);pointer-events:none}
+.page-header::after{content:'';position:absolute;bottom:-80px;left:-80px;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none}
+.page-header>*{position:relative;z-index:1}
+.page-tag{font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:10px}
+.page-title{font-family:var(--font-head);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:#fff;line-height:1.2;letter-spacing:-.025em;margin-bottom:12px}
+.page-desc{font-size:1rem;color:rgba(255,255,255,.85);line-height:1.75;max-width:540px;margin:0 auto}
+
+/* LAYOUT */
+.policy-wrap{max-width:820px;margin:0 auto;padding:60px 5% 80px}
+.policy-content{min-width:0;overflow-wrap:break-word;word-break:break-word}
+
+/* CONTENT */
+.policy-content h2{font-family:var(--font-head);font-size:1.15rem;font-weight:800;color:var(--ink);margin:40px 0 14px;padding-top:8px;letter-spacing:-.015em;border-left:3px solid var(--orange);padding-left:12px}
+.policy-content h2:first-child{margin-top:0}
+.policy-content p{font-size:.9rem;color:var(--slate);line-height:1.85;margin-bottom:14px}
+.policy-content ul{margin:10px 0 16px 20px}
+.policy-content li{font-size:.9rem;color:var(--slate);line-height:1.8;margin-bottom:6px}
+.policy-content a{color:var(--blue);font-weight:600}
+.policy-content a:hover{color:var(--blue-dark)}
+.policy-content strong{color:var(--ink);font-weight:700}
+.section-divider{border:none;border-top:1px solid var(--line);margin:36px 0}
+.last-updated{display:inline-flex;align-items:center;gap:8px;background:var(--blue-light)!important;color:var(--blue-dark)!important;font-size:.78rem;font-weight:600;padding:6px 14px;border-radius:100px;margin-bottom:28px}
+
+/* GUARANTEE HERO CARD */
+.guarantee-hero{background:linear-gradient(135deg,#1E8449 0%,#27AE60 60%,#52D68A 100%);border-radius:16px;padding:40px 36px;margin-bottom:40px;display:flex;align-items:center;gap:28px;position:relative;overflow:hidden}
+.guarantee-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.07);pointer-events:none}
+.guarantee-hero>*{position:relative;z-index:1}
+.guarantee-hero-icon{width:72px;height:72px;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.guarantee-hero-icon svg{width:36px;height:36px;color:#fff}
+.guarantee-hero-text h2{font-family:var(--font-head);font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:8px;letter-spacing:-.02em}
+.guarantee-hero-text p{font-size:.88rem;color:rgba(255,255,255,.8);line-height:1.75;margin:0}
+@media(max-width:600px){.guarantee-hero{flex-direction:column;text-align:center;padding:28px 20px}.guarantee-hero-icon{margin:0 auto}}
+
+/* PILLARS GRID */
+.pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0 36px}
+@media(max-width:700px){.pillars-grid{grid-template-columns:1fr}}
+.pillar-card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:24px 20px;transition:box-shadow .2s,transform .2s,border-color .2s}
+.pillar-card:hover{box-shadow:0 12px 32px rgba(39,174,96,.13);transform:translateY(-4px);border-color:rgba(39,174,96,.2)}
+.pillar-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.pillar-icon.blue{background:linear-gradient(135deg,var(--blue-light),#C8DFF4)}
+.pillar-icon.orange{background:linear-gradient(135deg,var(--orange-light),#FDDDB8)}
+.pillar-icon.green{background:linear-gradient(135deg,var(--green-light),#C0E8C8)}
+.pillar-icon svg{width:22px;height:22px}
+.pillar-card h3{font-family:var(--font-head);font-size:.95rem;font-weight:800;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em}
+.pillar-card p{font-size:.82rem;color:var(--slate);line-height:1.75;margin:0}
+
+/* ALERT BOX */
+.alert-box{display:flex;gap:14px;align-items:flex-start;background:var(--green-light);border:1px solid rgba(46,139,58,.25);border-radius:12px;padding:18px 20px;margin:20px 0}
+.alert-box svg{flex-shrink:0;color:var(--green-dark);margin-top:1px}
+.alert-box p{font-size:.85rem;color:var(--green-dark);line-height:1.75;margin:0;font-weight:500}
+
+/* STEPS */
+.steps-list{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:14px}
+.steps-list li{display:flex;gap:14px;align-items:flex-start}
+.step-num{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;font-size:.72rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 10px rgba(39,174,96,.3);margin-top:1px}
+.step-text{font-size:.9rem;color:var(--slate);line-height:1.8}
+.step-text strong{color:var(--ink)}
+
+/* FOOTER */
+footer{background:var(--ink);color:var(--subtle);padding:60px 5% 28px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand p{font-size:.83rem;line-height:1.75;color:#718096}
+.footer-col h4{font-size:.7rem;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:16px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{color:#718096;font-size:.83rem;transition:color .15s}
+.footer-col a:hover{color:#CBD5E0}
+.footer-bottom{border-top:1px solid #1C2333;padding-top:22px;display:flex;justify-content:space-between;font-size:.78rem;color:#4A5568;flex-wrap:wrap;gap:6px}
+.footer-social{display:flex;gap:8px;margin-top:18px}
+.soc-btn{width:64px;height:64px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;text-decoration:none;flex-shrink:0}.soc-btn img{width:32px;height:32px;object-fit:contain;filter:brightness(0) invert(1);display:block}.soc-btn:hover{background:#2ECC71;border-color:#2ECC71}
+
+@media(max-width:760px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.footer-grid{grid-template-columns:1fr}}
+@media(max-width:768px){nav{height:64px;padding:0 4%;display:flex;justify-content:center;align-items:center}.logo-img{height:52px}.nav-links{display:none}.hamburger{display:flex}.nav-actions{display:none}.btn-signin{display:none}.page-header{padding:36px 4% 32px}.page-title{font-size:1.5rem}.policy-wrap{padding:32px 4% 60px}.footer-grid{grid-template-columns:1fr!important;gap:28px}.footer-bottom{flex-direction:column;gap:8px;font-size:.72rem}footer{padding:40px 4% 24px}}
+@media(max-width:400px){.pillars-grid{grid-template-columns:1fr}}
+
+@media (max-width: 768px) {
+  /* Footer Director/EIN row — stack vertically on mobile */
+  .footer-main > div[style*="justify-content:space-between"] { flex-direction: column !important; gap: 14px !important; align-items: flex-start !important; }
+  .footer-main > div[style*="justify-content:space-between"] > div { text-align: left !important; }
+}
+</style>
+<link rel="stylesheet" href="site.css?v=112">
+</head>
+<body>
+
+<style>
+nav .nav-links{order:1;display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0}.filter-bar{top:140px!important}
+nav .logo{order:2;justify-self:center;display:flex;align-items:center;}
+nav .logo-img{height:165px;width:auto;display:block;}
+nav .nav-actions{order:3;justify-self:end;display:flex;align-items:center;gap:12px;}
+nav .hamburger{order:4;}nav{background:transparent!important;box-shadow:none!important;border:none!important;position:relative!important;}
+@media(max-width:768px){nav{display:flex!important;justify-content:center!important;align-items:center!important;position:relative!important;}nav .nav-links{display:none!important}nav .hamburger{display:flex!important;position:absolute!important;right:16px!important;top:50%!important;transform:translateY(-50%)!important;}nav .nav-actions{display:none!important}nav .logo-img{height:155px!important}nav .logo{justify-content:center!important;}}
+</style><nav style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 5%;border-bottom:none;background:transparent;z-index:999;">
+  <ul class="nav-links">
+    <li class="nav-item">
+      <button class="nav-trigger">How to help <span class="nc">▾</span></button>
+      <div class="dropdown">
+        <a href="campaigns.html">Campaigns</a>
+        <a href="causes.html">Causes</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-trigger">Discover <span class="nc">▾</span></button>
+      <div class="dropdown">
+        <a href="most-loved.html">Most Loved</a>
+        <a href="events.html">Good Green Foundation Events</a>
+        <a href="blog.html">Blog</a>
+      </div>
+    </li>
+  </ul>
+
+  <a class="logo" href="index.html">
+    <img class="logo-img" src="logo-ggf.png" alt="Good Green Foundation" style="height:165px;width:auto;" />
+  </a>
+
+  <div class="nav-actions">
+    
+    
+    <button class="btn-cta" onclick="location.href='start-yourself.html'">Start a Campaign</button>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<style>
+/* Override site.css — green hero */
+.page-header{background:linear-gradient(135deg,#1E8449 0%,#27AE60 60%,#52D68A 100%)!important;border-bottom:none!important;padding:72px 5% 64px!important}
+.page-header::before{content:''!important;width:320px!important;height:320px!important;top:-60px!important;left:auto!important;right:-60px!important;bottom:auto!important;border-radius:50%!important;background:rgba(255,255,255,.06)!important}
+.page-title{color:#fff!important}
+.page-desc{color:rgba(255,255,255,.85)!important}
+.page-tag{color:rgba(255,255,255,.75)!important}
+.guarantee-hero{background:linear-gradient(135deg,#1E8449 0%,#27AE60 60%,#52D68A 100%)!important}
+.policy-content h2{border-left-color:var(--blue)!important}
+</style>
+<div class="page-header">
+  <div class="page-tag">Trust &amp; Safety</div>
+  <h1 class="page-title">Good Green Foundation Guarantee</h1>
+  <p class="page-desc">Every donation made on our platform is protected. We stand behind every campaign with our commitment to transparency, security, and accountability.</p>
+</div>
+
+<div class="policy-wrap">
+  <div class="policy-content">
+
+    <div class="last-updated">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Effective: January 1, 2025
+    </div>
+
+    <!-- HERO CARD -->
+    <div class="guarantee-hero">
+      <div class="guarantee-hero-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      </div>
+      <div class="guarantee-hero-text">
+        <h2>Your donation is protected by the Good Green Foundation Guarantee</h2>
+        <p>We are committed to ensuring that every dollar donated reaches its intended cause. If a campaign is found to be fraudulent or in violation of our policies, we will work to make it right — including issuing refunds when applicable.</p>
+      </div>
+    </div>
+
+    <!-- THREE PILLARS -->
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#27AE60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h3>Secure Payments</h3>
+        <p>All transactions are processed with bank-grade SSL encryption. We never store your full card details.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon orange">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2ECC71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <h3>Campaign Verification</h3>
+        <p>Our team reviews campaigns for authenticity. Suspicious activity is flagged, investigated, and removed.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#27AE60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Donor Support</h3>
+        <p>Questions about a donation? Our support team is here to help you every step of the way.</p>
+      </div>
+    </div>
+
+    <h2 id="what-it-covers">1. What the Guarantee Covers</h2>
+    <p>The Good Green Foundation Guarantee applies to all donations made through our platform. It is our promise that:</p>
+    <ul>
+      <li>Your payment information is handled securely and never sold to third parties</li>
+      <li>Campaigns are monitored for fraud, misrepresentation, and policy violations</li>
+      <li>Funds are disbursed only to verified organizers who have agreed to our Terms of Use</li>
+      <li>You will receive a donation receipt for tax purposes when applicable</li>
+      <li>Our team is available to investigate and resolve any concerns you raise about a campaign</li>
+    </ul>
+    <div class="alert-box">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <p>Every campaign organizer agrees to our Terms of Use before launching. Violations are taken seriously and result in immediate campaign suspension pending investigation.</p>
+    </div>
+    <hr class="section-divider">
+
+    <h2 id="donor-protection">2. Donor Protection</h2>
+    <p>As a donor, you are protected in the following ways:</p>
+    <ul>
+      <li><strong>Fraud protection:</strong> If a campaign is confirmed as fraudulent after you donate, you are eligible for a full refund of your donation</li>
+      <li><strong>Anonymous giving:</strong> You may choose to donate anonymously — your name will not be shared publicly or with the campaign organizer</li>
+      <li><strong>Receipts &amp; records:</strong> You will always receive a confirmation email with your donation details for your records</li>
+      <li><strong>No hidden fees:</strong> The donation amount shown is what gets directed to the campaign. Any applicable platform fees are disclosed before checkout</li>
+      <li><strong>Dispute resolution:</strong> If you believe a campaign misrepresented itself, you can submit a report and our team will investigate within 5 business days</li>
+    </ul>
+    <hr class="section-divider">
+
+    <h2 id="campaign-standards">3. Campaign Standards</h2>
+    <p>All campaigns on Good Green Foundation must meet our standards before and after launch:</p>
+    <ul>
+      <li>Organizers must provide accurate, truthful information about themselves and their cause</li>
+      <li>Campaign funds must be used for the stated purpose</li>
+      <li>Organizers must provide updates to donors on the progress of their campaign</li>
+      <li>Campaigns promoting hate, violence, illegal activity, or deceptive practices are strictly prohibited</li>
+    </ul>
+    <p>Our trust and safety team continuously monitors campaigns for compliance. Campaigns that fall short of these standards are suspended, and donors are notified when a campaign they supported is affected.</p>
+    <hr class="section-divider">
+
+    <h2 id="secure-payments">4. Secure Payment Processing</h2>
+    <p>We take payment security seriously. All transactions on Good Green Foundation are protected by:</p>
+    <ul>
+      <li><strong>TLS/SSL encryption:</strong> All data transmitted between your device and our servers is encrypted</li>
+      <li><strong>PCI-DSS compliance:</strong> Our payment processors are certified to the highest security standards in the industry</li>
+      <li><strong>No stored card data:</strong> We do not store your full credit or debit card numbers on our servers</li>
+      <li><strong>Fraud detection:</strong> Automated systems monitor for unusual transaction patterns and flag suspicious activity in real time</li>
+    </ul>
+    <hr class="section-divider">
+
+    <h2 id="refunds">5. Refund Policy</h2>
+    <p>We understand that circumstances change. Our refund policy is designed to be fair for both donors and campaign organizers.</p>
+    <p><strong>You may be eligible for a refund if:</strong></p>
+    <ul>
+      <li>A campaign is found to be fraudulent or in violation of our policies</li>
+      <li>A campaign is cancelled by the organizer before funds are disbursed</li>
+      <li>You made a donation in error (request must be submitted within 24 hours)</li>
+    </ul>
+    <p><strong>Refunds are generally not available if:</strong></p>
+    <ul>
+      <li>Funds have already been disbursed to the organizer and used for the stated purpose</li>
+      <li>The campaign did not reach its goal but funds were disbursed (keep-what-you-raise campaigns)</li>
+      <li>More than 30 days have passed since the donation was made</li>
+    </ul>
+    <p>To request a refund, contact us via <a href="contact.html">our contact page</a> and include your donation confirmation number.</p>
+    <hr class="section-divider">
+
+    <h2 id="how-to-report">6. How to Report a Concern</h2>
+    <p>If you come across a campaign that you believe is fraudulent, misleading, or in violation of our policies, please report it immediately. Here's how:</p>
+    <ul class="steps-list" style="list-style:none;margin-left:0">
+      <li>
+        <span class="step-num">1</span>
+        <span class="step-text"><strong>Use the "Report" button</strong> found on every campaign page. This sends an immediate alert to our trust and safety team.</span>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <span class="step-text"><strong>Provide details.</strong> The more context you share — screenshots, links, specific claims — the faster we can investigate.</span>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <span class="step-text"><strong>We'll follow up within 5 business days.</strong> All reports are confidential. You'll receive an update on the outcome when the investigation is complete.</span>
+      </li>
+    </ul>
+    <hr class="section-divider">
+
+    <h2 id="organizer-accountability">7. Organizer Accountability</h2>
+    <p>Campaign organizers on Good Green Foundation agree to a strict code of conduct. By creating a campaign, organizers commit to:</p>
+    <ul>
+      <li>Using donated funds exclusively for the purpose stated in their campaign</li>
+      <li>Providing regular updates to donors on how funds are being used</li>
+      <li>Responding to inquiries from donors and our support team in a timely manner</li>
+      <li>Maintaining accurate and up-to-date campaign information</li>
+    </ul>
+    <p>Organizers who fail to meet these obligations may have their campaigns suspended, their accounts terminated, and — in cases of fraud — may be referred to law enforcement authorities.</p>
+    <hr class="section-divider">
+
+    <h2 id="limitations">8. Limitations of the Guarantee</h2>
+    <p>While we work hard to protect every donor and ensure every campaign is legitimate, the Good Green Foundation Guarantee has the following limitations:</p>
+    <ul>
+      <li>We cannot guarantee the outcome of any campaign or that a specific fundraising goal will be met</li>
+      <li>Good Green Foundation acts as a fundraising platform, not a charity itself — we facilitate donations between donors and organizers</li>
+      <li>We are not responsible for how funds are used once disbursed to a verified organizer who has complied with our Terms</li>
+      <li>The Guarantee does not cover donations made outside our platform or through unofficial channels</li>
+    </ul>
+    <hr class="section-divider">
+
+    <h2 id="contact">9. Questions? We're Here to Help</h2>
+    <p>If you have any questions about the Good Green Foundation Guarantee, a specific campaign, or a donation you made, our team is ready to help.</p>
+    <ul>
+      <li>Visit our <a href="help-center.html">Help Center</a> for answers to common questions</li>
+      <li>Contact our support team via <a href="contact.html">the Contact Us page</a></li>
+    </ul>
+    <p>We are committed to making charitable giving safe, transparent, and impactful for everyone.</p>
+
+  </div>
+</div>
+
+<style id='footer-fix'>
+.footer-col a{color:rgba(255,255,255,.8)!important}
+.footer-col a::before{background:rgba(255,255,255,.3)!important}
+.footer-col a:hover{color:#fff!important}
+.footer-col h4{color:rgba(255,255,255,.45)!important}
+.footer-bottom{color:rgba(255,255,255,.45)!important;border-top:1px solid rgba(255,255,255,.1)!important}
+.footer-bottom-links a{color:rgba(255,255,255,.45)!important}
+.footer-bottom-links a:hover{color:#fff!important}
+.footer-brand p{color:rgba(255,255,255,.6)!important}
+.footer-social{display:flex!important;gap:10px!important;margin-top:14px!important}
+.soc-btn{display:none!important}
+</style><footer style="background:#0A2B18;color:rgba(255,255,255,0.75);">
+  <div class="footer-cta-strip">
+    <div>
+      <h3>Ready to make a difference?</h3>
+      <p>Launch your campaign in minutes — no fees, full transparency.</p>
+    </div>
+    <a href="start-yourself.html" class="footer-cta-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Start a Campaign
+    </a>
+  </div>
+  <div class="footer-main">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo-text-footer.png" alt="Good Green Foundation" style="width:200px;height:auto;display:block;margin-bottom:16px;">
+        <p class="footer-brand-desc">Connecting people and causes that transform communities across America. Transparent, secure, and making real impact since 2026.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/goodgreenfoundation/" class="soc-btn" title="Instagram">
+            <img src="social-instagram.png" alt="Instagram">
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="campaigns.html">Explore Campaigns</a></li>
+          <li><a href="index.html#start">Start a Campaign</a></li>
+          <li><a href="most-loved.html">Most Loved</a></li>
+          <li><a href="causes.html">All Causes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="help-center.html">Help Center</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-of-use.html">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 ALL GOOD GREEN TAG FOUNDATION</span>
+        <div class="footer-bottom-links">
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="terms-of-use.html">Terms</a>
+        <a href="contact.html">Contact</a>
+        </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.nav-item').forEach(item => {
+  const trigger = item.querySelector('.nav-trigger');
+  if (!trigger) return;
+  trigger.addEventListener('click', e => {
+    e.stopPropagation();
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('open'));
+    if (document.getElementById('navSearchBox')) document.getElementById('navSearchBox').classList.remove('open');
+    if (!isOpen) item.classList.add('open');
+  });
+});
+document.addEventListener('click', () => {
+  document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('open'));
+  if (document.getElementById('navSearchBox')) document.getElementById('navSearchBox').classList.remove('open');
+});
+const _nsBtn = document.getElementById('navSearchBtn');
+const _nsBox = document.getElementById('navSearchBox');
+if (_nsBtn && _nsBox) {
+  _nsBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('open'));
+    _nsBox.classList.toggle('open');
+  });
+  document.querySelectorAll('.nav-search-cat').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.nav-search-cat').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+  document.getElementById('navSearchGo').addEventListener('click', () => {
+    const cat = document.querySelector('.nav-search-cat.active')?.dataset.cat || 'all';
+    window.location.href = 'campaigns.html' + (cat !== 'all' ? '?cat=' + cat : '');
+  });
+}
+const _hbg = document.getElementById('hamburger');
+if (_hbg) {
+  _hbg.addEventListener('click', e => {
+    e.stopPropagation();
+    _hbg.classList.toggle('open');
+  });
+}
+</script>
+
+<script src="sidebar.js"></script>
+<script src="ggf-tracker.js"></script>
+</body>
+</html>

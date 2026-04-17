@@ -1,0 +1,725 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nonprofits — Good Green Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue:#27AE60;--blue-dark:#1E8449;--blue-light:#EAFAF1;
+  --orange:#2ECC71;--orange-dark:#27AE60;--orange-light:#D5F5E3;
+  --green:#27AE60;--green-dark:#1E8449;--green-light:#EAFAF1;
+  --ink:#0D1117;--ink2:#1C2333;--ink3:#2D3748;--slate:#4A5568;
+  --muted:#718096;--subtle:#A0AEC0;--line:#E2E8F0;--surface:#F7F8FA;--white:#FFFFFF;
+  --font-head:'Plus Jakarta Sans',sans-serif;--font-body:'Plus Jakarta Sans',sans-serif;
+  --r-xs:6px;--r-sm:100px;--r:100px;--r-lg:100px;--r-xl:100px;
+  --s-xs:0 1px 2px rgba(0,0,0,.05);
+  --s-sm:0 1px 3px rgba(0,0,0,.06),0 2px 8px rgba(0,0,0,.04);
+  --s-md:0 4px 12px rgba(0,0,0,.08),0 8px 28px rgba(0,0,0,.06);
+  --s-lg:0 8px 24px rgba(0,0,0,.10),0 20px 48px rgba(0,0,0,.08);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--white);color:var(--ink);overflow-x:hidden;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+/* NAV */
+nav{background:var(--white);border-bottom:1px solid var(--line);height:80px;padding:0 4%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;position:sticky;top:0;z-index:999;box-shadow:0 1px 0 var(--line),0 2px 12px rgba(0,0,0,.04)}
+.logo{display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none}
+.logo-img{height:72px;width:auto;object-fit:contain;display:block}
+.logo-mobile{display:none}
+.logo-desktop{display:block}
+@media(max-width:900px){.logo-desktop{display:none}.logo-mobile{display:block;height:44px;width:auto}.logo{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important}}
+.nav-links{display:flex;align-items:center;gap:0;list-style:none}
+.nav-item{position:relative}
+.nav-trigger{display:flex;align-items:center;gap:6px;color:var(--slate);font-family:var(--font-body);font-weight:700;font-size:1rem;letter-spacing:.01em;padding:8px 12px;border-radius:0;cursor:pointer;background:none;border:none;height:80px;transition:color .15s;white-space:nowrap;border-bottom:2.5px solid transparent}
+.nav-trigger:hover{color:var(--ink);border-bottom-color:var(--line)}
+.nav-item.open .nav-trigger{color:var(--blue);border-bottom-color:var(--blue)}
+.nc{width:16px;height:16px;border-radius:50%;background:var(--surface);border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;font-size:.48rem;color:var(--muted);transition:transform .2s,background .15s;flex-shrink:0}
+.nav-item.open .nc{transform:rotate(180deg);background:var(--blue-light);border-color:var(--blue);color:var(--blue)}
+.dropdown{position:absolute;top:100%;left:0;background:var(--white);border-radius:0 0 12px 12px;box-shadow:0 8px 24px rgba(0,0,0,.10),0 2px 6px rgba(0,0,0,.05);border:1px solid var(--line);border-top:3px solid var(--blue);min-width:230px;padding:8px;opacity:0;visibility:hidden;transform:translateY(-2px);transition:opacity .15s,transform .15s,visibility .15s;z-index:1000}
+.nav-item.open .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.dropdown a{display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:8px;color:var(--slate);font-weight:500;font-size:.92rem;transition:background .12s,color .12s}
+.dropdown a:before{content:'';width:6px;height:6px;border-radius:50%;background:var(--line);flex-shrink:0;transition:background .12s}
+.dropdown a:hover{background:var(--surface);color:var(--ink)}
+.dropdown a:hover:before{background:var(--blue)}
+.dropdown a.active{background:var(--blue-light);color:var(--blue-dark);font-weight:600}
+.dropdown a.active:before{background:var(--blue)}
+.nav-actions{display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.nav-search-wrap{position:relative;display:flex;align-items:center}
+.nav-search-btn{display:flex;align-items:center;gap:7px;padding:9px 16px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--white);font-family:var(--font-body);font-size:.92rem;font-weight:600;color:var(--slate);cursor:pointer;transition:all .15s;white-space:nowrap;height:42px}
+.nav-search-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+.nav-search-btn svg{flex-shrink:0}
+.nav-search-box{position:absolute;right:0;top:calc(100% + 10px);background:var(--white);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.06);border:1px solid var(--line);padding:20px;width:310px;opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .18s,transform .18s,visibility .18s;z-index:1000}
+.nav-search-box.open{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-search-label{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.nav-search-label:after{content:'';flex:1;height:1px;background:var(--line)}
+.nav-search-cats{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.nav-search-cat{padding:6px 13px;border-radius: 16px;font-size:.78rem;font-weight:600;border:1.5px solid var(--line);background:var(--white);color:var(--slate);cursor:pointer;transition:all .12s;font-family:var(--font-body)}
+.nav-search-cat:hover{border-color:var(--blue);color:var(--blue-dark);background:var(--blue-light)}
+.nav-search-cat.active{border-color:var(--blue);background:var(--blue);color:var(--white);box-shadow:0 2px 6px rgba(43,127,212,.25)}
+.nav-search-go{width:100%;padding:11px;border-radius:var(--r-sm);border:none;background:var(--blue);color:var(--white);font-family:var(--font-body);font-size:.88rem;font-weight:700;cursor:pointer;transition:background .15s;box-shadow:0 2px 6px rgba(43,127,212,.25)}
+.nav-search-go:hover{background:var(--blue-dark)}
+.btn-signin{padding:9px 18px;border-radius:100px;font-weight:600;font-size:.92rem;cursor:pointer;border:1.5px solid var(--line);background:var(--white);color:var(--slate);font-family:var(--font-body);transition:all .15s;white-space:nowrap;height:42px}
+.btn-signin:hover{border-color:var(--ink3);color:var(--ink);background:var(--surface)}
+.btn-cta{padding:11px 26px;border-radius:100px;font-weight:700;font-size:.95rem;letter-spacing:.02em;cursor:pointer;border:none;background:var(--orange);color:var(--white);font-family:var(--font-body);transition:background .15s,box-shadow .15s,transform .1s;white-space:nowrap;box-shadow:0 2px 8px rgba(232,114,10,.35)}
+.btn-cta:hover{background:var(--orange-dark);box-shadow:0 4px 16px rgba(232,114,10,.42);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px;border:none;background:none;position:absolute;right:4%}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink3);border-radius:2px}
+@media(max-width:900px){.nav-links{display:none}.hamburger{display:flex}nav{display:flex;justify-content:center;align-items:center}.nav-actions{display:none}}
+/* PAGE HEADER */
+.page-header{background:linear-gradient(135deg,var(--blue-dark) 0%,#27AE60 60%,#52D68A 100%);padding:64px 5% 56px;text-align:center}
+.page-tag{font-size:.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:14px}
+.page-title{font-family:var(--font-head);font-size:clamp(2rem,4vw,3rem);font-weight:900;color:var(--white);line-height:1.1;letter-spacing:-.04em;margin-bottom:14px}
+.page-desc{font-size:1rem;color:rgba(255,255,255,.85);line-height:1.75;max-width:600px;margin:0 auto 36px}
+/* Stats band inside hero */
+.hero-stats{display:flex;align-items:center;justify-content:center;gap:0;max-width:700px;margin:0 auto}
+.hero-stat-item{flex:1;text-align:center;padding:8px 20px;position:relative}
+.hero-stat-item+.hero-stat-item::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);height:32px;width:1px;background:rgba(255,255,255,.25)}
+.hero-stat-num{font-family:var(--font-head);font-size:1.6rem;font-weight:800;color:#fff;line-height:1;margin-bottom:4px}
+.hero-stat-label{font-size:.72rem;color:rgba(255,255,255,.7);font-weight:500;text-transform:uppercase;letter-spacing:.5px}
+
+
+
+/* LAYOUT — full-width, no sidebar */
+.page-layout{display:block}
+
+/* MAIN */
+.page-main{padding:40px 5%;max-width:1240px;margin:0 auto;width:100%}
+.page-layout{background:var(--surface)}
+.results-info{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:8px}
+.results-count{font-size:.84rem;color:var(--muted)}
+.results-count strong{color:var(--ink);font-weight:700}
+
+/* GRID SECTION */
+.page-main{background:var(--surface)}
+
+/* GRID */
+.np-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-bottom:40px;max-width:1200px;margin-left:auto;margin-right:auto}
+
+/* NONPROFIT CARD */
+.np-card{background:var(--white);border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.08);border:1px solid var(--line);transition:box-shadow .22s,transform .22s,border-color .22s;cursor:pointer;display:flex;flex-direction:column}
+.np-card:hover{box-shadow:0 8px 32px rgba(39,174,96,.12);transform:translateY(-4px);border-color:#a7f3d0}
+.np-img{width:100%;height:160px;object-fit:cover;display:block}
+.np-img-placeholder{width:100%;height:160px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;font-weight:800;color:rgba(255,255,255,.85);font-family:var(--font-head)}
+.np-body{padding:18px 20px 20px;flex:1;display:flex;flex-direction:column}
+.np-name-row{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.np-name{font-family:var(--font-head);font-size:.95rem;font-weight:700;color:var(--ink);line-height:1.3}
+.np-verified{color:var(--green);font-size:.85rem;flex-shrink:0}
+.np-meta{font-size:.77rem;color:var(--muted);margin-bottom:10px;display:flex;flex-direction:column;gap:2px}
+.np-category{font-weight:600;color:var(--slate)}
+.np-desc{font-size:.82rem;color:var(--slate);line-height:1.6;flex:1;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.np-btn{display:block;width:100%;padding:10px;border-radius:var(--r-sm);background:var(--green);color:var(--white);font-family:var(--font-body);font-size:.83rem;font-weight:700;text-align:center;border:none;cursor:pointer;transition:background .15s;letter-spacing:.01em}
+.np-btn:hover{background:var(--green-dark)}
+
+/* PAGINATION */
+.pagination{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px}
+.pg-btn{min-width:36px;height:36px;padding:0 10px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--white);font-family:var(--font-head);font-size:.82rem;font-weight:600;color:var(--slate);cursor:pointer;transition:all .12s;display:flex;align-items:center;justify-content:center}
+.pg-btn:hover{border-color:var(--blue);color:var(--blue-dark);background:var(--blue-light)}
+.pg-btn.active{border-color:var(--blue);background:var(--blue);color:var(--white)}
+.pg-btn:disabled{opacity:.35;cursor:default;pointer-events:none}
+
+/* PARTNER CTA BANNER */
+.partner-banner{background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue) 60%,#52D68A 100%);padding:64px 5%;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;text-align:left}
+.partner-banner-text h2{font-family:var(--font-head);font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:800;color:var(--white);letter-spacing:-.02em;margin-bottom:8px}
+.partner-banner-text p{font-size:.9rem;color:rgba(255,255,255,.75);max-width:520px;line-height:1.7}
+.btn-partner{padding:13px 28px;border-radius:var(--r-sm);background:var(--orange);color:var(--white);font-family:var(--font-body);font-size:.88rem;font-weight:700;border:none;cursor:pointer;transition:background .15s;white-space:nowrap;box-shadow:0 2px 8px rgba(232,114,10,.3)}
+.btn-partner:hover{background:var(--orange-dark)}
+
+/* FOOTER */
+footer{background:var(--ink);color:var(--subtle);padding:60px 5% 28px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand p{font-size:.83rem;line-height:1.75;color:#718096}
+.footer-col h4{font-size:.7rem;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:16px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{color:#718096;font-size:.83rem;transition:color .15s}
+.footer-col a:hover{color:#CBD5E0}
+.footer-bottom{border-top:1px solid #1C2333;padding-top:22px;display:flex;justify-content:space-between;font-size:.78rem;color:#4A5568;flex-wrap:wrap;gap:6px}
+.footer-social{display:flex;gap:8px;margin-top:18px}
+.soc-btn{width:64px;height:64px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;text-decoration:none;flex-shrink:0}.soc-btn img{width:32px;height:32px;object-fit:contain;filter:brightness(0) invert(1);display:block}.soc-btn:hover{background:#2ECC71;border-color:#2ECC71}
+.footer-col h4{font-size:.7rem;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:16px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{color:#718096;font-size:.83rem;transition:color .15s}
+.footer-col a:hover{color:#CBD5E0}
+.footer-bottom{border-top:1px solid #1C2333;padding-top:22px;display:flex;justify-content:space-between;font-size:.78rem;color:#4A5568;flex-wrap:wrap;gap:6px}
+
+@media(max-width:900px){.nav-links{display:none}.hamburger{display:flex}.sidebar{display:none}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.footer-grid{grid-template-columns:1fr}.page-header{padding:36px 5% 32px}.partner-banner{flex-direction:column;text-align:center}}
+.footer-social{display:flex;gap:8px;margin-top:18px}
+.soc-btn{width:64px;height:64px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;text-decoration:none;flex-shrink:0}.soc-btn img{width:32px;height:32px;object-fit:contain;filter:brightness(0) invert(1);display:block}.soc-btn:hover{background:#2ECC71;border-color:#2ECC71}
+
+/* ── GLOBAL VISUAL UPGRADES ── */
+
+/* Campaign/content cards */
+.cc, .value-card, .how-card, .faq-item, .info-card, .form-card,
+.sidebar-card, .badge-item, .contact-box {
+  border-radius: 16px !important;
+}
+
+/* Section accent line */
+.section::before, .values-section::before, .faq-wrap > .faq-section:first-child::before {
+  display: none;
+}
+
+/* Page headers — keep our green gradient override */
+.page-header, .about-hero {
+  position: relative;
+  overflow: hidden;
+}
+.page-header::before, .about-hero::before { background: none !important; }
+.page-header h1, .about-hero h1 { color: #fff !important; }
+.page-header p, .about-hero p { color: rgba(255,255,255,.85) !important; }
+.page-header .page-tag, .about-hero .page-tag { color: rgba(255,255,255,.7) !important; }
+.page-header > *, .about-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Section top accent stripe */
+.section, .faq-wrap, .terms-wrap, .policy-wrap, .contact-wrap {
+  position: relative;
+}
+
+/* Cards hover upgrade */
+.value-card:hover, .how-card:hover, .info-card:hover {
+  box-shadow: 0 12px 32px rgba(26,109,181,.13) !important;
+  transform: translateY(-4px) !important;
+  border-color: rgba(26,109,181,.2) !important;
+}
+
+/* Section backgrounds alternation */
+.values-section {
+  background: linear-gradient(180deg, #F0FFF5 0%, #EAFAF1 100%) !important;
+  position: relative;
+}
+.values-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--blue), var(--orange), var(--green));
+}
+
+/* How-it-works upgrade */
+.how-grid .how-num, .how-card .how-num {
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark)) !important;
+  border-radius: 50% !important;
+  width: 44px !important; height: 44px !important;
+  box-shadow: 0 4px 12px rgba(26,109,181,.3) !important;
+}
+
+/* CTA banners */
+.cta-banner {
+  background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 60%, #52D68A 100%) !important;
+  position: relative;
+  overflow: hidden;
+}
+.cta-banner::before { display: none !important; }
+.cta-banner > * { position: relative; z-index: 1; }
+.cta-banner h2 { color: #fff !important; }
+.cta-banner p { color: rgba(255,255,255,.85) !important; }
+
+/* Form inputs focus */
+.field input:focus, .field textarea:focus, .field select:focus {
+  border-color: var(--blue) !important;
+  box-shadow: 0 0 0 3px rgba(26,109,181,.1) !important;
+}
+
+/* Buttons */
+.btn-send, .btn-contact, .btn-confirm-donate, .btn-donate {
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark)) !important;
+  box-shadow: 0 4px 14px rgba(26,109,181,.3) !important;
+}
+.btn-send:hover, .btn-contact:hover, .btn-confirm-donate:hover, .btn-donate:hover {
+  background: linear-gradient(135deg, var(--blue-dark), #092C52) !important;
+  transform: translateY(-1px) !important;
+}
+.btn-banner {
+  background: var(--white) !important;
+  color: var(--blue-dark) !important;
+  border-color: var(--white) !important;
+  font-weight: 700 !important;
+}
+.btn-banner:hover {
+  background: transparent !important;
+  color: var(--white) !important;
+}
+
+/* FAQ accordion upgrade */
+.faq-item {
+  border-radius: 12px !important;
+  border: 1px solid var(--line) !important;
+  overflow: hidden !important;
+  margin-bottom: 10px !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,.04) !important;
+}
+.faq-item.open {
+  box-shadow: 0 6px 20px rgba(26,109,181,.1) !important;
+  border-color: rgba(26,109,181,.2) !important;
+}
+.faq-item.open .faq-icon {
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark)) !important;
+  border-color: var(--blue) !important;
+}
+
+/* Info cards */
+.info-icon.blue { background: linear-gradient(135deg, var(--blue-light), #C8DFF4) !important; }
+.info-icon.orange { background: linear-gradient(135deg, var(--orange-light), #FDDDB8) !important; }
+.info-icon.green { background: linear-gradient(135deg, var(--green-light), #C0E8C8) !important; }
+
+/* Mission visual box */
+.mission-visual {
+  background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 60%, #52D68A 100%) !important;
+}
+
+/* Blog/events section cards */
+.blog-card, .event-card, .event-item {
+  border-radius: 16px !important;
+}
+.blog-card:hover, .event-card:hover {
+  box-shadow: 0 12px 32px rgba(26,109,181,.13) !important;
+  transform: translateY(-4px) !important;
+}
+
+/* Progress bars */
+.cc-bar {
+  background: linear-gradient(90deg, var(--blue), var(--orange)) !important;
+}
+.prog-bar {
+  background: linear-gradient(90deg, var(--green-dark), var(--green)) !important;
+}
+
+/* last-updated badge */
+.last-updated {
+  background: var(--blue-light) !important;
+  color: var(--blue-dark) !important;
+}
+
+/* Contact form card */
+.form-card {
+  box-shadow: 0 8px 32px rgba(26,109,181,.1) !important;
+  border-color: rgba(26,109,181,.12) !important;
+}
+
+/* Terms/Policy content headings accent */
+.terms-content h2, .policy-content h2 {
+  border-left: 3px solid var(--orange);
+  padding-left: 12px;
+}
+
+
+/* Card radius overrides - prevent pill on containers */
+.article-card, .ac-img, .cc, .cc-img, .value-card, .how-card,
+.start-card, .plan-card, .event-card, .cause-card, .help-card,
+.faq-item, .mission-visual, .sidebar-card, .donate-card,
+.camp-summary, .guarantee-box, .cover-wrap, .feat-wrap,
+.modal, .form-card, .info-card, .partner-card, .solution-card,
+.nonprofit-card, .contact-card, .most-loved-card, .trending-card,
+.blog-card, .story-card, .update-item, .donor-item,
+.nav-search-box, .heroCatBox, #heroCatBox { border-radius: 16px !important; }
+.ac-img, .cc-img { border-radius: 16px 16px 0 0 !important; }
+.ac-body, .cc-body { border-radius: 0 0 16px 16px !important; }
+</style>
+<style id="mobile-global">
+@media (max-width: 768px) {
+  nav { height: 64px; padding: 0 4%; }
+  .logo-img { height: 52px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-actions { gap: 6px; }
+  .btn-signin { display: none; }
+  .btn-cta { padding: 9px 16px; font-size: .82rem; }
+  .nav-search-btn { padding: 8px 12px; font-size: .82rem; }
+  .nav-search-box { width: calc(100vw - 32px); right: -60px; }
+  .breadcrumb { font-size: .72rem; padding: 10px 4%; flex-wrap: wrap; gap: 4px; }
+  .hero { min-height: auto; padding: 32px 16px; }
+  .hero-card { padding: 28px 20px 32px; margin: 0; border-radius: 16px; }
+  .hero-card h1 { font-size: 1.55rem; margin-bottom: 20px; }
+  .hero-tag { font-size: .62rem; padding: 5px 14px; }
+  .campaign-wrap { grid-template-columns: 1fr !important; gap: 20px; padding: 16px 4% 60px; }
+  .camp-sidebar { position: static !important; margin-top: 0; }
+  .sidebar-card { border-radius: 16px; padding: 20px; }
+  .raised-amount { font-size: 1.6rem; }
+  .stats-row { gap: 8px; }
+  .stat-box { padding: 10px 12px; border-radius: 12px; }
+  .stat-box-val { font-size: .9rem; }
+  .btn-donate { padding: 14px; font-size: .92rem; }
+  .camp-title { font-size: 1.2rem; }
+  .cover-wrap { border-radius: 12px; margin-bottom: 18px; }
+  .tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tab { padding: 10px 14px; font-size: .8rem; white-space: nowrap; }
+  .camp-meta { flex-wrap: wrap; gap: 6px; }
+  .urgent-banner { font-size: .7rem; padding: 8px 4%; }
+  .page-header { padding: 36px 4% 32px; }
+  .page-title { font-size: 1.5rem; }
+  .filter-bar { top: 64px; padding: 12px 4%; gap: 8px; flex-wrap: wrap; }
+  .filter-search { min-width: 100%; order: -1; }
+  .filter-chips { width: 100%; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+  .chip { white-space: nowrap; }
+  .filter-sort { margin-left: 0; width: 100%; }
+  .campaigns-layout { flex-direction: column; }
+  .sidebar { display: none; }
+  .campaigns-main { padding: 20px 4%; }
+  .cgrid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .section { padding: 48px 4%; }
+  .sec-title { font-size: 1.3rem; }
+  .values-grid { grid-template-columns: 1fr; gap: 14px; }
+  .how-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .how-connector { display: none; }
+  .mission-grid { grid-template-columns: 1fr; gap: 32px; }
+  .rel-grid { grid-template-columns: 1fr; }
+  .page-wrap { grid-template-columns: 1fr !important; gap: 20px; padding: 20px 4% 60px; }
+  .donate-card { position: static; }
+  .donate-card-header { padding: 22px 20px 18px; }
+  .donate-card-body { padding: 20px; }
+  .amount-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .amt-btn { padding: 12px 6px; font-size: .9rem; }
+  .btn-lift { padding: 15px; font-size: .9rem; }
+  .modal-overlay { padding: 0; align-items: flex-end; }
+  .modal { padding: 24px 20px; margin: 0; border-radius: 16px 16px 0 0; max-width: 100%; width: 100%; }
+  .modal-title { font-size: 1rem; }
+  .share-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .footer-grid { grid-template-columns: 1fr !important; gap: 28px; }
+  .footer-bottom { flex-direction: column; gap: 8px; font-size: .72rem; }
+  footer { padding: 40px 4% 24px; }
+  .about-hero { padding: 48px 4% 44px; }
+  .about-hero h1 { font-size: 1.7rem; }
+  .cta-banner { padding: 40px 4%; }
+  .cta-banner h2 { font-size: 1.3rem; }
+  .blog-layout { flex-direction: column; }
+  .blog-sidebar { display: none; }
+  .start-options { grid-template-columns: 1fr; }
+  .start-card { padding: 24px 20px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .help-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 400px) {
+  .cgrid { grid-template-columns: 1fr; }
+  .amount-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-card h1 { font-size: 1.35rem; }
+  .raised-amount { font-size: 1.4rem; }
+}
+@media (max-width: 768px) {
+  /* Footer Director/EIN row — stack vertically on mobile */
+  .footer-main > div[style*="justify-content:space-between"] { flex-direction: column !important; gap: 14px !important; align-items: flex-start !important; }
+  .footer-main > div[style*="justify-content:space-between"] > div { text-align: left !important; }
+}
+</style>
+<link rel="stylesheet" href="site.css?v=112">
+</head>
+<body>
+
+<style>
+nav .nav-links{order:1;display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0}.filter-bar{top:140px!important}
+nav .logo{order:2;justify-self:center;display:flex;align-items:center;}
+nav .logo-img{height:165px;width:auto;display:block;}
+nav .nav-actions{order:3;justify-self:end;display:flex;align-items:center;gap:12px;}
+nav .hamburger{order:4;}nav{background:transparent!important;box-shadow:none!important;border:none!important;position:relative!important;}
+@media(max-width:768px){nav{display:flex!important;justify-content:center!important;align-items:center!important;position:relative!important;}nav .nav-links{display:none!important}nav .hamburger{display:flex!important;position:absolute!important;right:16px!important;top:50%!important;transform:translateY(-50%)!important;}nav .nav-actions{display:none!important}nav .logo-img{height:155px!important}nav .logo{justify-content:center!important;}}
+</style><nav style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 5%;border-bottom:none;background:transparent;z-index:999;">
+  <ul class="nav-links">
+    <li class="nav-item">
+      <button class="nav-trigger">How to help <span class="nc">▾</span></button>
+      <div class="dropdown">
+        <a href="campaigns.html">Campaigns</a>
+        <a href="causes.html">Causes</a>
+        <a href="nonprofits.html">Nonprofits</a>
+      </div>
+    </li>
+    <li class="nav-item">
+      <button class="nav-trigger">Discover <span class="nc">▾</span></button>
+      <div class="dropdown">
+        <a href="most-loved.html">Most Loved</a>
+        <a href="nonprofits-solutions.html">Solutions for Nonprofits</a>
+        <a href="events.html">Good Green Foundation Events</a>
+        <a href="blog.html">Blog</a>
+      </div>
+    </li>
+  </ul>
+
+  <a class="logo" href="index.html">
+    <img class="logo-img" src="logo-ggf.png" alt="Good Green Foundation" style="height:165px;width:auto;" />
+  </a>
+
+  <div class="nav-actions">
+    
+    
+    <button class="btn-cta" onclick="location.href='start-yourself.html'">Start a Campaign</button>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<style>
+.page-header{background:linear-gradient(135deg,#1E8449 0%,#27AE60 60%,#52D68A 100%)!important;border-bottom:none!important;}
+.page-header h1,.page-header .page-title{color:#fff!important}
+.page-header p,.page-header .page-desc{color:rgba(255,255,255,.85)!important}
+.page-header .page-tag{color:rgba(255,255,255,.75)!important}
+</style>
+<div class="page-header">
+  <div class="page-tag">How to Help</div>
+  <h1 class="page-title">Partner Nonprofits</h1>
+  <p class="page-desc">Good Green Foundation partners with verified nonprofits working on causes that truly matter. Together, we make it easier for organizations to reach donors and create lasting change.</p>
+  <div class="hero-stats">
+    <div class="hero-stat-item">
+      <div class="hero-stat-num">18+</div>
+      <div class="hero-stat-label">Partner orgs</div>
+    </div>
+    <div class="hero-stat-item">
+      <div class="hero-stat-num">$2.4M</div>
+      <div class="hero-stat-label">Funds raised</div>
+    </div>
+    <div class="hero-stat-item">
+      <div class="hero-stat-num">6</div>
+      <div class="hero-stat-label">Cause areas</div>
+    </div>
+    <div class="hero-stat-item">
+      <div class="hero-stat-num">100%</div>
+      <div class="hero-stat-label">Verified</div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="page-layout">
+
+
+
+  <main class="page-main">
+    <div class="results-info">
+      <div class="results-count">Showing <strong id="showingCount">9</strong> of <strong id="totalCount">18</strong> nonprofits</div>
+    </div>
+    <div class="np-grid" id="npGrid"></div>
+    <div class="pagination" id="pagination"></div>
+  </main>
+</div>
+
+<!-- PARTNER CTA -->
+<div class="partner-banner">
+  <div class="partner-banner-text">
+    <h2>Is your nonprofit ready to make a bigger impact?</h2>
+    <p>Join Good Green Foundation's partner network and connect your cause with thousands of engaged donors across America. Free to apply — we grow together.</p>
+  </div>
+  <button class="btn-partner">Become a Partner</button>
+</div>
+
+<style id='footer-fix'>
+.footer-col a{color:rgba(255,255,255,.8)!important}
+.footer-col a::before{background:rgba(255,255,255,.3)!important}
+.footer-col a:hover{color:#fff!important}
+.footer-col h4{color:rgba(255,255,255,.45)!important}
+.footer-bottom{color:rgba(255,255,255,.45)!important;border-top:1px solid rgba(255,255,255,.1)!important}
+.footer-bottom-links a{color:rgba(255,255,255,.45)!important}
+.footer-bottom-links a:hover{color:#fff!important}
+.footer-brand p{color:rgba(255,255,255,.6)!important}
+.footer-social{display:flex!important;gap:10px!important;margin-top:14px!important}
+.soc-btn{display:none!important}
+</style><footer style="background:#0A2B18;color:rgba(255,255,255,0.75);">
+  <div class="footer-cta-strip">
+    <div>
+      <h3>Ready to make a difference?</h3>
+      <p>Launch your campaign in minutes — no fees, full transparency.</p>
+    </div>
+    <a href="start-yourself.html" class="footer-cta-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Start a Campaign
+    </a>
+  </div>
+  <div class="footer-main">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo-text-footer.png" alt="Good Green Foundation" style="width:200px;height:auto;display:block;margin-bottom:16px;">
+        <p class="footer-brand-desc">Connecting people and causes that transform communities across America. Transparent, secure, and making real impact since 2026.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/goodgreenfoundation/" class="soc-btn" title="Instagram">
+            <img src="social-instagram.png" alt="Instagram">
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="campaigns.html">Explore Campaigns</a></li>
+          <li><a href="index.html#start">Start a Campaign</a></li>
+          <li><a href="most-loved.html">Most Loved</a></li>
+          <li><a href="causes.html">All Causes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="help-center.html">Help Center</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-of-use.html">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 ALL GOOD GREEN TAG FOUNDATION</span>
+        <div class="footer-bottom-links">
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="terms-of-use.html">Terms</a>
+        <a href="contact.html">Contact</a>
+        </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const PER_PAGE = 9;
+let currentPage = 1;
+
+// Gradient palettes per category
+const GRAD = {
+  health:      'linear-gradient(135deg,#2ECC71 0%,#27AE60 100%)',
+  environment: 'linear-gradient(135deg,#27AE60 0%,#1E8449 100%)',
+  social:      'linear-gradient(135deg,#27AE60 0%,#1E8449 100%)',
+  education:   'linear-gradient(135deg,#7C3AED 0%,#5B21B6 100%)',
+  children:    'linear-gradient(135deg,#DB2777 0%,#9D174D 100%)',
+  animals:     'linear-gradient(135deg,#D97706 0%,#92400E 100%)',
+};
+
+const NONPROFITS = [
+  { id:1,  name:'Healing Hearts Foundation', cat:'health',      state:'CA', initials:'HH', desc:'Providing free cardiac screenings and heart health education to underserved communities across California.', campaigns:12, idx:18 },
+  { id:2,  name:'MindBridge Mental Health',  cat:'health',      state:'NY', initials:'MB', desc:'Connecting individuals to affordable mental health resources and crisis support in New York and beyond.', campaigns:8, idx:15 },
+  { id:3,  name:'Rural Health Alliance',      cat:'health',      state:'TX', initials:'RH', desc:'Bringing mobile healthcare clinics and telemedicine to rural Texas communities with limited access to care.', campaigns:6, idx:10 },
+  { id:4,  name:'Cancer Free Tomorrow',       cat:'health',      state:'FL', initials:'CF', desc:'Funding early detection programs and supporting families navigating cancer treatment in Florida.', campaigns:14, idx:17 },
+  { id:5,  name:'GreenCoast Initiative',      cat:'environment', state:'CA', initials:'GC', desc:'Restoring California coastlines through community beach cleanups, marine research, and conservation advocacy.', campaigns:9, idx:16 },
+  { id:6,  name:'TreeNation USA',             cat:'environment', state:'WA', initials:'TN', desc:'Planting native trees across the Pacific Northwest to combat deforestation and support local ecosystems.', campaigns:11, idx:12 },
+  { id:7,  name:'Clean Water Project',        cat:'environment', state:'TX', initials:'CW', desc:'Protecting freshwater sources and educating communities about sustainable water use across the Southwest.', campaigns:5, idx:8 },
+  { id:8,  name:'Second Chance Network',      cat:'social',      state:'NY', initials:'SC', desc:'Empowering formerly incarcerated individuals with job training, housing support, and community reintegration programs.', campaigns:7, idx:14 },
+  { id:9,  name:'Home & Hope',                cat:'social',      state:'CA', initials:'HO', desc:'Providing emergency shelter and long-term housing solutions to families experiencing homelessness.', campaigns:10, idx:13 },
+  { id:10, name:'Equality Now',               cat:'social',      state:'NY', initials:'EQ', desc:'Advocating for the rights of LGBTQ+ individuals and supporting programs that promote inclusion and dignity.', campaigns:4, idx:9 },
+  { id:11, name:'Veterans Bridge',            cat:'social',      state:'TX', initials:'VB', desc:'Connecting veterans with mental health resources, employment opportunities, and community support networks.', campaigns:13, idx:11 },
+  { id:12, name:'Books Without Borders',      cat:'education',   state:'FL', initials:'BW', desc:'Distributing books and learning materials to schools in low-income neighborhoods across the United States.', campaigns:8, idx:7 },
+  { id:13, name:'Code the Future',            cat:'education',   state:'WA', initials:'CT', desc:'Teaching coding and digital skills to youth in under-resourced communities, preparing them for tomorrow\'s economy.', campaigns:15, idx:6 },
+  { id:14, name:'Scholarship America',        cat:'education',   state:'CA', initials:'SA', desc:'Connecting first-generation college students with scholarships, mentors, and the support they need to succeed.', campaigns:6, idx:5 },
+  { id:15, name:'Little Stars Foundation',    cat:'children',    state:'FL', initials:'LS', desc:'Supporting children with serious illnesses through wish-granting programs, hospital visits, and family assistance.', campaigns:17, idx:4 },
+  { id:16, name:'Safe Childhood Alliance',    cat:'children',    state:'NY', initials:'SCA', desc:'Protecting vulnerable children from abuse through education, advocacy, and direct support services.', campaigns:9, idx:3 },
+  { id:17, name:'Rescue Paws',                cat:'animals',     state:'CA', initials:'RP', desc:'Rescuing, rehabilitating, and rehoming animals from shelters and disaster zones throughout the West Coast.', campaigns:11, idx:2 },
+  { id:18, name:'Wildlife Guardian',          cat:'animals',     state:'WA', initials:'WG', desc:'Protecting endangered wildlife habitats and supporting conservation science in partnership with local governments.', campaigns:7, idx:1 },
+];
+
+const filtered = [...NONPROFITS];
+
+function buildCard(np) {
+  const grad = GRAD[np.cat] || 'linear-gradient(135deg,#718096 0%,#4A5568 100%)';
+  return `
+  <div class="np-card">
+    <div class="np-img-placeholder" style="background:${grad}">${np.initials}</div>
+    <div class="np-body">
+      <div class="np-name-row">
+        <span class="np-name">${np.name}</span>
+        <span class="np-verified" title="Verified Partner">✓</span>
+      </div>
+      <div class="np-meta">
+        <span class="np-category">${capitalize(np.cat)}</span>
+        <span>${np.state}</span>
+      </div>
+      <p class="np-desc">${np.desc}</p>
+      <button class="np-btn">Learn about the initiative</button>
+    </div>
+  </div>`;
+}
+
+function capitalize(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+
+function renderPage(page) {
+  currentPage = page;
+  const slice = filtered.slice((page-1)*PER_PAGE, page*PER_PAGE);
+  document.getElementById('npGrid').innerHTML = slice.map(buildCard).join('');
+  document.getElementById('showingCount').textContent = slice.length;
+  document.getElementById('totalCount').textContent = filtered.length;
+  renderPagination();
+  window.scrollTo({top: document.querySelector('.page-main').offsetTop - 130, behavior:'smooth'});
+}
+
+function renderPagination() {
+  const total = Math.ceil(filtered.length / PER_PAGE);
+  const el = document.getElementById('pagination');
+  el.innerHTML = '';
+  if (total <= 1) return;
+  el.appendChild(mkBtn('←', currentPage===1, ()=>renderPage(currentPage-1)));
+  for(let i=1;i<=total;i++){
+    const b = mkBtn(i, false, ()=>renderPage(i));
+    if(i===currentPage) b.classList.add('active');
+    el.appendChild(b);
+  }
+  el.appendChild(mkBtn('→', currentPage===total, ()=>renderPage(currentPage+1)));
+}
+
+function mkBtn(label, disabled, onClick) {
+  const b = document.createElement('button');
+  b.className = 'pg-btn';
+  b.textContent = label;
+  b.disabled = disabled;
+  b.addEventListener('click', onClick);
+  return b;
+}
+
+
+// Nav dropdowns
+document.querySelectorAll('.nav-item').forEach(item => {
+  const trigger = item.querySelector('.nav-trigger');
+  if (!trigger) return;
+  trigger.addEventListener('click', e => {
+    e.stopPropagation();
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('open'));
+    if (document.getElementById('navSearchBox')) document.getElementById('navSearchBox').classList.remove('open');
+    if (!isOpen) item.classList.add('open');
+  });
+});
+document.addEventListener('click', () => {
+  document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('open'));
+  if (document.getElementById('navSearchBox')) document.getElementById('navSearchBox').classList.remove('open');
+});
+// Search toggle
+const _nsBtn = document.getElementById('navSearchBtn');
+const _nsBox = document.getElementById('navSearchBox');
+if (_nsBtn && _nsBox) {
+  _nsBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('open'));
+    _nsBox.classList.toggle('open');
+  });
+  document.querySelectorAll('.nav-search-cat').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.nav-search-cat').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+  document.getElementById('navSearchGo').addEventListener('click', () => {
+    const cat = document.querySelector('.nav-search-cat.active')?.dataset.cat || 'all';
+    window.location.href = 'campaigns.html' + (cat !== 'all' ? '?cat=' + cat : '');
+  });
+}
+// Hamburger
+const _hbg = document.getElementById('hamburger');
+if (_hbg) {
+  _hbg.addEventListener('click', () => {
+    const links = document.querySelector('.nav-links');
+    const open = links.style.display === 'flex';
+    links.style.cssText = open ? '' : 'display:flex;flex-direction:column;position:absolute;top:72px;left:0;width:100%;background:#fff;padding:12px 5%;gap:2px;box-shadow:0 8px 24px rgba(0,0,0,.08);z-index:998;border-top:1px solid #E2E8F0';
+  });
+}
+</script>
+<script src="sidebar.js"></script>
+<script src="ggf-tracker.js"></script>
+</body>
+</html>

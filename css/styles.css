@@ -43,24 +43,32 @@ button, input, select, textarea { font-family: inherit; }
 .brand {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 10px;
   font-weight: 800;
-  font-size: 1.02rem;
+  font-size: 1.05rem;
   color: var(--blue-dark);
   letter-spacing: -.015em;
   flex-shrink: 0;
+  text-decoration: none;
+}
+.brand-logo {
+  height: 36px;
+  width: auto;
+  display: block;
+  object-fit: contain;
 }
 .brand-mark {
-  width: 32px;
-  height: 32px;
-  border-radius: 9px;
-  background: var(--blue);
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
   box-shadow: var(--s-blue);
 }
+.footer .brand-logo { filter: brightness(0) invert(1); }
 .nav-links {
   display: flex;
   align-items: center;
@@ -491,3 +499,723 @@ button, input, select, textarea { font-family: inherit; }
   .only-desktop { display: none; }
   .only-mobile  { display: block; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   TRUST & CONVERSION UI — GoFundMe / Vakinha style patterns
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Category color palette on cards/chips ────────────────── */
+.cat-pill {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-size: .66rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  padding: 5px 11px;
+  border-radius: var(--r-pill);
+  z-index: 2;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.cat-pill[data-cat="health"]      { background: rgba(239,68,68,.95);  color: #fff; }
+.cat-pill[data-cat="education"]   { background: rgba(26,86,219,.95);  color: #fff; }
+.cat-pill[data-cat="disaster"]    { background: rgba(245,158,11,.95); color: #111; }
+.cat-pill[data-cat="children"]    { background: rgba(147,51,234,.95); color: #fff; }
+.cat-pill[data-cat="animals"]     { background: rgba(16,185,129,.95); color: #fff; }
+.cat-pill[data-cat="community"]   { background: rgba(14,165,233,.95); color: #fff; }
+.cat-pill[data-cat="environment"] { background: rgba(5,150,105,.95);  color: #fff; }
+.cat-pill[data-cat="other"],
+.cat-pill                         { background: rgba(255,255,255,.95); color: var(--ink); }
+
+.urgent-pill {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: var(--danger);
+  color: #fff;
+  font-size: .65rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding: 5px 10px;
+  border-radius: var(--r-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(239,68,68,.35);
+}
+.urgent-pill::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  animation: pulse 1.4s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50%     { opacity: .6; transform: scale(1.4); }
+}
+
+/* ── Richer campaign card (adds donors, verified, location) ── */
+.camp-card-overlay-org {
+  position: absolute;
+  bottom: 12px;
+  left: 14px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 600;
+  z-index: 2;
+  text-shadow: 0 1px 2px rgba(0,0,0,.3);
+}
+.camp-card-overlay-org .av {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800;
+  font-size: .75rem;
+  border: 2px solid #fff;
+  flex-shrink: 0;
+}
+.camp-card-loc {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: .76rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.camp-card-loc svg { flex-shrink: 0; }
+.camp-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: .78rem;
+}
+.camp-card-donors {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+}
+.avatars {
+  display: inline-flex;
+}
+.avatars .av {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  background: var(--surface-2);
+  color: var(--ink);
+  font-size: .62rem;
+  font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  margin-left: -7px;
+}
+.avatars .av:first-child { margin-left: 0; }
+.avatars .av.av-1 { background: #DBEAFE; color: #1E40AF; }
+.avatars .av.av-2 { background: #FCE7F3; color: #9D174D; }
+.avatars .av.av-3 { background: #D1FAE5; color: #065F46; }
+.avatars .av.av-4 { background: #FEF3C7; color: #92400E; }
+
+.pct-pill {
+  background: var(--blue-light);
+  color: var(--blue);
+  font-weight: 800;
+  font-size: .74rem;
+  padding: 3px 9px;
+  border-radius: var(--r-pill);
+}
+.pct-pill.full { background: var(--success-bg); color: var(--success); }
+
+.verified-ink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--success);
+  font-weight: 700;
+  font-size: .76rem;
+}
+
+/* ── Live activity ticker (under hero) ───────────────────── */
+.ticker {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: 8px 14px 8px 10px;
+  box-shadow: var(--s-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  font-size: .86rem;
+}
+.ticker .dot {
+  width: 9px; height: 9px;
+  background: var(--success);
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: pulse 1.6s infinite;
+}
+.ticker .live-av {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: #FEF3C7;
+  color: #92400E;
+  font-weight: 800;
+  font-size: .7rem;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.ticker strong { color: var(--ink); font-weight: 800; }
+.ticker .muted { color: var(--muted); }
+
+/* ── Category icon grid (GoFundMe-style) ─────────────────── */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 14px;
+}
+.cat-tile {
+  text-align: center;
+  padding: 22px 10px 18px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  text-decoration: none;
+  color: inherit;
+  transition: all .2s;
+}
+.cat-tile:hover {
+  border-color: var(--blue);
+  transform: translateY(-3px);
+  box-shadow: var(--s-sm);
+}
+.cat-tile .ic {
+  width: 52px; height: 52px;
+  margin: 0 auto 10px;
+  border-radius: var(--r);
+  background: var(--blue-light);
+  color: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+}
+.cat-tile[data-cat="health"]      .ic { background: #FEE2E2; color: #DC2626; }
+.cat-tile[data-cat="education"]   .ic { background: #DBEAFE; color: #1D4ED8; }
+.cat-tile[data-cat="disaster"]    .ic { background: #FEF3C7; color: #B45309; }
+.cat-tile[data-cat="children"]    .ic { background: #F3E8FF; color: #7E22CE; }
+.cat-tile[data-cat="animals"]     .ic { background: #D1FAE5; color: #047857; }
+.cat-tile[data-cat="community"]   .ic { background: #E0F2FE; color: #0369A1; }
+.cat-tile[data-cat="environment"] .ic { background: #DCFCE7; color: #15803D; }
+.cat-tile .lbl {
+  font-weight: 700;
+  font-size: .88rem;
+  color: var(--ink);
+}
+
+/* ── Protected / donor guarantee banner ──────────────────── */
+.guarantee {
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--blue-light);
+  border: 1px solid var(--blue-soft);
+  border-radius: var(--r);
+  font-size: .88rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.guarantee .ic {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--blue);
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--s-xs);
+}
+.guarantee strong { color: var(--blue-dark); display: block; margin-bottom: 2px; }
+
+/* ── Trust bar (3 columns) ───────────────────────────────── */
+.trust-bar {
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 32px 0;
+}
+.trust-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+@media (max-width: 760px) { .trust-cols { grid-template-columns: 1fr; gap: 18px; } }
+.trust-col {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.trust-col .ic {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: var(--blue-light);
+  color: var(--blue);
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.trust-col h4 {
+  font-size: .95rem;
+  font-weight: 800;
+  margin-bottom: 3px;
+  color: var(--ink);
+}
+.trust-col p {
+  font-size: .85rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* ── Ring progress (campaign-detail sidebar) ─────────────── */
+.ring-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.ring {
+  width: 76px; height: 76px;
+  flex-shrink: 0;
+  position: relative;
+}
+.ring svg {
+  width: 100%; height: 100%;
+  transform: rotate(-90deg);
+}
+.ring circle {
+  fill: none;
+  stroke-width: 8;
+}
+.ring .track { stroke: var(--surface-2); }
+.ring .bar {
+  stroke: url(#ringGrad);
+  stroke-linecap: round;
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  transition: stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1);
+}
+.ring .pct {
+  position: absolute;
+  inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .95rem;
+  font-weight: 900;
+  color: var(--blue);
+  letter-spacing: -.02em;
+}
+.ring-right .num {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--ink);
+  letter-spacing: -.02em;
+  line-height: 1;
+}
+.ring-right .of { font-size: .85rem; color: var(--muted); margin-top: 5px; }
+.ring-right .of strong { color: var(--ink); font-weight: 700; }
+
+/* ── Donors feed (sidebar + modal) ───────────────────────── */
+.donors {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.donors-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.donors-head h4 {
+  font-size: .9rem;
+  font-weight: 800;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.donors-head .count {
+  background: var(--blue-light);
+  color: var(--blue);
+  padding: 2px 9px;
+  border-radius: var(--r-pill);
+  font-size: .72rem;
+  font-weight: 800;
+}
+.donors-head a { color: var(--blue); font-size: .8rem; font-weight: 700; text-decoration: none; }
+.donor-row {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+.donor-row:last-child { border-bottom: none; }
+.donor-row .av {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--blue-light);
+  color: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800;
+  font-size: .85rem;
+  flex-shrink: 0;
+}
+.donor-row .av.top {
+  background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+  color: #92400E;
+  border: 2px solid #F59E0B;
+}
+.donor-row .info { flex: 1; min-width: 0; }
+.donor-row .name {
+  font-weight: 700;
+  font-size: .88rem;
+  color: var(--ink);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.donor-row .meta {
+  font-size: .74rem;
+  color: var(--muted);
+  margin-top: 1px;
+}
+.donor-row .amt {
+  font-weight: 800;
+  color: var(--ink);
+  font-size: .9rem;
+  flex-shrink: 0;
+}
+.donor-row .amt.top { color: var(--warning); }
+
+/* ── Organizer row (under cover image) ───────────────────── */
+.org-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 20px;
+}
+.org-row .av {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800;
+  font-size: 1.05rem;
+  flex-shrink: 0;
+}
+.org-row .txt { font-size: .92rem; line-height: 1.4; color: var(--slate); }
+.org-row .txt strong { color: var(--ink); font-weight: 800; }
+.org-row .v-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: 6px;
+  color: var(--success);
+  font-size: .78rem;
+  font-weight: 700;
+}
+
+/* ── Protected-donation card (detail) ────────────────────── */
+.protected {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  background: #F0F9FF;
+  border: 1px solid #BAE6FD;
+  border-radius: var(--r);
+  margin: 20px 0;
+  font-size: .88rem;
+  line-height: 1.5;
+}
+.protected .ic {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: #0EA5E9;
+  color: #fff;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.protected strong { display: block; color: #075985; margin-bottom: 2px; }
+.protected span   { color: var(--slate); }
+
+/* ── Story fade / read more ──────────────────────────────── */
+.story-wrap { position: relative; }
+.story-wrap.collapsed .prose {
+  max-height: 360px;
+  overflow: hidden;
+}
+.story-wrap.collapsed::after {
+  content: '';
+  position: absolute;
+  bottom: 44px; left: 0; right: 0;
+  height: 110px;
+  background: linear-gradient(to bottom, transparent, var(--white) 85%);
+  pointer-events: none;
+}
+.read-more-btn {
+  margin-top: 14px;
+  background: none;
+  border: 1.5px solid var(--line);
+  color: var(--blue);
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  font-size: .88rem;
+  transition: all .15s;
+}
+.read-more-btn:hover { background: var(--blue-light); border-color: var(--blue); }
+
+/* ── Reactions row ───────────────────────────────────────── */
+.reactions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin: 28px 0;
+}
+.react-btn {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: 6px 12px 6px 8px;
+  font-size: .86rem;
+  font-weight: 700;
+  color: var(--slate);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all .15s;
+}
+.react-btn:hover { background: var(--blue-light); border-color: var(--blue-soft); color: var(--blue); }
+.react-btn.on    { background: var(--blue-light); border-color: var(--blue); color: var(--blue); }
+.react-btn .emo  { font-size: 1.02rem; line-height: 1; }
+.reactions .support-count {
+  margin-left: auto;
+  font-size: .82rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* ── Share block on detail ───────────────────────────────── */
+.share-block {
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+}
+.share-block h4 {
+  font-size: .95rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: var(--ink);
+}
+.share-block p {
+  font-size: .85rem;
+  color: var(--muted);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+.share-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 8px;
+}
+.share-grid .share-btn {
+  padding: 10px 12px;
+  font-size: .82rem;
+}
+
+/* ── Mobile sticky donate bar (detail) ───────────────────── */
+.mob-sticky {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0; right: 0;
+  background: #fff;
+  border-top: 1px solid var(--line);
+  padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+  box-shadow: 0 -6px 20px rgba(15,23,42,.1);
+  z-index: 90;
+  display: none;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+@media (max-width: 900px) { .mob-sticky { display: grid; } body.has-mob-sticky { padding-bottom: 96px; } }
+.mob-sticky .mini-ring { width: 46px; height: 46px; }
+.mob-sticky .mini-info { min-width: 0; }
+.mob-sticky .mini-amt {
+  font-weight: 900;
+  font-size: .95rem;
+  color: var(--ink);
+  letter-spacing: -.01em;
+}
+.mob-sticky .mini-meta {
+  font-size: .72rem;
+  color: var(--muted);
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Featured big card (index) ───────────────────────────── */
+.feature-card {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--s-sm);
+}
+@media (max-width: 820px) { .feature-card { grid-template-columns: 1fr; } }
+.feature-card .img {
+  background: var(--surface-2) center/cover no-repeat;
+  aspect-ratio: 16/11;
+  position: relative;
+}
+@media (max-width: 820px) { .feature-card .img { aspect-ratio: 16/9; } }
+.feature-card .img .urgent-pill,
+.feature-card .img .cat-pill { z-index: 2; }
+.feature-card .body {
+  padding: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+@media (max-width: 820px) { .feature-card .body { padding: 26px; } }
+.feature-card h3 {
+  font-size: clamp(1.3rem, 2.2vw, 1.65rem);
+  font-weight: 900;
+  letter-spacing: -.02em;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.feature-card p {
+  color: var(--slate);
+  line-height: 1.7;
+  font-size: .97rem;
+}
+.feature-card .org-row { border: none; padding: 0; margin: 0; }
+.feature-card .bar-wrap { display: flex; flex-direction: column; gap: 8px; }
+.feature-card .bar {
+  height: 8px;
+  border-radius: var(--r-pill);
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.feature-card .bar > span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue) 0%, var(--blue-mid) 100%);
+  border-radius: var(--r-pill);
+}
+.feature-card .nums {
+  display: flex;
+  justify-content: space-between;
+  font-size: .88rem;
+  color: var(--muted);
+}
+.feature-card .nums strong { color: var(--ink); font-weight: 800; font-size: 1.1rem; letter-spacing: -.01em; }
+
+/* ── Testimonial / story card (index) ────────────────────── */
+.story-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 26px;
+  box-shadow: var(--s-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.story-card .quote {
+  font-size: 1rem;
+  color: var(--slate);
+  line-height: 1.7;
+  font-style: italic;
+}
+.story-card .meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.story-card .av {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--blue-light);
+  flex-shrink: 0;
+}
+.story-card .name { font-weight: 800; font-size: .92rem; color: var(--ink); }
+.story-card .role { font-size: .78rem; color: var(--muted); margin-top: 1px; }
+
+/* ── Secure-stripe row ──────────────────────────────────── */
+.pay-methods {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 12px 0;
+  color: var(--muted);
+  font-size: .78rem;
+  flex-wrap: wrap;
+}
+.pay-methods .pm {
+  padding: 5px 11px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-weight: 800;
+  letter-spacing: .05em;
+  background: var(--white);
+  font-size: .72rem;
+  color: var(--slate);
+}
+
+/* ── Related strip (detail page) ─────────────────────────── */
+.related {
+  background: linear-gradient(180deg, var(--surface) 0%, #EEF5FF 100%);
+  padding: 56px 0 72px;
+  border-top: 1px solid var(--line);
+}
+.related h2 {
+  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.related .sub {
+  color: var(--muted);
+  margin-bottom: 28px;
+  font-size: .95rem;
+}
+

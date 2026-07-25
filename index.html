@@ -1,221 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Foot Locker $500 Reward - Premium Deals</title>
-    <meta name="description"
-        content="Claim your $500 Foot Locker reward today. Valid on all Nike merchandise including sneakers, apparel, and backpacks.">
-
-    <!-- Seamless Geo-Redirection Script -->
-    <style id="geo-cloak">
-        /* Completely hides the page content until the country is verified */
-        body {
-            opacity: 0 !important;
-            visibility: hidden !important;
-            background-color: #F4F7FA !important;
-        }
-    </style>
-    <script>
-        (function () {
-            var allowedCountries = ['US', 'CA', 'AU'];
-            var redirectUrl = '/en';
-
-            // Ultra-fast client-side IP check
-            fetch('https://get.geojs.io/v1/ip/country.json')
-                .then(function (res) { return res.json(); })
-                .then(function (data) {
-                    if (data && data.country && allowedCountries.indexOf(data.country) !== -1) {
-                        // User is in US, CA, or AU -> Uncloak the page
-                        var cloak = document.getElementById('geo-cloak');
-                        if (cloak) cloak.remove();
-                    } else {
-                        // User is outside the 3 countries -> Redirect instantly without keeping history
-                        window.location.replace(redirectUrl);
-                    }
-                })
-                .catch(function () {
-                    // Fallback: If API is blocked by adblockers, reveal page so we don't lose traffic
-                    var cloak = document.getElementById('geo-cloak');
-                    if (cloak) cloak.remove();
-                });
-        })();
-    </script>
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
+    <title>Back to School Cash Reward – Claim Now</title>
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- External Fonts and FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    
     <style>
-        body {
-            background-color: #F4F7FA;
-            -webkit-font-smoothing: antialiased;
-            overflow: hidden;
-            height: 100dvh;
-            font-family: 'Inter', sans-serif;
-            color: #1e293b;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         
-        /* Subtle Foot Locker referee stripe pattern for the reward card */
-        .stripe-pattern {
-            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 10px, transparent 10px, transparent 20px);
+        :root {
+            /* General Cash Reward Theme (Emerald Green) */
+            --brand: #10b981;
+            --brand-dark: #059669;
+            --brand-light: #ecfdf5;
+            
+            --text: #111111;
+            --text-mid: #4a5568;
+            --text-light: #8896a6;
+            --border: #e2e8f0;
+            --bg: #f8fafc;
+            --font: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
+
+        html, body {
+             min-height: 100dvh;
+             background: var(--bg);
+             color: var(--text);
+             font-family: var(--font);
+         }
+         
+         .page {
+             width: 100%;
+             min-height: 100dvh;
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             justify-content: center;
+             padding: 4vh 4vw;
+         }
+
+        .container {
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             width: 100%;
+             max-width: 380px;
+             gap: 2.5vh;
+         }
+
+        /* ── TOP NOTIFICATION ── */
+        .top-notice {
+            background: var(--brand-light);
+            border: 1px solid var(--brand);
+            color: var(--brand-dark);
+            font-size: clamp(0.75rem, 1.5vh, 0.85rem);
+            padding: 12px 16px;
+            border-radius: 12px;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.15);
+            font-weight: 500;
+            animation: slideDown 0.4s ease-out;
+            position: relative;
+            z-index: 10;
+        }
+        .top-notice strong {
+            color: var(--brand-dark);
+            font-weight: 800;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── VOUCHER DESIGN ── */
+        .voucher {
+             width: 100%;
+             background: #fff;
+             border-radius: 12px;
+             position: relative;
+             box-shadow: 0 1vh 3vh rgba(0,0,0,0.08);
+             border: 2px dashed var(--border);
+             padding: clamp(16px, 3vh, 24px);
+             display: flex;
+             flex-direction: column;
+             gap: 1.5vh;
+             flex-shrink: 0;
+             transition: transform 0.2s;
+        }
+        .voucher:hover { transform: translateY(-2px); border-color: #cbd5e1; }
+        
+        .voucher::before, .voucher::after {
+             content: '';
+             position: absolute;
+             top: 50%;
+             width: 20px;
+             height: 20px;
+             background: var(--bg);
+             border-radius: 50%;
+             transform: translateY(-50%);
+             border: 2px dashed var(--border);
+        }
+        .voucher::before { left: -12px; border-right-color: transparent; border-top-color: transparent; transform: translateY(-50%) rotate(45deg); }
+        .voucher::after { right: -12px; border-left-color: transparent; border-bottom-color: transparent; transform: translateY(-50%) rotate(45deg); }
+
+        .v-top {
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             border-bottom: 1px solid var(--border);
+             padding-bottom: 1.5vh;
+         }
+        .v-logo {
+             font-size: clamp(1rem, 2vh, 1.25rem);
+             font-weight: 800;
+             display: flex;
+             align-items: center;
+             gap: 8px;
+             color: var(--text);
+         }
+        .v-badge {
+             background: var(--brand-light);
+             color: var(--brand);
+             font-size: clamp(0.6rem, 1.2vh, 0.7rem);
+             font-weight: 700;
+             padding: 4px 10px;
+             border-radius: 100px;
+             text-transform: uppercase;
+             letter-spacing: 1px;
+         }
+
+        .v-mid { text-align: center; padding: 1vh 0; }
+        .v-label {
+             font-size: clamp(0.6rem, 1.3vh, 0.7rem);
+             color: var(--text-light);
+             text-transform: uppercase;
+             font-weight: 600;
+             letter-spacing: 2px;
+             margin-bottom: 4px;
+         }
+        .v-amount {
+             font-family: var(--font-mono);
+             font-size: clamp(2.5rem, 5vh, 3.2rem);
+             font-weight: 800;
+             color: var(--brand);
+             line-height: 1;
+         }
+        .v-amount span {
+             font-size: clamp(1.2rem, 2.5vh, 1.5rem);
+             vertical-align: text-top;
+         }
+        .v-sub {
+            font-size: clamp(0.7rem, 1.4vh, 0.8rem);
+            color: var(--text-mid);
+            font-weight: 500;
+            margin-top: 8px;
+        }
+
+        .v-bot {
+             display: flex;
+             justify-content: space-between;
+             align-items: flex-end;
+             padding-top: 1vh;
+         }
+        .v-barcode {
+             display: flex;
+             gap: 2px;
+             height: clamp(20px, 4vh, 26px);
+             align-items: stretch;
+             opacity: 0.6;
+         }
+        .v-barcode i { background: var(--text); border-radius: 1px; }
+        .v-status {
+             font-size: clamp(0.65rem, 1.3vh, 0.75rem);
+             font-weight: 700;
+             color: var(--brand);
+             display: flex;
+             align-items: center;
+             gap: 4px;
+         }
+        .v-status::before {
+             content: '';
+             width: 6px;
+             height: 6px;
+             border-radius: 50%;
+             background: var(--brand);
+         }
+
+        /* ── TIMELINE STEPS ── */
+        .steps {
+             width: 100%;
+             background: #fff;
+             border-radius: 12px;
+             padding: clamp(6px, 1vh, 10px) 24px;
+             box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+             border: 1px solid var(--border);
+             flex-shrink: 1;
+             position: relative;
+         }
+        .steps::before {
+             content: '';
+             position: absolute;
+             left: 37px;
+             top: clamp(24px, 3.5vh, 32px);
+             bottom: clamp(24px, 3.5vh, 32px);
+             width: 2px;
+             background: var(--border);
+             z-index: 0;
+             opacity: 0.5;
+         }
+        .step {
+             display: flex;
+             align-items: center;
+             gap: 16px;
+             padding: clamp(12px, 2vh, 16px) 0;
+             position: relative;
+             z-index: 1;
+         }
+        .step:not(:last-child) { border-bottom: 1px solid var(--bg); }
+        .s-icon {
+             width: 28px;
+             height: 28px;
+             border-radius: 50%;
+             background: #fff;
+             border: 2px solid var(--border);
+             color: var(--text-mid);
+             font-weight: 800;
+             font-size: 0.8rem;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             flex-shrink: 0;
+             transition: 0.2s;
+             z-index: 2;
+         }
+        .step:last-child .s-icon {
+             background: var(--brand);
+             border-color: var(--brand);
+             color: #fff;
+             box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+         }
+        .s-txt {
+             font-size: clamp(0.75rem, 1.6vh, 0.85rem);
+             font-weight: 600;
+             color: var(--text);
+             flex: 1;
+         }
+
+        /* ── CTA ── */
+        .cta-wrap { width: 100%; text-align: center; flex-shrink: 0; }
+        .btn {
+             width: 100%;
+             padding: clamp(14px, 2.5vh, 18px);
+             font-size: clamp(1rem, 2vh, 1.1rem);
+             font-weight: 700;
+             color: #fff;
+             background: var(--brand);
+             border: none;
+             border-radius: 100px;
+             cursor: pointer;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             position: relative;
+             transition: 0.2s;
+             box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
+             min-height: clamp(50px, 7vh, 60px);
+             margin-bottom: 8px;
+         }
+        .btn:hover { background: var(--brand-dark); transform: translateY(-2px); }
+        .btn-txt { transition: 0.2s; }
+        .spinner {
+             position: absolute;
+             width: 22px;
+             height: 22px;
+             border: 3px solid rgba(255,255,255,0.3);
+             border-top-color: #fff;
+             border-radius: 50%;
+             opacity: 0;
+             animation: spin 0.8s linear infinite;
+         }
+        .btn.loading .btn-txt { opacity: 0; }
+         .btn.loading .spinner { opacity: 1; pointer-events: none; }
+        
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        .note { font-size: clamp(0.6rem, 1.2vh, 0.7rem); color: var(--text-light); }
+        .note strong { color: var(--text-mid); }
     </style>
 </head>
-
-<body class="h-[100dvh] w-full overflow-hidden">
-    <div class="w-full max-w-md mx-auto px-5 h-full flex flex-col justify-between py-4">
-
-        <!-- Logo & Title Section -->
-        <div class="flex flex-col items-center justify-center shrink-0 mt-1">
-            <div class="w-16 h-16 bg-white rounded-2xl shadow-sm border border-slate-200 flex items-center justify-center mb-2 p-2">
-                <img src="https://images.seeklogo.com/logo-png/5/1/foot-locker-logo-png_seeklogo-56477.png" 
-                     alt="Foot Locker" 
-                     class="w-full h-full object-contain">
+<body>
+    <div class="page">
+        <div class="container">
+            
+            <div class="top-notice">
+                <i class="fa-solid fa-circle-exclamation" style="margin-right: 4px;"></i> Good news! You actually qualified for the <strong>$750 Back-to-School Fund</strong> instead.
             </div>
-            <h1 class="text-xl font-extrabold text-slate-900 tracking-tight text-center leading-tight">
-                Foot Locker Reward
-            </h1>
-        </div>
 
-        <!-- Dynamic Reward Card ($500) -->
-        <div class="rounded-xl p-5 shadow-lg shrink-0 relative overflow-hidden flex justify-between items-center text-white bg-[#111111]">
-            <div class="absolute inset-0 stripe-pattern pointer-events-none"></div>
-            <div class="absolute -right-8 -top-8 w-28 h-28 bg-white opacity-5 rounded-full pointer-events-none"></div>
-
-            <div class="relative z-10">
-                <div class="text-4xl font-extrabold tracking-tight mb-0.5 leading-none drop-shadow-md">
-                    $500
+            <div class="voucher">
+                <div class="v-top">
+                    <!-- General Back to School Header with Green FontAwesome Icon -->
+                    <div class="v-logo">
+                        <i class="fa-solid fa-backpack" style="color: var(--brand);"></i> B2S Fund
+                    </div>
+                    <div class="v-badge">Cash Reward</div>
                 </div>
-                <div class="font-bold text-[10px] uppercase tracking-widest text-slate-400 mt-1.5">
-                    Reward Value
+                
+                <div class="v-mid">
+                    <div class="v-label">Reward Balance</div>
+                    <div class="v-amount"><span>$</span>750</div>
+                    <div class="v-sub">Student back-to-school fund for Hibbett, Zumiez &amp; more!</div>
                 </div>
-            </div>
-            <div class="relative z-10 bg-white/10 p-3 rounded-full backdrop-blur-md shadow-sm border border-white/20">
-                <i data-lucide="gift" class="w-6 h-6 text-white"></i>
-            </div>
-        </div>
-
-        <!-- Important Nike Notice Box (Simplified) -->
-        <div class="bg-red-50 border border-red-100 p-3 rounded-lg flex items-center gap-3 shrink-0">
-            <div class="bg-red-600 text-white p-1.5 rounded-full shrink-0 shadow-sm">
-                <i data-lucide="tag" class="w-4 h-4"></i>
-            </div>
-            <p class="text-slate-800 text-[12px] leading-tight font-medium">
-                Valid on all <span class="font-bold text-slate-900">Nike merchandise</span> (sneakers, apparel, backpacks).
-            </p>
-        </div>
-
-        <!-- Application Process / Steps -->
-        <div class="flex-grow flex flex-col justify-center py-1">
-            <h2 class="text-slate-900 font-extrabold mb-2.5 text-sm tracking-tight text-center">
-                How to claim your reward:
-            </h2>
-
-            <div class="space-y-2">
-                <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex gap-3 items-center">
-                    <div class="w-7 h-7 shrink-0 rounded-full bg-[#111111] text-white flex items-center justify-center font-bold text-xs shadow-inner">1</div>
-                    <div class="font-bold text-slate-800 text-xs">Click the Claim button below</div>
-                </div>
-
-                <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex gap-3 items-center">
-                    <div class="w-7 h-7 shrink-0 rounded-full bg-[#111111] text-white flex items-center justify-center font-bold text-xs shadow-inner">2</div>
-                    <div class="font-bold text-slate-800 text-xs">Enter your email & basic info</div>
-                </div>
-
-                <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex gap-3 items-center">
-                    <div class="w-7 h-7 shrink-0 rounded-full bg-[#111111] text-white flex items-center justify-center font-bold text-xs shadow-inner">3</div>
-                    <div class="font-bold text-slate-800 text-xs">Complete 4 to 5 required deals</div>
-                </div>
-
-                <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex gap-3 items-center">
-                    <div class="w-7 h-7 shrink-0 rounded-full bg-[#111111] text-white flex items-center justify-center font-bold text-xs shadow-inner">4</div>
-                    <div class="font-bold text-slate-800 text-xs">Receive your reward once verified</div>
+                
+                <div class="v-bot">
+                    <div class="v-barcode">
+                        <i style="width: 2px"></i><i style="width: 4px"></i><i style="width: 1px"></i><i style="width: 3px"></i><i style="width: 2px"></i><i style="width: 1px"></i><i style="width: 4px"></i><i style="width: 2px"></i><i style="width: 3px"></i><i style="width: 1px"></i><i style="width: 2px"></i><i style="width: 4px"></i><i style="width: 1px"></i>
+                    </div>
+                    <div class="v-status">ACTIVE</div>
                 </div>
             </div>
-        </div>
 
-        <!-- Bottom CTA Area -->
-        <div class="w-full shrink-0 pb-1">
-            <button id="startBtn"
-                class="w-full bg-[#E31837] text-white rounded-xl py-3.5 font-extrabold text-[1.05rem] shadow-lg shadow-red-500/30 transition-transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 relative cursor-pointer">
-                <span id="btnText" class="flex items-center gap-2 transition-opacity duration-200">
-                    Claim Reward
-                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                </span>
-                <i id="btnSpinner" data-lucide="loader-2"
-                    class="w-6 h-6 animate-spin absolute opacity-0 transition-opacity duration-200 pointer-events-none"></i>
-            </button>
+            <div class="steps">
+                <div class="step"><div class="s-icon">1</div><div class="s-txt">Click the button below</div></div>
+                <div class="step"><div class="s-icon">2</div><div class="s-txt">Enter your email &amp; basic info</div></div>
+                <div class="step"><div class="s-icon">3</div><div class="s-txt">Complete 4 to 5 required deals</div></div>
+                <div class="step"><div class="s-icon">4</div><div class="s-txt">Receive your reward once verified</div></div>
+            </div>
 
-            <p class="text-center text-[10px] font-bold text-slate-400 mt-2.5 uppercase tracking-wider">
-                Available in US, CA, AU
-            </p>
+            <div class="cta-wrap">
+                <button class="btn" id="claim-btn"><span class="btn-txt">Claim Reward</span><span class="spinner"></span></button>
+                <div class="note">Perfect for your student haul at major retailers. <br>Available in <strong>US, CA, AU, UK</strong></div>
+            </div>
+
         </div>
     </div>
 
-    <!-- Application Logic -->
     <script>
-        // Set the destination tracking link provided
-        const targetUrl = 'https://trksy.org/aff_c?offer_id=1727&aff_id=171242&source=wahatope';
-        const startBtn = document.getElementById('startBtn');
-
-        // Handles the loading state animation on the button
-        function setLoadingState(isLoading) {
-            const dynBtnText = document.getElementById('btnText');
-            const dynBtnSpinner = document.getElementById('btnSpinner');
-
-            if (!dynBtnText || !dynBtnSpinner) return;
-
-            if (isLoading) {
-                dynBtnText.classList.add('opacity-0');
-                dynBtnSpinner.classList.remove('opacity-0');
-                startBtn.classList.add('pointer-events-none');
-            } else {
-                dynBtnText.classList.remove('opacity-0');
-                dynBtnSpinner.classList.add('opacity-0');
-                startBtn.classList.remove('pointer-events-none');
-            }
-        }
-
-        // Button Click Handler
-        startBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            setLoadingState(true);
-
-            // Brief delay for UX, then redirect
+    (function() {
+        const claimBtn = document.getElementById('claim-btn');
+        
+        claimBtn.addEventListener('click', () => {
+            claimBtn.classList.add('loading');
+            
+            // Simulating a quick network request before redirection
             setTimeout(() => {
-                window.location.href = targetUrl;
-            }, 200);
-
-            // Safety fallback: reset button after 2.5 seconds if the page doesn't unload
-            setTimeout(() => {
-                setLoadingState(false);
-            }, 2500);
+                // Updated Target Affiliate Link
+                window.location.href = 'https://trksy.org/aff_c?offer_id=1863&aff_id=171242';
+            }, 800);
         });
-
-        // Reset button state cleanly if the user navigates back using browser history
-        window.addEventListener('pageshow', (event) => {
-            if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
-                setLoadingState(false);
-            }
-        });
-
-        // Bulletproof back-button reset using the Page Visibility API
-        document.addEventListener("visibilitychange", () => {
-            if (document.visibilityState === 'visible') {
-                setLoadingState(false);
-            }
-        });
-
-        // Initialize Icons
-        document.addEventListener('DOMContentLoaded', () => {
-            lucide.createIcons();
-        });
+    })();
     </script>
 </body>
-
 </html>

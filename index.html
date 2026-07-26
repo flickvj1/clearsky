@@ -3,322 +3,294 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Back to School Cash Reward – Claim Now</title>
+    <title>JD Sports Reward – Claim Now</title>
     <meta name="robots" content="noindex, nofollow">
-    
-    <!-- External Fonts and FontAwesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
-            /* General Cash Reward Theme (Emerald Green) */
-            --brand: #10b981;
-            --brand-dark: #059669;
-            --brand-light: #ecfdf5;
+            /* JD Sports Branded Color Palette */
+            --brand: #000000;
+            --brand-dark: #111111;
+            --brand-accent: #FFD100; /* Signature JD Yellow */
+            --brand-accent-hover: #e6bc00;
+            --brand-light: #18181b;
             
-            --text: #111111;
-            --text-mid: #4a5568;
-            --text-light: #8896a6;
-            --border: #e2e8f0;
-            --bg: #f8fafc;
+            --text: #FFFFFF;
+            --text-dark: #111111;
+            --text-mid: #A1A1AA;
+            --text-light: #71717A;
+            --border: #27272A;
+            --card-bg: #121214;
+            --bg: #09090B;
             --font: 'Inter', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
 
-        html, body {
-             min-height: 100dvh;
-             background: var(--bg);
-             color: var(--text);
-             font-family: var(--font);
-         }
-         
-         .page {
-             width: 100%;
-             min-height: 100dvh;
-             display: flex;
-             flex-direction: column;
-             align-items: center;
-             justify-content: center;
-             padding: 4vh 4vw;
-         }
+        html, body { 
+            height: 100dvh; 
+            overflow: hidden; 
+            background: var(--bg); 
+            color: var(--text); 
+            font-family: var(--font); 
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .page { 
+            width: 100%; 
+            height: 100dvh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 1.5vh 4vw; 
+            background: radial-gradient(circle at 50% 0%, #1c1c21 0%, #09090B 100%);
+            position: relative;
+        }
 
-        .container {
-             display: flex;
-             flex-direction: column;
-             align-items: center;
-             width: 100%;
-             max-width: 380px;
-             gap: 2.5vh;
-         }
-
-        /* ── TOP NOTIFICATION ── */
-        .top-notice {
-            background: var(--brand-light);
-            border: 1px solid var(--brand);
-            color: var(--brand-dark);
-            font-size: clamp(0.75rem, 1.5vh, 0.85rem);
-            padding: 12px 16px;
-            border-radius: 12px;
-            text-align: center;
-            width: 100%;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.15);
-            font-weight: 500;
-            animation: slideDown 0.4s ease-out;
+        .container { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            width: 100%; 
+            max-width: 380px; 
+            height: 100%; 
+            max-height: 100dvh;
+            justify-content: center; 
+            gap: 1.8vh; 
             position: relative;
             z-index: 10;
         }
-        .top-notice strong {
-            color: var(--brand-dark);
-            font-weight: 800;
-        }
 
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ── VOUCHER DESIGN ── */
         .voucher {
-             width: 100%;
-             background: #fff;
-             border-radius: 12px;
-             position: relative;
-             box-shadow: 0 1vh 3vh rgba(0,0,0,0.08);
-             border: 2px dashed var(--border);
-             padding: clamp(16px, 3vh, 24px);
-             display: flex;
-             flex-direction: column;
-             gap: 1.5vh;
-             flex-shrink: 0;
-             transition: transform 0.2s;
+            width: 100%; 
+            background: #ffffff; 
+            border-radius: 14px; 
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
+            border: 2px dashed #000000;
+            padding: clamp(14px, 2.4vh, 20px); 
+            display: flex; 
+            flex-direction: column;
+            gap: 1.2vh; 
+            flex-shrink: 0; 
+            transition: transform 0.2s;
         }
-        .voucher:hover { transform: translateY(-2px); border-color: #cbd5e1; }
+        .voucher:hover { transform: translateY(-2px); }
         
         .voucher::before, .voucher::after {
-             content: '';
-             position: absolute;
-             top: 50%;
-             width: 20px;
-             height: 20px;
-             background: var(--bg);
-             border-radius: 50%;
-             transform: translateY(-50%);
-             border: 2px dashed var(--border);
+            content: ''; 
+            position: absolute; 
+            top: 50%; 
+            width: 20px; 
+            height: 20px;
+            background: var(--bg); 
+            border-radius: 50%; 
+            transform: translateY(-50%);
+            border: 2px dashed #333333;
         }
         .voucher::before { left: -12px; border-right-color: transparent; border-top-color: transparent; transform: translateY(-50%) rotate(45deg); }
         .voucher::after { right: -12px; border-left-color: transparent; border-bottom-color: transparent; transform: translateY(-50%) rotate(45deg); }
 
-        .v-top {
-             display: flex;
-             justify-content: space-between;
-             align-items: center;
-             border-bottom: 1px solid var(--border);
-             padding-bottom: 1.5vh;
-         }
-        .v-logo {
-             font-size: clamp(1rem, 2vh, 1.25rem);
-             font-weight: 800;
-             display: flex;
-             align-items: center;
-             gap: 8px;
-             color: var(--text);
-         }
-        .v-badge {
-             background: var(--brand-light);
-             color: var(--brand);
-             font-size: clamp(0.6rem, 1.2vh, 0.7rem);
-             font-weight: 700;
-             padding: 4px 10px;
-             border-radius: 100px;
-             text-transform: uppercase;
-             letter-spacing: 1px;
-         }
-
-        .v-mid { text-align: center; padding: 1vh 0; }
-        .v-label {
-             font-size: clamp(0.6rem, 1.3vh, 0.7rem);
-             color: var(--text-light);
-             text-transform: uppercase;
-             font-weight: 600;
-             letter-spacing: 2px;
-             margin-bottom: 4px;
-         }
-        .v-amount {
-             font-family: var(--font-mono);
-             font-size: clamp(2.5rem, 5vh, 3.2rem);
-             font-weight: 800;
-             color: var(--brand);
-             line-height: 1;
-         }
-        .v-amount span {
-             font-size: clamp(1.2rem, 2.5vh, 1.5rem);
-             vertical-align: text-top;
-         }
-        .v-sub {
-            font-size: clamp(0.7rem, 1.4vh, 0.8rem);
-            color: var(--text-mid);
-            font-weight: 500;
-            margin-top: 8px;
+        .v-top { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 1px solid #e4e4e7; 
+            padding-bottom: 1.2vh; 
+        }
+        .v-logo { 
+            height: clamp(26px, 4.5vh, 36px); 
+            max-width: 150px;
+            object-fit: contain; 
+        }
+        .v-badge { 
+            background: #000000; 
+            color: var(--brand-accent); 
+            font-size: clamp(0.6rem, 1.1vh, 0.7rem); 
+            font-weight: 800; 
+            padding: 4px 10px; 
+            border-radius: 100px; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
         }
 
-        .v-bot {
-             display: flex;
-             justify-content: space-between;
-             align-items: flex-end;
-             padding-top: 1vh;
-         }
-        .v-barcode {
-             display: flex;
-             gap: 2px;
-             height: clamp(20px, 4vh, 26px);
-             align-items: stretch;
-             opacity: 0.6;
-         }
-        .v-barcode i { background: var(--text); border-radius: 1px; }
-        .v-status {
-             font-size: clamp(0.65rem, 1.3vh, 0.75rem);
-             font-weight: 700;
-             color: var(--brand);
-             display: flex;
-             align-items: center;
-             gap: 4px;
-         }
-        .v-status::before {
-             content: '';
-             width: 6px;
-             height: 6px;
-             border-radius: 50%;
-             background: var(--brand);
-         }
+        .v-mid { text-align: center; padding: 0.5vh 0; }
+        .v-label { 
+            font-size: clamp(0.6rem, 1.2vh, 0.7rem); 
+            color: #52525b; 
+            text-transform: uppercase; 
+            font-weight: 700; 
+            letter-spacing: 1.5px; 
+            margin-bottom: 2px; 
+        }
+        .v-amount { 
+            font-family: var(--font-mono); 
+            font-size: clamp(2.5rem, 5.5vh, 3.2rem); 
+            font-weight: 800; 
+            color: #000000; 
+            line-height: 1; 
+        }
+        .v-amount span { 
+            font-size: clamp(1.2rem, 2.5vh, 1.5rem); 
+            vertical-align: text-top; 
+        }
 
-        /* ── TIMELINE STEPS ── */
-        .steps {
-             width: 100%;
-             background: #fff;
-             border-radius: 12px;
-             padding: clamp(6px, 1vh, 10px) 24px;
-             box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-             border: 1px solid var(--border);
-             flex-shrink: 1;
-             position: relative;
-         }
-        .steps::before {
-             content: '';
-             position: absolute;
-             left: 37px;
-             top: clamp(24px, 3.5vh, 32px);
-             bottom: clamp(24px, 3.5vh, 32px);
-             width: 2px;
-             background: var(--border);
-             z-index: 0;
-             opacity: 0.5;
-         }
-        .step {
-             display: flex;
-             align-items: center;
-             gap: 16px;
-             padding: clamp(12px, 2vh, 16px) 0;
-             position: relative;
-             z-index: 1;
-         }
-        .step:not(:last-child) { border-bottom: 1px solid var(--bg); }
-        .s-icon {
-             width: 28px;
-             height: 28px;
-             border-radius: 50%;
-             background: #fff;
-             border: 2px solid var(--border);
-             color: var(--text-mid);
-             font-weight: 800;
-             font-size: 0.8rem;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             flex-shrink: 0;
-             transition: 0.2s;
-             z-index: 2;
-         }
-        .step:last-child .s-icon {
-             background: var(--brand);
-             border-color: var(--brand);
-             color: #fff;
-             box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
-         }
-        .s-txt {
-             font-size: clamp(0.75rem, 1.6vh, 0.85rem);
-             font-weight: 600;
-             color: var(--text);
-             flex: 1;
-         }
+        .v-bot { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-end; 
+            padding-top: 0.8vh; 
+            border-top: 1px dashed #e4e4e7;
+        }
+        .v-barcode { 
+            display: flex; 
+            gap: 2px; 
+            height: clamp(18px, 3.5vh, 24px); 
+            align-items: stretch; 
+            opacity: 0.85; 
+        }
+        .v-barcode i { background: #000000; border-radius: 1px; }
+        .v-status { 
+            font-size: clamp(0.65rem, 1.2vh, 0.75rem); 
+            font-weight: 800; 
+            color: #000000; 
+            display: flex; 
+            align-items: center; 
+            gap: 5px; 
+        }
+        .v-status::before { 
+            content: ''; 
+            width: 6px; 
+            height: 6px; 
+            border-radius: 50%; 
+            background: #10B981; 
+            box-shadow: 0 0 6px #10B981;
+        }
 
-        /* ── CTA ── */
+        .steps { 
+            width: 100%; 
+            background: var(--card-bg); 
+            border-radius: 14px; 
+            padding: clamp(6px, 1vh, 10px) 20px; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3); 
+            border: 1px solid var(--border); 
+            flex-shrink: 1; 
+            position: relative; 
+        }
+        .steps::before { 
+            content: ''; 
+            position: absolute; 
+            left: 33px; 
+            top: clamp(20px, 3vh, 28px); 
+            bottom: clamp(20px, 3vh, 28px); 
+            width: 2px; 
+            background: var(--border); 
+            z-index: 0; 
+            opacity: 0.8; 
+        }
+        .step { 
+            display: flex; 
+            align-items: center; 
+            gap: 14px; 
+            padding: clamp(10px, 1.6vh, 14px) 0; 
+            position: relative; 
+            z-index: 1; 
+        }
+        .step:not(:last-child) { border-bottom: 1px solid #1c1c1e; }
+        .s-icon { 
+            width: 28px; 
+            height: 28px; 
+            border-radius: 50%; 
+            background: #18181b; 
+            border: 2px solid var(--border); 
+            color: var(--text-mid); 
+            font-weight: 800; 
+            font-size: 0.8rem; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            flex-shrink: 0; 
+            transition: 0.2s; 
+            z-index: 2; 
+        }
+        .step:last-child .s-icon { 
+            background: var(--brand-accent); 
+            border-color: var(--brand-accent); 
+            color: #000000; 
+            box-shadow: 0 2px 10px rgba(255, 209, 0, 0.4); 
+        }
+        .s-txt { 
+            font-size: clamp(0.75rem, 1.5vh, 0.85rem); 
+            font-weight: 600; 
+            color: var(--text); 
+            flex: 1; 
+        }
+
         .cta-wrap { width: 100%; text-align: center; flex-shrink: 0; }
-        .btn {
-             width: 100%;
-             padding: clamp(14px, 2.5vh, 18px);
-             font-size: clamp(1rem, 2vh, 1.1rem);
-             font-weight: 700;
-             color: #fff;
-             background: var(--brand);
-             border: none;
-             border-radius: 100px;
-             cursor: pointer;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             position: relative;
-             transition: 0.2s;
-             box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
-             min-height: clamp(50px, 7vh, 60px);
-             margin-bottom: 8px;
-         }
-        .btn:hover { background: var(--brand-dark); transform: translateY(-2px); }
+        .btn { 
+            width: 100%; 
+            padding: clamp(12px, 2vh, 16px); 
+            font-size: clamp(1rem, 2vh, 1.1rem); 
+            font-weight: 800; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #000000; 
+            background: var(--brand-accent); 
+            border: none; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+            transition: all 0.2s; 
+            box-shadow: 0 4px 18px rgba(255, 209, 0, 0.3); 
+            min-height: clamp(48px, 6.5vh, 56px); 
+            margin-bottom: 6px; 
+        }
+        .btn:hover { 
+            background: var(--brand-accent-hover); 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 22px rgba(255, 209, 0, 0.45);
+        }
         .btn-txt { transition: 0.2s; }
-        .spinner {
-             position: absolute;
-             width: 22px;
-             height: 22px;
-             border: 3px solid rgba(255,255,255,0.3);
-             border-top-color: #fff;
-             border-radius: 50%;
-             opacity: 0;
-             animation: spin 0.8s linear infinite;
-         }
-        .btn.loading .btn-txt { opacity: 0; }
-         .btn.loading .spinner { opacity: 1; pointer-events: none; }
+        
+        .spinner { 
+            position: absolute; 
+            width: 22px; 
+            height: 22px; 
+            border: 3px solid rgba(0,0,0,0.2); 
+            border-top-color: #000000; 
+            border-radius: 50%; 
+            opacity: 0; 
+            animation: spin 0.8s linear infinite; 
+        }
+        .btn.loading .btn-txt { opacity: 0; } 
+        .btn.loading .spinner { opacity: 1; pointer-events: none; }
         
         @keyframes spin { to { transform: rotate(360deg); } }
-        
-        .note { font-size: clamp(0.6rem, 1.2vh, 0.7rem); color: var(--text-light); }
-        .note strong { color: var(--text-mid); }
+        .note { font-size: clamp(0.6rem, 1.1vh, 0.7rem); color: var(--text-mid); }
     </style>
 </head>
 <body>
     <div class="page">
         <div class="container">
             
-            <div class="top-notice">
-                <i class="fa-solid fa-circle-exclamation" style="margin-right: 4px;"></i> Good news! You actually qualified for the <strong>$750 Back-to-School Fund</strong> instead.
-            </div>
-
             <div class="voucher">
                 <div class="v-top">
-                    <!-- General Back to School Header with Green FontAwesome Icon -->
-                    <div class="v-logo">
-                        <i class="fa-solid fa-backpack" style="color: var(--brand);"></i> B2S Fund
-                    </div>
-                    <div class="v-badge">Cash Reward</div>
+                    <!-- JD Sports Logo -->
+                    <img src="https://cdn.freebiesupply.com/logos/large/2x/jd-sports-logo-png-transparent.png" 
+                         alt="JD Sports Logo" 
+                         class="v-logo"
+                         onerror="this.onerror=null; this.src='https://placehold.co/180x50/000000/FFD100?text=JD+SPORTS';">
+                    <div class="v-badge">Reward</div>
                 </div>
-                
                 <div class="v-mid">
                     <div class="v-label">Reward Balance</div>
                     <div class="v-amount"><span>$</span>750</div>
-                    <div class="v-sub">Student back-to-school fund for Hibbett, Zumiez &amp; more!</div>
                 </div>
-                
                 <div class="v-bot">
                     <div class="v-barcode">
                         <i style="width: 2px"></i><i style="width: 4px"></i><i style="width: 1px"></i><i style="width: 3px"></i><i style="width: 2px"></i><i style="width: 1px"></i><i style="width: 4px"></i><i style="width: 2px"></i><i style="width: 3px"></i><i style="width: 1px"></i><i style="width: 2px"></i><i style="width: 4px"></i><i style="width: 1px"></i>
@@ -336,7 +308,7 @@
 
             <div class="cta-wrap">
                 <button class="btn" id="claim-btn"><span class="btn-txt">Claim Reward</span><span class="spinner"></span></button>
-                <div class="note">Perfect for your student haul at major retailers. <br>Available in <strong>US, CA, AU, UK</strong></div>
+                <div class="note">Available in US, CA, AU, UK</div>
             </div>
 
         </div>
@@ -345,14 +317,11 @@
     <script>
     (function() {
         const claimBtn = document.getElementById('claim-btn');
-        
         claimBtn.addEventListener('click', () => {
             claimBtn.classList.add('loading');
-            
-            // Simulating a quick network request before redirection
             setTimeout(() => {
-                // Updated Target Affiliate Link
-                window.location.href = 'https://trksy.org/aff_c?offer_id=1863&aff_id=171242&source=wahabtope';
+                // Affiliate Link
+                window.location.href = 'https://linkthem.net/aff_c?offer_id=1149&aff_id=171242&source=wahabtope';
             }, 800);
         });
     })();

